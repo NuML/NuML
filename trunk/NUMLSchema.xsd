@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.numl.org/numl/level1/version1"
+	xmlns="http://www.numl.org/numl/level1/version1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<!--Definition of identifier (NMId) type -->
+	<xsd:simpleType name="NMId">
+		<xsd:annotation>
+			<xsd:documentation>
+				The type NMId is used throughout Numerical Result Markup Language (NML) as the type of the 'id' attributes on NML elements.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:pattern value="(_|[a-z]|[A-Z])(_|[a-z]|[A-Z]|[0-9])*" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<!-- Definition of DataType -->
+	<xsd:simpleType name="DataType">
+		<xsd:annotation>
+			<xsd:documentation>
+				The enumeration type "DataType" is used to specify the type of "valueType" attribute of atomicDescription and "indexType" attribute of the compositeDescription elements.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="string" />
+			<xsd:enumeration value="xpath" />
+			<xsd:enumeration value="float" />
+			<xsd:enumeration value="double" />
+			<xsd:enumeration value="integer" />
+		</xsd:restriction>
+	</xsd:simpleType>
+
+	<!--Definition of NMBase Type -->
+	<xsd:complexType name="NMBase" abstract="true">
+		<xsd:annotation>
+			<xsd:documentation>
+				The NMBase type is the base type of all main components in NML. It supports attaching metadata, notes and annotations to components.
+			</xsd:documentation>
+		</xsd:annotation>
+		<xsd:sequence>
+			<xsd:element name="notes" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:any namespace="http://www.w3.org/1999/xhtml" processContents="skip" minOccurs="0" maxOccurs="unbounded" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="annotation" minOccurs="0">
+				<xsd:complexType>
+					<xsd:sequence>
+						<xsd:any processContents="skip" minOccurs="0" maxOccurs="unbounded" />
+					</xsd:sequence>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="metaid" type="xsd:ID" use="optional" />
+	</xsd:complexType>
+	
+	<!-- Definition of NML elements -->
+	<xsd:element name="resultComponent" type="ResultComponent" />
+	
+	<!-- Elements for data description -->
+	<xsd:element name="dimensionDescription" type="DimensionDescription" />	
+	<xsd:element name="compositeDescription" type="CompositeDescription" />
+	<xsd:element name="tupleDescription" type="TupleDescription" />
+	<xsd:element name="atomicDescription" type="AtomicDescription" />
+	
+	<!-- Elements for data -->
+	<xsd:element name="dimension" type="Dimension" />
+	<xsd:element name="compositeValue" type="CompositeValue" />
+	<xsd:element name="tuple" type="Tuple" />
+	<xsd:element name="atomicValue" type="xsd:string" />
+	
+	<!-- Definition of ontologyTerm element for referencing external ontologies basically used for data description -->	
+	<xsd:element name="ontologyTerm" type="OntologyTerm" />
+	
+	<!-- Definition of ontologyTerms element. This is container for all ontology terms used in the NUML document -->
+	<xsd:element name="ontologyTerms">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element ref="ontologyTerm" maxOccurs="unbounded" />
+		</xsd:sequence>
+	</xsd:complexType>
+	</xsd:element>
+	
+	<!-- Definition of OntologyTerm type for data description -->
+	<xsd:complexType name="OntologyTerm">
+		<xsd:complexContent>
+			<xsd:extension base="NMBase">
+				<xsd:attribute name="id" use="required" type="NMId" />
+				<xsd:attribute name="term" use="required" type="xsd:string" />
+				<xsd:attribute name="sourceTermId" use="required" type="xsd:string" />
+				<xsd:attribute name="ontologyURI" use="required" type="xsd:anyURI" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!--definition of result component type -->
+	<xsd:complexType name="ResultComponent">
+		<xsd:complexContent>
+			<xsd:extension base="NMBase">
+				<xsd:sequence>
+					<xsd:element ref="dimensionDescription" />
+					<xsd:element ref="dimension" />
+				</xsd:sequence>
+				<xsd:attribute name="id" use="required" type="NMId" />
+				<xsd:attribute name="name" use="optional" type="xsd:string" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- definition of dimension description type -->
+	<xsd:complexType name="DimensionDescription">
+		<xsd:complexContent>
+			<xsd:extension base="NMBase">
+				<xsd:choice>
+					<xsd:element ref="compositeDescription" maxOccurs="unbounded" />
+					<xsd:element ref="tupleDescription" maxOccurs="unbounded" />
+					<xsd:element ref="atomicDescription" maxOccurs="unbounded" />
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- Definition of dimension type -->
+	<xsd:complexType name="Dimension">
+		<xsd:complexContent>
+			<xsd:extension base="NMBase">
+				<xsd:choice>
+					<xsd:element ref="compositeValue" maxOccurs="unbounded" />
+					<xsd:element ref="tuple" maxOccurs="unbounded" />
+					<xsd:element ref="atomicValue" maxOccurs="unbounded" />
+				</xsd:choice>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- Definition of CompositeDescription type -->
+	<xsd:complexType name="CompositeDescription">
+		<xsd:complexContent>
+			<xsd:extension base="NMBase">
+				<xsd:choice>
+					<xsd:element ref="compositeDescription" />
+					<xsd:element ref="tupleDescription" />
+					<xsd:element ref="atomicDescription" />
+				</xsd:choice>
+				<xsd:attribute name="id" use="optional" type="NMId" />
+				<xsd:attribute name="name" use="required" type="xsd:string" />
+				<xsd:attribute name="ontologyTerm" use="optional" type="NMId" />
+				<xsd:attribute name="indexType" use="required" type="DataType" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- Definition of TupleDescription type -->
+	<xsd:complexType name="TupleDescription">
+		<xsd:complexContent>
+			<xsd:extension base="NMBase">
+				<xsd:sequence>
+					<xsd:element ref="atomicDescription" maxOccurs="unbounded" />
+				</xsd:sequence>
+				<xsd:attribute name="id" use="optional" type="NMId" />
+				<xsd:attribute name="name" use="optional" />
+				<xsd:attribute name="ontologyTerm" use="optional" type="NMId" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- Definition of AtomicDescription type -->
+	<xsd:complexType name="AtomicDescription">
+		<xsd:complexContent>
+			<xsd:extension base="NMBase">
+				<xsd:attribute name="id" use="optional" type="NMId" />
+				<xsd:attribute name="name" use="required" type="xsd:string" />
+				<xsd:attribute name="ontologyTerm" use="optional" type="NMId" />
+				<xsd:attribute name="valueType" use="required" type="DataType" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- Definition of CompositeValue type -->
+	<xsd:complexType name="CompositeValue">
+		<xsd:complexContent>
+			<xsd:extension base="NMBase">
+				<xsd:choice>
+					<xsd:element ref="compositeValue" maxOccurs="unbounded" />
+					<xsd:element ref="tuple" />
+					<xsd:element ref="atomicValue" />
+				</xsd:choice>
+				<xsd:attribute name="description" use="optional" type="NMId" />
+				<xsd:attribute name="indexValue" use="required" type="xsd:string" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- Definition of Tuple type -->
+	<xsd:complexType name="Tuple">
+		<xsd:complexContent>
+			<xsd:extension base="NMBase">
+				<xsd:sequence>
+					<xsd:element ref="atomicValue" maxOccurs="unbounded" />
+				</xsd:sequence>
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!-- Definition of NML Type -->
+	<xsd:complexType name="NML">
+		<xsd:complexContent>
+			<xsd:extension base="NMBase">
+				<xsd:sequence>
+					<xsd:element ref="ontologyTerms"/>
+					<xsd:element ref="resultComponent" maxOccurs="unbounded" />
+				</xsd:sequence>
+				<xsd:attribute name="level" type="xsd:positiveInteger" use="required" fixed="1" />
+				<xsd:attribute name="version" type="xsd:positiveInteger" use="required" fixed="1" />
+			</xsd:extension>
+		</xsd:complexContent>
+	</xsd:complexType>
+
+	<!--The (only) top-level element allowed in an NML document. -->
+	<xsd:element name="nml" type="NML" />
+</xsd:schema>
