@@ -7,7 +7,7 @@
 	<xsd:simpleType name="NMId">
 		<xsd:annotation>
 			<xsd:documentation>
-				The type NMId is used throughout Numerical Result Markup Language (NML) as the type of the 'id' attributes on NML elements.
+				The type NMId is used throughout Numerical Result Markup Language (NuML) as the type of the 'id' attributes on NuML elements.
 			</xsd:documentation>
 		</xsd:annotation>
 		<xsd:restriction base="xsd:string">
@@ -35,7 +35,7 @@
 	<xsd:complexType name="NMBase" abstract="true">
 		<xsd:annotation>
 			<xsd:documentation>
-				The NMBase type is the base type of all main components in NML. It supports attaching metadata, notes and annotations to components.
+				The NMBase type is the base type of all main components in NuML. It supports attaching metadata, notes and annotations to components.
 			</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
@@ -57,7 +57,7 @@
 		<xsd:attribute name="metaid" type="xsd:ID" use="optional" />
 	</xsd:complexType>
 	
-	<!-- Definition of NML elements -->
+	<!-- Definition of NuML elements -->
 	<xsd:element name="resultComponent" type="ResultComponent" />
 	
 	<!-- Elements for data description -->
@@ -205,8 +205,8 @@
 		</xsd:complexContent>
 	</xsd:complexType>
 
-	<!-- Definition of NML Type -->
-	<xsd:complexType name="NML">
+	<!-- Definition of NuML Type -->
+	<xsd:complexType name="NUML">
 		<xsd:complexContent>
 			<xsd:extension base="NMBase">
 				<xsd:sequence>
@@ -219,6 +219,6 @@
 		</xsd:complexContent>
 	</xsd:complexType>
 
-	<!--The (only) top-level element allowed in an NML document. -->
-	<xsd:element name="nml" type="NML" />
+	<!--The (only) top-level element allowed in an NuML document. -->
+	<xsd:element name="numl" type="NUML" />
 </xsd:schema>
