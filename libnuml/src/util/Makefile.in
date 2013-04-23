@@ -1,0 +1,176 @@
+## @configure_input@
+##
+## Filename    : Makefile.in
+## Description : Makefile template for libnuml src/util 
+##
+## Begin svn Header
+## $Rev::		$:	Revision of last commit
+## $Author::	$:	Author of last commit
+## $Date::		$:	Date of last commit
+## $HeadURL::	$
+## $Id::		$
+## End svn Header
+## ***************************************************************************
+## This file is part of libNUML.  Please visit http://code.google.com/p/numl/for more
+## information about NUML, and the latest version of libNUML.
+## Copyright (c) 2013 The University of Manchester.
+##
+## This library is free software; you can redistribute it and/or modify it
+## under the terms of the GNU Lesser General Public License as published
+## by the Free Software Foundation.  A copy of the license agreement is
+## provided in the file named "LICENSE.txt" included with this software
+## distribution and also available online as http://www.gnu.org/licenses/lgpl.html
+##
+## The original code was initially developed by:
+##
+##	SBML Team
+##	Control and Dynamical Systems, MC 107-81
+##	California Institute of Technology
+##	Pasadena, CA, 91125, USA
+##
+## 	http://www.sbml.org
+##	mailto:sbml-team@caltech.edu
+##
+## Adapted for NUML by:
+##
+##	NUML Team
+##	Computational Systems Biology Group
+##  School of Computer Science
+## 	The University of Manchester
+##	Manchester, M1 7DN UK
+##	mailto:josephodada@gmail.com
+##
+##  Contributor(s):
+##  Joseph O. Dada, The University of Manchester - initial LIBNUML API and implementation
+## **************************************************************************
+##
+
+
+# -----------------------------------------------------------------------------
+# Configuration variables
+# -----------------------------------------------------------------------------
+# Some of the following are substituted automatically by `configure'.  If
+# you are looking at "Makefile", do not edit these values; instead, run the
+# configure script at the top level of the src tree.  It will recreate
+# "Makefile".
+
+include @top_srcdir@/config/makefile-common-vars.mk
+
+# `srcdir' points to the current directory, but should be set by configure.
+# `subdir' must be set manually to the relative dir under `srcdir'.  Don't 
+# set `subdir' to an absolute path, or some `make' actions will fail.
+
+srcdir    = @srcdir@
+thisdir   = src/util
+
+# Variables `headers', `sources', `libraries', `extra_CPPFLAGS',
+# `extra_CXXFLAGS', `extra_LDFLAGS', `distfiles', 'header_inst_prefix' and
+# others are used by the default rules in `makefile-common-actions.mk'.
+
+headers   = \
+	List.h \
+	memory.h \
+	Stack.h \
+	StringBuffer.h \
+	util.h
+
+header_inst_prefix = util
+
+sources   = \
+	List.cpp \
+	memory.c \
+	Stack.c \
+	StringBuffer.c \
+	util.c \
+
+extra_CPPFLAGS = -DPACKAGE_NAME=\"$(PACKAGE_NAME)\"
+
+subdirs = test 
+
+# `distfiles' determines the files and directories included in a distribution.
+# `distfiles_exclude' is used to filter out specific items, so that even if
+# they appear in `distfiles', they will not be copied in the distribution.
+
+distfiles = $(sources) $(headers) Makefile.in
+
+
+# -----------------------------------------------------------------------------
+# Primary build actions
+# -----------------------------------------------------------------------------
+
+# The default action is to remake the object files.  Those rules which are
+# not defined below are defined in makefile-common-actions.mk.
+
+all: Makefile default
+
+
+# -----------------------------------------------------------------------------
+# Checking.
+# -----------------------------------------------------------------------------
+
+# Targets of the form 'foo-recursive' are interpreted by the common
+# makefile rules as meaning "go into every subdir and do 'make foo' in
+# each".  Here the recursive command is needed because of the ./test
+# subdiretory.
+
+check: check-recursive
+
+
+# -----------------------------------------------------------------------------
+# Tags.
+# -----------------------------------------------------------------------------
+
+tags: etags ctags
+
+
+# -----------------------------------------------------------------------------
+# Installation
+# -----------------------------------------------------------------------------
+
+# This library doesn't actually get installed.  The main libnuml library
+# (in ../src) slurps in the object files when it's built.  Only the headers
+# get installed.
+
+install: all install-headers
+
+installcheck: all installcheck-headers
+
+uninstall: uninstall-headers
+
+
+# -----------------------------------------------------------------------------
+# Cleaning.
+# -----------------------------------------------------------------------------
+
+# The recursive command is needed because of the ./test subdiretory.
+
+clean: clean-normal clean-recursive
+
+distclean: distclean-normal distclean-recursive
+
+mostlyclean: mostlyclean-normal mostlyclean-recursive
+
+maintainer-clean: maintainer-clean-normal maintainer-clean-recursive
+
+
+# -----------------------------------------------------------------------------
+# Creating distribution (for libNUML maintainers only)
+# -----------------------------------------------------------------------------
+
+# The recursive command is needed because of the ./test subdiretory.
+
+dist: all dist-normal dist-recursive
+
+distcheck: all distcheck-normal distcheck-recursive
+
+
+# -----------------------------------------------------------------------------
+# Miscellaneous
+# -----------------------------------------------------------------------------
+
+include @top_srcdir@/config/makefile-common-actions.mk
+
+
+# -----------------------------------------------------------------------------
+# End.
+# -----------------------------------------------------------------------------
