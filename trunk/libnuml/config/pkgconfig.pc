@@ -1,0 +1,15 @@
+# This is a comment
+prefix=/home/dada/tools/libnuml-1.0.1   # this defines a variable
+exec_prefix=${prefix}  # defining another variable in terms of the first
+libdir=${exec_prefix}/lib
+includedir=${prefix}/include
+
+Name: NUML                            # human-readable name
+Description: Object/type system for GLib # human-readable description
+Version: 4.0.1
+URL: 
+Requires: libnuml-1.0 = 1.0.1
+Conflicts: foobar <= 4.5
+Libs: -L${libdir} -lnuml
+Libs.private: -lm
+Cflags: -I${includedir}/libnuml-1.0.1 -I${libdir}/libnuml-1.0.1/include

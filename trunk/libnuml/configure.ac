@@ -1,0 +1,569 @@
+dnl
+dnl Filename    : configure.ac
+dnl Description : Run this file through autoconf to produce `configure'
+dnl
+dnl Begin svn Header
+dnl $Rev::		$:	Revision of last commit
+dnl $Author::	$:	Author of last commit
+dnl $Date::		$:	Date of last commit
+dnl $HeadURL::	$
+dnl $Id::		$
+dnl End svn Header
+dnl ***************************************************************************
+dnl This file is part of libNUML.  Please visit http://code.google.com/p/numl/for more
+dnl information about NUML, and the latest version of libNUML.
+dnl Copyright (c) 2013 The University of Manchester.
+dnl
+dnl This library is free software; you can redistribute it and/or modify it
+dnl under the terms of the GNU Lesser General Public License as published
+dnl by the Free Software Foundation.  A copy of the license agreement is
+dnl provided in the file named "LICENSE.txt" included with this software
+dnl distribution and also available online as http://www.gnu.org/licenses/lgpl.html
+dnl
+dnl The original code was initially developed by:
+dnl
+dnl	SBML Team
+dnl	Control and Dynamical Systems, MC 107-81
+dnl	California Institute of Technology
+dnl	Pasadena, CA, 91125, USA
+dnl
+dnl 	http://www.sbml.org
+dnl	mailto:sbml-team@caltech.edu
+dnl
+dnl Adapted for NUML by:
+dnl
+dnl	NUML Team
+dnl	Computational Systems Biology Group
+dnl  School of Computer Science
+dnl 	The University of Manchester
+dnl	Manchester, M1 7DN UK
+dnl	mailto:josephodada@gmail.com
+dnl
+dnl  Contributor(s):
+dnl  Joseph O. Dada, The University of Manchester - initial LIBNUML API and implementation
+dnl **************************************************************************
+dnl ---------------------------------------------------------------------------
+dnl Autoconf initialization.
+dnl
+dnl Bug reports are sent to dada@ieee.org
+dnl ---------------------------------------------------------------------------
+
+m4_define(LIBNUML_VERSION, 
+  m4_esyscmd(cat VERSION.txt  |  tr -d '\n\r'))
+
+AC_INIT([libNUML], LIBNUML_VERSION, [dada@ieee.org], [libnuml])
+AC_CONFIG_AUX_DIR(config)
+
+AC_REVISION($Revision: 10643 $)
+
+AC_PREREQ(2.57)
+
+AC_CONFIG_SRCDIR(src/Makefile.in)
+
+AC_CONFIG_HEADERS(src/common/libnuml-config-unix.h)
+AC_CONFIG_HEADERS(src/common/libnuml-package.h)
+AC_CONFIG_HEADERS(src/common/libnuml-namespace.h)
+
+LIBNUML_VERSION_NUMERIC=m4_esyscmd(cat VERSION.txt |\
+  awk -F'.' '{ printf("%d%02d%02d\n", $1, $2, $3) }')
+AC_SUBST(LIBNUML_VERSION_NUMERIC)
+
+LIBNUML_MAJOR_VERSION=m4_esyscmd(cat VERSION.txt |\
+  awk -F'.' '{ printf("%d\n", $1) }')
+AC_SUBST(LIBNUML_MAJOR_VERSION)
+
+LIBNUML_MINOR_VERSION=m4_esyscmd(cat VERSION.txt |\
+  awk -F'.' '{ printf("%d\n", $2) }')
+AC_SUBST(LIBNUML_MINOR_VERSION)
+
+LIBNUML_REVISION_VERSION=m4_esyscmd(cat VERSION.txt |\
+  awk -F'.' '{ printf("%d\n", $3) }')
+AC_SUBST(LIBNUML_REVISION_VERSION)
+
+LIBNUML_BETA_VERSION=m4_esyscmd(cat VERSION.txt |\
+  awk -F'\\-' '{ printf("%s\n", $2) }')
+AC_SUBST(LIBNUML_BETA_VERSION)
+
+
+dnl ---------------------------------------------------------------------------
+dnl Command-line options
+dnl ---------------------------------------------------------------------------
+
+dnl [2007-06-25] This is not currently functioning and may never be again.
+
+dnl AC_ARG_ENABLE([memory-tracing],
+dnl   AC_HELP_STRING([--enable-memory-tracing],
+dnl                  [Enable memory tracing (default: disabled)]),
+dnl     [enable_tracing=$withval],
+dnl     [enable_tracing=no])
+
+dnl if test "$enable_tracing" != no; then
+dnl   AC_DEFINE([TRACE_MEMORY], 1,
+dnl             [Define to 1 to enable primitive memory tracing.])
+dnl fi
+
+AC_ARG_ENABLE([cpp-namespace],
+  AC_HELP_STRING([--enable-cpp-namespace@<:@=ARG@:>@],
+                 [Enable C++ namespace for libnuml (default=no)]),
+  [enable_cpp_namespace=$enableval],
+  [enable_cpp_namespace=no])
+
+if test "$enable_cpp_namespace" != no; then
+  AC_DEFINE([LIBNUML_USE_CPP_NAMESPACE], 1, [Define to 1 to enable C++ namespace.])
+fi
+
+AC_ARG_ENABLE([layout],
+  AC_HELP_STRING([--enable-layout@<:@=ARG@:>@],
+                 [Build the NUML layout extension (default=no)]),
+  [enable_layout=$enableval],
+  [enable_layout=no])
+
+if test "$enable_layout" != no; then
+  AC_DEFINE([USE_LAYOUT], 1, [Define to 1 to build the NUML layout extension.])
+  AC_SUBST(USE_LAYOUT, 1)
+fi
+
+AC_ARG_ENABLE([compression],
+  AC_HELP_STRING([--enable-compression@<:@=ARG@:>@],
+                 [Enable zlib/bzip2 compression if required libs detected, otherwise disabled (default=yes)]),
+  [enable_compression=$enableval],
+  [enable_compression=yes])
+
+if test "$enable_compression" != no; then
+  AC_DEFINE([USE_COMPRESSION], 1, [Define to 1 to enable zlib/bzip2 compression.])
+  AC_SUBST(USE_COMPRESSION, 1)
+fi
+
+dnl -----
+dnl ----Library
+
+dnl Other cmd-line options are defined in the individual .m4 files in the
+dnl config/ subdirectory.
+
+dnl ---------------------------------------------------------------------------
+dnl Check host operating system.
+dnl ---------------------------------------------------------------------------
+
+AC_CANONICAL_HOST
+
+case $host_os in
+  *linux*)
+    CPPFLAGS="-DLINUX $CPPFLAGS"
+    HOST_TYPE="linux"
+    SHAREDLIBEXT="so"
+    ;;
+
+  *solaris*)
+    CPPFLAGS="-DSOLARIS $CPPFLAGS"
+    HOST_TYPE="solaris"
+    SHAREDLIBEXT="so"
+    ;;
+
+  *cygwin*)
+    CPPFLAGS="-DWIN32 -DCYGWIN -DLIBNUML_EXPORTS $CPPFLAGS"
+    HOST_TYPE="cygwin"
+    SHAREDLIBEXT="dll"
+    ;;
+
+  *darwin*)
+    CPPFLAGS="-DMACOSX $CPPFLAGS"
+    HOST_TYPE="darwin"
+    SHAREDLIBEXT="dylib"
+    ;;
+
+  *aix*)
+    CPPFLAGS="-DAIX $CPPFLAGS"
+    HOST_TYPE="aix"
+    SHAREDLIBEXT="a"
+    ;;
+
+  *freebsd*)
+    CPPFLAGS="-DFREEBSD $CPPFLAGS"
+    HOST_TYPE="freebsd"
+    SHAREDLIBEXT="so"
+    ;;
+
+esac
+
+AC_SUBST(HOST_TYPE)
+AC_SUBST(SHAREDLIBEXT)
+
+dnl Provide dynamic library path settings.
+
+CONFIG_LDPATH
+
+
+dnl ---------------------------------------------------------------------------
+dnl Checks for various programs and packages.
+dnl ---------------------------------------------------------------------------
+
+AC_PROG_CXX
+AC_PROG_CC
+AC_PROG_CPP
+AC_LIBTOOL_WIN32_DLL
+AC_PROG_LIBTOOL
+AC_PROG_INSTALL
+AC_PROG_MAKE_SET
+
+AC_SUBST(LIBTOOL)
+DOLT
+
+AC_PATH_PROG([AUTOCONF],[autoconf],[autoconf])
+AC_PATH_PROG([ACLOCAL],[aclocal],[aclocal])
+
+
+#
+# Checks whether -Wno-long-double option is supported.
+#
+# (On MacOS X, compilation generates a warning about `long double'
+#  with Python and Ruby bindings).
+#
+saved_CPPFLAGS=$CPPFLAGS
+CPPFLAGS="-Wno-long-double"
+AC_MSG_CHECKING([whether -Wno-long-double is supported])
+AC_COMPILE_IFELSE(
+  [AC_LANG_SOURCE([])],
+  [AC_SUBST(HAS_GCC_WNO_LONG_DOUBLE, 1)
+   AC_MSG_RESULT([yes])],
+  [AC_MSG_RESULT([no])]
+)
+CPPFLAGS=$saved_CPPFLAGS
+
+
+# The Lisp language binding has been removed for the time being, because it
+# no longer works in recent versions of libNUML.
+
+CONFIG_PROG_SWIG(1.3.39)
+#CONFIG_PROG_PYTHON
+#CONFIG_PROG_PERL
+CONFIG_PROG_JAVA(1.5.0)
+#CONFIG_PROG_MATLAB
+#CONFIG_PROG_OCTAVE(2.9.7,2.9.7)
+#CONFIG_PROG_RUBY
+#CONFIG_PROG_CSHARP
+
+# Make sure to test doxygen *after* java, because there's a dependency on
+# in CONFIG_PROG_DOXYGEN on whether --with-java was also given.
+
+CONFIG_PROG_DOXYGEN(1.5.8)
+
+dnl AC_LIBTOOL_WIN32_DLL
+dnl AC_PROG_LIBTOOL
+
+
+dnl ---------------------------------------------------------------------------
+dnl Checks for libraries.
+dnl ---------------------------------------------------------------------------
+
+AC_LANG(C)
+
+AC_CHECK_LIB(m, isnan)
+
+dnl Make sure to test libxml *last*, because libxml is the default and the
+dnl config macro needs to know whether any other XML libraries have been
+dnl chosen instead of it.
+
+CONFIG_LIB_EXPAT(1.95.8)
+CONFIG_LIB_XERCES
+CONFIG_LIB_LIBXML(2.6.16)
+
+dnl Make sure NUML library is available
+CONFIG_LIB_LIBNUML
+
+CONFIG_LIB_LIBCHECK(0.9.2)
+CONFIG_LIB_ZLIB
+CONFIG_LIB_BZ2
+CONFIG_LIB_UNIVBINARY
+
+
+dnl ---------------------------------------------------------------------------
+dnl Checks for header files.
+dnl ---------------------------------------------------------------------------
+
+AC_HEADER_STDC
+AC_CHECK_HEADERS(errno.h)
+AC_CHECK_HEADERS(math.h)
+AC_CHECK_HEADERS(ieeefp.h)
+
+
+dnl ---------------------------------------------------------------------------
+dnl Checks for typedefs, structures, and compiler characteristics.
+dnl ---------------------------------------------------------------------------
+
+AC_C_BIGENDIAN
+AC_C_CONST
+AC_TYPE_SIZE_T
+AC_EXEEXT
+AC_OBJEXT
+
+dnl ---------------------------------------------------------------------------
+dnl Checks for Sun cc.
+dnl ---------------------------------------------------------------------------
+
+if ($CXX -V 2>&1 | grep 'Sun C++')  >/dev/null 2>/dev/null; then
+  AC_SUBST(USE_SUN_CC, 1)
+fi
+
+dnl ---------------------------------------------------------------------------
+dnl Miscellaneous
+dnl ---------------------------------------------------------------------------
+
+# Root directory
+# Translate path for native Windows compilers for use with 'make check'
+
+ROOT_DIR=`pwd`
+case $host in
+*-*-cygwin* | *-*-mingw*)
+  if (cygpath --mixed $ROOT_DIR) >/dev/null 2>/dev/null; then
+    ROOT_DIR=`cygpath --mixed $ROOT_DIR`
+  fi
+  # Extra files generated by some Windows compilers
+  EXTRA_CLEAN="*.stackdump *.exp *.lib"
+  ;;
+esac
+
+dnl In order to allow certain Makefile tests, we define a variable that
+dnl stores a list of options available to configure.  This variable is
+dnl added to by the configure options defined in config/ .m4 files.
+
+AC_DEFINE(LIBNUML_OPTIONS)
+AC_SUBST(LIBNUML_OPTIONS)
+
+
+dnl ---------------------------------------------------------------------------
+dnl Output
+dnl ---------------------------------------------------------------------------
+
+AC_CONFIG_FILES([config/lt_link_helper.sh], [chmod a+x config/lt_link_helper.sh])
+AC_CONFIG_FILES([config/makefile-common-vars.mk])
+AC_CONFIG_FILES([config/mkoctfile_wrapper.sh], [chmod a+x config/mkoctfile_wrapper.sh])
+AC_CONFIG_FILES([./Makefile])
+
+AC_CONFIG_FILES([libnuml.spec])
+
+AC_CONFIG_FILES([src/Makefile])
+
+AC_CONFIG_FILES([src/common/Makefile])
+AC_CONFIG_FILES([src/common/libnuml-version.h])
+
+
+
+# The Lisp language binding has been removed for the time being, because it
+# no longer works in recent versions of libNUML.
+
+AC_CONFIG_FILES([src/numl/Makefile])
+AC_CONFIG_FILES([src/numl/test/Makefile])
+
+#AC_CONFIG_FILES([src/numl/testNUML/Makefile])
+
+AC_CONFIG_FILES([src/util/Makefile])
+AC_CONFIG_FILES([src/util/test/Makefile])
+
+#AC_CONFIG_FILES([src/validator/Makefile])
+#AC_CONFIG_FILES([src/validator/test/Makefile])
+
+AC_CONFIG_FILES([src/xml/Makefile])
+#AC_CONFIG_FILES([src/xml/test/Makefile])
+
+AC_CONFIG_FILES([src/bindings/Makefile])
+
+AC_CONFIG_FILES([src/bindings/java/Makefile])
+
+#AC_CONFIG_FILES([src/annotation/Makefile])
+
+AC_CONFIG_FILES([src/compress/Makefile])
+
+AC_CONFIG_FILES([examples/c++/Makefile])
+
+#AC_CONFIG_FILES([macosx/Makefile])
+#AC_CONFIG_FILES([macosx/build.sh], [chmod a+x macosx/build.sh])
+#AC_CONFIG_FILES([macosx/libNUML.pkg/Contents/Info.plist])
+#AC_CONFIG_FILES([macosx/libNUML.pkg/Contents/Resources/package_version])
+
+AC_OUTPUT
+
+
+dnl ---------------------------------------------------------------------------
+dnl Inform users of settings
+dnl ---------------------------------------------------------------------------
+
+dnl Gather up the values of the flags into one set of variables for easier
+dnl printing below.
+
+if test $with_expat != no; then
+  xml_library="Expat"
+  xml_cppflags=$EXPAT_CPPFLAGS
+  xml_ldflags=$EXPAT_LDFLAGS
+  xml_libs=$EXPAT_LIBS
+elif test $with_libxml != no; then
+  xml_library="libxml2"
+  xml_cppflags=$LIBXML_CPPFLAGS
+  xml_ldflags=$LIBXML_LDFLAGS
+  xml_libs=$LIBXML_LIBS
+else
+  xml_library="Xerces-C++"
+  xml_cppflags=$XERCES_CPPFLAGS
+  xml_ldflags=$XERCES_LDFLAGS
+  xml_libs=$XERCES_LIBS
+fi
+
+
+dnl Simple helper functions used below.
+
+print_whitespace()
+{
+  i=$1
+  if test -n "$i"; then
+    while expr $i \> 0 > /dev/null
+    do 
+      i=`expr $i - 1`; printf ' '
+    done
+  fi
+}
+
+print_flag()
+{
+  if test -n "$2" -a "$2" != "no"; then
+    i=`expr 13 - ${#1}`
+    printf "  Using $1 with path "
+    print_whitespace $i
+    if test -n "$4"; then
+      /bin/echo -n "= $3"
+    else
+      echo "= $3"
+    fi
+  fi
+  dnl
+  dnl If there's a 4th arg, print it after everything else on the line.
+  dnl 
+  if test -n "$4"; then
+    echo "  ($4)"
+  fi
+}
+
+
+echo ""
+echo "----------------------------------------------------------------------"
+echo "${PACKAGE_NAME} version ${PACKAGE_VERSION}"
+echo "----------------------------------------------------------------------"
+echo ""
+echo "More information and the latest version are available online at"
+echo "http://numl.org/Software/libNUML"
+echo ""
+echo "Please report problems using the issue tracker at"
+echo "http://numl.org/software/libnuml/issue-tracker"
+echo ""
+echo "To contact the developers directly, email dada@ieee.org"
+echo ""
+echo "Configured on host \"`hostname`\""
+echo "  host type                     = $HOST_TYPE"
+echo "  host vendor                   = $host_vendor"
+echo "  host operating system         = $host_os"
+echo "  host CPU architecture         = $host_cpu"
+echo ""
+echo "General build flags:"
+echo "  CC                            = $CC"
+echo "  CXX                           = $CXX"
+echo "  CFLAGS                        = $CFLAGS"
+echo "  CXXFLAGS                      = $CXXFLAGS"
+echo "  CPPFLAGS                      = $CPPFLAGS $ZLIB_CPPFLAGS $BZ2_CPPFLAGS"
+echo "  LDFLAGS                       = $LDFLAGS $ZLIB_LDFLAGS $BZ2_LDFLAGS"
+echo "  LIBS                          = $LIBS $ZLIB_LIBS $BZ2_LIBS"
+echo ""
+echo "XML parser library configuration:"
+echo "  XML library                   = $xml_library"
+echo "  CPPFLAGS for XML              = $xml_cppflags"
+echo "  LDFLAGS for XML               = $xml_ldflags"
+echo "  LIBS for XML                  = $xml_libs"
+echo "  CPPFLAGS for NUML             = $LIBSML_CPPFLAGS"
+echo "  LDFLAGS for NUML              = $LIBNUML_LDFLAGS"
+echo "  LIBS for NUML                 = $LIBNUML_LIBS"
+echo ""
+echo "Other ${PACKAGE_NAME} configuration settings:"
+echo "  Installation \$prefix          = $prefix"
+
+print_flag "libcheck"  	$with_libcheck	$with_check
+print_flag "SWIG"   	$with_swig	$SWIG
+print_flag "doxygen"    $with_doxygen   $with_doxygen
+print_flag "Java"   	$with_java	$JAVA
+print_flag "Python" 	$with_python	$PYTHON
+print_flag "Perl"   	$with_perl	$PERL
+print_flag "MATLAB"   	$with_matlab	$MATLAB
+print_flag "Octave"   	$with_octave	$OCTAVE
+print_flag "Asdf"   	$EXT_ASDF	$ASDF
+print_flag "UFFI"   	$EXT_UFFI	$UFFI
+print_flag "Ruby"       $with_ruby      $RUBY
+print_flag "CSharp"     $with_csharp    $CSHARP_CILINTERPRETER
+print_flag "zlib"       $with_zlib      $with_zlib
+print_flag "bzip2"      $with_bzip2     $with_bzip2
+
+if test "$enable_cpp_namespace" != "no" ; then
+  echo "  Using C++ namespace for libNUML (libnuml) = yes"
+fi
+
+if test "$enable_layout" != "no" ; then
+  echo "  Using layout extension  = yes"
+fi
+
+echo ""
+echo "Other potentially important settings:"
+if test "$enable_univbinary" != "no"; then
+  echo "  Building libNUML as MacOS universal binary."
+fi
+
+if test "$with_zlib" != no; then
+  /bin/echo -n "  Compression support enabled for .zip"
+  if test "$with_bzip2" != no; then
+    echo ", .gz and .bz2 files"
+  else
+    echo " and .gz files"
+  fi
+elif test "$with_bzip2" != no; then
+  echo "  Compression support enabled for .bz2 files"
+fi
+
+if test "$HOST_TYPE" = "darwin"; then
+  echo "  Value of \$DYLD_LIBRARY_PATH   = $DYLD_LIBRARY_PATH"
+else
+  echo "  Value of \$LD_LIBRARY_PATH     = $LD_LIBRARY_PATH"
+fi
+
+if test -n "$with_java" -a "$with_java" != "no"; then
+  echo "  Value of \$CLASSPATH for Java  = $CLASSPATH"  
+fi
+
+if test -n "$with_csharp" -a "$with_csharp" != "no"; then
+  echo "  Using CSharp compiler = $CSHARP_COMPILER"
+fi
+
+dnl Print these warnings at the end so they're less likely to be overlooked.
+
+if test "$with_zlib" = no && test "$with_bzip2" = no; then
+  echo ""
+  echo "Warning: reading/writing compressed NUML in this copy of libNUML"
+  echo "is not supported or has not been enabled.  If this was not your"
+  echo "intention, please check the --with-zlib, -with-bzip2, and/or"
+  echo "--enable-compression options."
+  echo ""
+elif test "$with_zlib" = no; then
+  echo ""
+  echo "Warning: reading/writing compressed NUML in .gz and .zip format"
+  echo "in this copy of libNUML is not supported or has been disabled."
+  echo "If this was not your intention, please check the --with-zlib"
+  echo "option."
+  echo ""
+elif test "$with_bzip2" = no; then
+  echo ""
+  echo "Warning: reading/writing compressed NUML in .bz2 format in"
+  echo "this copy of libNUML is not supported or has been disabled."
+  echo "If this was not your intention, please check the --with-bzip2"
+  echo "option."
+  echo ""
+fi
+
+
+dnl Temporarily unavailable anyway, so skip this for now:
+dnl echo "  enable memory tracing? = $enable_tracing"
+
+echo "----------------------------------------------------------------------"
+echo ""
