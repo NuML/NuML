@@ -3,8 +3,8 @@
  * @brief   Utility functions
  * @author  Ben Bornstein
  *
- * $Id: util.h 9686 2009-06-30 17:37:35Z ajouraku $
- * $HeadURL: https://numl.svn.sourceforge.net/svnroot/numl/branches/rel-4-0-0/src/util/util.h $
+ * $Id$
+ * $HeadURL$
  *
  *<!---------------------------------------------------------------------------
  * This file is part of libNUML.  Please visit http://numl.org for more

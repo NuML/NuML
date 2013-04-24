@@ -3,8 +3,8 @@
  * @brief   Implementations of wrapper classes for C++ standard output streams. 
  * @author  Akiya Jouraku
  *
- * $Id: OStream.cpp 10049 2009-08-20 13:00:02Z ajouraku $
- * $URL: https://sbml.svn.sourceforge.net/svnroot/sbml/branches/rel-4-0-0/src/bindings/swig/OStream.cpp $
+ * $Id$
+ * $URL$
  *
  *<!-----------------------------------------------------------------------
  * This file is part of libSBML.  Please visit http://sbml.org for more
