@@ -5,7 +5,7 @@
 # This script was originally implemented by Moriyoshi Koizumi.
 #
 
-libdir=/home/dada/local/libnuml/lib
+libdir=/usr/local/lib
 
 progname=`basename "$0"`
 
@@ -52,7 +52,7 @@ while test -n "$1"; do
             ;;
         lib*.la | */lib*.la)
             mkdir -p "${stage_dir}/${libdir}" && \
-                eval "/home/dada/workspace/libnuml/libtool --mode=install cp \"$1\" \"${stage_dir}/${libdir}\""
+                eval "/home/dada/workspaces/libnuml/libtool --mode=install cp \"$1\" \"${stage_dir}/${libdir}\""
             libname=`basename "$1" | sed -e 's/lib\([^.]*\)\.la/\1/'`
             args="${args} \"$1\""
             ;; 
@@ -71,8 +71,8 @@ if test -z "$out_file"; then
     exit 1
 fi
 
-eval "/home/dada/workspace/libnuml/libtool --tag=\"$TAG\" --mode=link \"$LD\" -rpath \"${libdir}\" -inst-prefix-dir \"${stage_dir}\" -module -avoid-version -export-dynamic -shrext "${dllibext}" -o \"${out_dir}/${out_filename}.la\" $args" && \
-    eval "/home/dada/workspace/libnuml/libtool --mode=install cp \"${out_dir}/${out_filename}.la\" \"${stage_dir}/${libdir}/${out_filename}.la\"" 
+eval "/home/dada/workspaces/libnuml/libtool --tag=\"$TAG\" --mode=link \"$LD\" -rpath \"${libdir}\" -inst-prefix-dir \"${stage_dir}\" -module -avoid-version -export-dynamic -shrext "${dllibext}" -o \"${out_dir}/${out_filename}.la\" $args" && \
+    eval "/home/dada/workspaces/libnuml/libtool --mode=install cp \"${out_dir}/${out_filename}.la\" \"${stage_dir}/${libdir}/${out_filename}.la\"" 
 
   if [ -e "${stage_dir}${libdir}/${out_filename}${dllibext}" ]; then
     cp "${stage_dir}${libdir}/${out_filename}${dllibext}" "${out_dir}"
