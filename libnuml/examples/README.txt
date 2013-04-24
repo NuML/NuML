@@ -64,10 +64,10 @@ Adapted for NUML by:
   Joseph O. Dada, The University of Manchester - initial LIBNUML API and implementation
   
   $Rev::		$:	Revision of last commit
-  $Author::	$:	Author of last commit
+  $Author::		$:	Author of last commit
   $Date::		$:	Date of last commit
   $HeadURL::	$
-  $Id::		$
+  $Id::			$
 
 # The following is for [X]Emacs users.  Please leave in place.
 # Local Variables:
