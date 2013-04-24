@@ -1,9 +1,9 @@
 /**
  Begin svn Header
- $Rev:			$:	Revision of last commit
- $Author:			$:	Author of last commit
- $Date:			$:	Date of last commit
- $HeadURL:		$
+ $Rev$:	Revision of last commit
+ $Author$:	Author of last commit
+ $Date$:	Date of last commit
+ $HeadURL$
  $Id:				$
  End svn Header
  ****************************************************************************
