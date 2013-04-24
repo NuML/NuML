@@ -3,8 +3,8 @@
  * @brief   Syntax checking functions
  * @author  Sarah Keating
  *
- * $Id:  $
- * $HeadURL:  $
+ * $Id$
+ * $HeadURL$
  *
  *<!---------------------------------------------------------------------------
  * This file is part of libNUML.  Please visit http://numl.org for more

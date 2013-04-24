@@ -3,8 +3,8 @@
  * \brief   Java-specific SWIG support code for wrapping libNUML API
  * \author  Ben Bornstein
  *
- * $Id: local.cpp 8704 2009-01-04 02:26:05Z mhucka $
- * $HeadURL: https://numl.svn.sourceforge.net/svnroot/numl/branches/rel-4-0-0/src/bindings/java/local.cpp $
+ * $Id$
+ * $HeadURL$
  */
 /* Copyright 2004 California Institute of Technology and
  * Japan Science and Technology Corporation.

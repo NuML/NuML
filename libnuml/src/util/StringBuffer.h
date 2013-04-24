@@ -5,8 +5,8 @@
  * @brief       A growable buffer for creating character strings.
  * @author      Ben Bornstein <ben.bornstein@jpl.nasa.gov>
  *
- * $Id: StringBuffer.h 9686 2009-06-30 17:37:35Z ajouraku $
- * $HeadURL: https://numl.svn.sourceforge.net/svnroot/numl/branches/rel-4-0-0/src/util/StringBuffer.h $
+ * $Id$
+ * $HeadURL$
  *
  *<!---------------------------------------------------------------------------
  * This file is part of libNUML.  Please visit http://numl.org for more
