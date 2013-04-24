@@ -4,7 +4,7 @@
  $Author$:	Author of last commit
  $Date$:	Date of last commit
  $HeadURL$
- $Id:				$
+ $Id$
  End svn Header
  ****************************************************************************
  This file is part of libNUML.  Please visit http://code.google.com/p/numl/for more
