@@ -69,7 +69,6 @@ thisdir = src/numl
 
 headers =	\
   OntologyTerm.h	\
-  Result.h	\
   ResultComponent.h	\
   DimensionDescription.h	\
   Dimension.h	\
@@ -96,7 +95,6 @@ headers =	\
 
 sources =  \
   OntologyTerm.cpp	\
-  Result.cpp	\
   ResultComponent.cpp	\
   DimensionDescription.cpp	\
   Dimension.cpp	\

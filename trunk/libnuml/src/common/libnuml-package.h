@@ -1,3 +1,4 @@
+/* src/common/libnuml-package.h.  Generated from libnuml-package.h.in by configure.  */
 /**
 * Begin svn Header
 * $Rev$:	Revision of last commit
@@ -40,7 +41,6 @@
 *   Joseph O. Dada, The University of Manchester - initial LIBNUML API and implementation
 * ***************************************************************************
 **/
-
 
 /**
  *

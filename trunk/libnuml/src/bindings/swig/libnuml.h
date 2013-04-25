@@ -55,7 +55,7 @@
 
 #include <numl/OntologyTerm.h>
 
-#include <numl/Result.h>
+//#include <numl/Result.h>
 
 #include <numl/ResultComponent.h>
 #include <numl/Dimension.h>

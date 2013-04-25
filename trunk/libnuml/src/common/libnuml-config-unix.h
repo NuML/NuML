@@ -1,3 +1,4 @@
+/* src/common/libnuml-config-unix.h.  Generated from libnuml-config-unix.h.in by configure.  */
 /**
 * Begin svn Header
 * $Rev$:	Revision of last commit

@@ -412,43 +412,6 @@ NUMLDocument::setLevelAndVersion (unsigned int level, unsigned int version,
   return conversionSuccess;
 }
 
-
-/*
- * Sets the Model for this NUMLDocument to a copy of the given Model.
- */
-/*int
-NUMLDocument::setModel (const Model* m)
-{
-  if (mModel == m)
-  {
-    return LIBNUML_OPERATION_SUCCESS;
-  }
-  else if (m == NULL)
-  {
-    delete mModel;
-    mModel = 0;
-    return LIBNUML_OPERATION_SUCCESS;
-  }
-  else if (getLevel() != m->getLevel())
-  {
-    return LIBNUML_LEVEL_MISMATCH;
-  }
-  else if (getVersion() != m->getVersion())
-  {
-    return LIBNUML_VERSION_MISMATCH;
-  }
-  else
-  {
-    delete mModel;
-    mModel = (m != 0) ? new Model(*m) : 0;
-
-    if (mModel) mModel->setNUMLDocument(this);
-    if (mModel) mModel->setParentNUMLObject(this);
-    
-    return LIBNUML_OPERATION_SUCCESS;
-  }
-}
-*/
 /** @cond doxygen-libnuml-internal */
 /*
  * @return the NUML object corresponding to next XMLToken in the
@@ -792,7 +755,7 @@ NUMLDocument::writeAttributes (XMLOutputStream& stream) const
 
      if (mLevel == 1)
      {
-        xmlns.add("http://www.numl.org/numl/level1");
+        xmlns.add("http://www.numl.org/numl/level1/version1");
      }
      stream << xmlns;
 
@@ -930,28 +893,17 @@ NUMLDocument_getVersion (const NUMLDocument_t *d)
 
 /**
  * Sets the NUML Level and Version of this NUMLDocument, attempting to
- * convert the model as needed.
+ * convert the ResultComponent as needed.
  *
- * This method is used to convert models between Levels and Versions of
- * NUML.  Generally, models can be converted upward without difficulty
- * (e.g., from NUML Level 1 to Level 2, or from an earlier version of
- * Level 2 to the latest version of Level 2).  Sometimes models can be
- * translated downward as well, if they do not use constructs specific to
- * more advanced Levels of NUML.
+ * This method is used to convert numl between Levels and Versions of
+ * NUML.
  *
  * Callers can also check compatibility directly using the methods
- * checkL1Compatibility(), checkL2v1Compatibility(), and 
- * checkL2v2Compatibility().
  * 
  * The valid combinations as of this release of libNUML are the
  * following: 
  *
  * @li Level 1 Version 1
- * @li Level 1 Version 2
- * @li Level 2 Version 1
- * @li Level 2 Version 2
- * @li Level 2 Version 3
- * @li Level 2 Version 4
  *
  * @param d the NUMLDocument_t structure
  *
@@ -963,10 +915,8 @@ NUMLDocument_getVersion (const NUMLDocument_t *d)
  * conversion.  If the conversion fails, it will be logged in the error
  * list associated with this NUMLDocument_t structure.  Callers should
  * consult getNumErrors() to find out if the conversion succeeded without
- * problems.  For conversions from Level 2 to Level 1, callers can also
- * check the Level of the model after calling this method to find out
- * whether it is Level 1.  (If the conversion to Level 1 failed, the Level
- * of this model will be left unchanged.)
+ * problems. (If the conversion to Level 1 failed, the Level
+ * of this ResultComponent will be left unchanged.)
  */
 LIBNUML_EXTERN
 int
@@ -983,15 +933,9 @@ NUMLDocument_setLevelAndVersion (  NUMLDocument_t *d
  * convert the model as needed.
  *
  * This method is used to convert models between Levels and Versions of
- * NUML.  Generally, models can be converted upward without difficulty
- * (e.g., from NUML Level 1 to Level 2, or from an earlier version of
- * Level 2 to the latest version of Level 2).  Sometimes models can be
- * translated downward as well, if they do not use constructs specific to
- * more advanced Levels of NUML.
+ * NUML.
  *
  * Callers can also check compatibility directly using the methods
- * checkL1Compatibility(), checkL2v1Compatibility(), and 
- * checkL2v2Compatibility().
  * 
  * The valid combinations as of this release of libNUML are the
  * following: 
@@ -1008,16 +952,12 @@ NUMLDocument_setLevelAndVersion (  NUMLDocument_t *d
  * conversion.  If the conversion fails, it will be logged in the error
  * list associated with this NUMLDocument_t structure.  Callers should
  * consult getNumErrors() to find out if the conversion succeeded without
- * problems.  For conversions from Level 2 to Level 1, callers can also
- * check the Level of the model after calling this method to find out
- * whether it is Level 1.  (If the conversion to Level 1 failed, the Level
- * of this model will be left unchanged.)
- *
+ * problems.
  *
  * Strict conversion applies the additional criteria that both the source
- * and the target model must be consistent NUML.  Users can control the
+ * and the target model must be consistent NUML. Users can control the
  * consistency checks that are applied using the 
- * NUMLDocument::setConsistencyChecks function.  If either the source
+ * NUMLDocument::setConsistencyChecks function. If either the source
  * or the potential target model have validation errors, the conversion
  * is not performed.  When a strict conversion is successful, the
  * underlying NUML object model is altered to reflect the new level
@@ -1050,8 +990,6 @@ NUMLDocument_setLevelAndVersionStrict (  NUMLDocument_t *d
  *
  * @see NUMLDocument_getNumErrors(), NUMLDocument_setLevelAndVersion(),
  * NUMLDocument_checkConsistency(), NUMLDocument_checkL1Compatibility(),
- * NUMLDocument_checkL2v1Compatibility()
- * NUMLDocument_checkL2v2Compatibility(), NUMLReader_readNUML(),
  * NUMLReader_readNUMLFromString().
  */
 LIBNUML_EXTERN
@@ -1072,8 +1010,6 @@ NUMLDocument_getError (NUMLDocument_t *d, unsigned int n)
  *
  * @see NUMLDocument_setLevelAndVersion(), NUMLDocument_checkConsistency(),
  * NUMLDocument_checkL1Compatibility(),
- * NUMLDocument_checkL2v1Compatibility()
- * NUMLDocument_checkL2v2Compatibility(), NUMLReader_readNUML(),
  * NUMLReader_readNUMLFromString().
  */
 LIBNUML_EXTERN
