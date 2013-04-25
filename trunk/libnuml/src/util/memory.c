@@ -1,10 +1,10 @@
 /**
 * Begin svn Header
-* $Rev::		$:	Revision of last commit
-* $Author::		$:	Author of last commit
-* $Date::		$:	Date of last commit
-* $HeadURL::	$
-* $Id::			$
+* $Rev$:	Revision of last commit
+* $Author$:	Author of last commit
+* $Date$:	Date of last commit
+* $HeadURL$
+* $Id$
 * End svn Header
 * ***************************************************************************
 * This file is part of libNUML.  Please visit http://code.google.com/p/numl/for more
@@ -40,6 +40,7 @@
 *   Joseph O. Dada, The University of Manchester - initial LIBNUML API and implementation
 * ***************************************************************************
 **/
+
 
 #include <numl/common/common.h>
 #include <numl/util/memory.h>
