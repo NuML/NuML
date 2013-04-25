@@ -5,7 +5,7 @@
 # This script was originally implemented by Moriyoshi Koizumi.
 #
 
-libdir=/usr/local/lib
+libdir=/home/dada/local/libnuml/lib
 
 progname=`basename "$0"`
 

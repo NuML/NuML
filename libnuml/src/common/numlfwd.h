@@ -127,7 +127,7 @@ typedef CLASS_OR_STRUCT CompositeValue       CompositeValue_t;
  * @var typedef class Result Result_t
  * @copydoc Result
  */
-typedef CLASS_OR_STRUCT Result        Result_t;
+//typedef CLASS_OR_STRUCT Result        Result_t;
 
 /**
  * @var typedef class ResultComponent ResultComponent_t

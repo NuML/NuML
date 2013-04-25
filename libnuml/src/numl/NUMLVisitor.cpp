@@ -57,12 +57,6 @@ NUMLVisitor::visit (const OntologyTerm& x)
 }
 
 bool
-NUMLVisitor::visit (const Result& x)
-{
-  return visit( static_cast<const NMBase&>(x));
-}
-
-bool
 NUMLVisitor::visit (const ResultComponent& x)
 {
   return visit( static_cast<const NMBase&>(x));

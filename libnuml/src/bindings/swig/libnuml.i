@@ -312,7 +312,7 @@ LIBNUML_CPP_NAMESPACE_USE
 %newobject NUMLWriter::writeToString;
 %newobject writeNUMLToString;
 %newobject *::remove;
-%newobject Result::removeResultComponent;
+//%newobject Result::removeResultComponent;
 %newobject ResultComponent::removeDimension;
 %newobject ResultComponent::removeDimensionDescription;
 %newobject DimensionDescription::removeCompositeDescription;
@@ -400,8 +400,6 @@ LIBNUML_CPP_NAMESPACE_USE
 %include <numl/NUMLList.h>
 
 %include <numl/OntologyTerm.h>
-%include <numl/Result.h>
-
 
 %include <numl/ResultComponent.h>
 %include <numl/Dimension.h>

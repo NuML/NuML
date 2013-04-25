@@ -1,3 +1,4 @@
+/* src/common/libnuml-namespace.h.  Generated from libnuml-namespace.h.in by configure.  */
 /**
 * Begin svn Header
 * $Rev$:	Revision of last commit

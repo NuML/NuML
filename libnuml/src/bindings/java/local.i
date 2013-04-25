@@ -289,10 +289,7 @@ NUMLCONSTRUCTOR_EXCEPTION(AtomicValue)
         return new OntologyTerm(cPtr, owner);    
 
       case libnumlConstants.NUML_DOCUMENT:
-        return new NUMLDocument(cPtr, owner);
-    
-      case libnumlConstants.NUML_RESULT:
-        return new Result(cPtr, owner);
+        return new NUMLDocument(cPtr, owner);      
 
       case libnumlConstants.NUML_RESULTCOMPONENT:
         return new ResultComponent(cPtr, owner);
