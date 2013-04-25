@@ -120,10 +120,10 @@ NUMLVisitor::leave (const OntologyTerm& x)
 }
 
 
-void
+/*void
 NUMLVisitor::leave (const Result& x)
 {
-}
+}*/
 
 
 void
