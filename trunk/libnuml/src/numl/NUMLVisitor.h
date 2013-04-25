@@ -41,7 +41,7 @@ class NMBase;
 
 class NUMLDocument;
 class OntologyTerm;
-class Result;
+//class Result;
 class ResultComponent;
 class Dimension;
 class CompositeValue;
@@ -81,7 +81,7 @@ public:
   virtual bool visit (const NMBase                  &x);
   virtual bool visit (const OntologyTerm     	  &x);
 
-  virtual bool visit (const Result                  &x);
+ // virtual bool visit (const Result                  &x);
   virtual bool visit (const ResultComponent     	  &x);
   virtual bool visit (const Dimension	           &x);
   virtual bool visit (const CompositeValue	           &x);
@@ -97,7 +97,7 @@ public:
   virtual void leave (const OntologyTerm        &x);
 
   virtual void leave (const Tuple	           &x);
-  virtual void leave (const Result                  &x);
+//  virtual void leave (const Result                  &x);
   virtual void leave (const ResultComponent     	  &x);
   virtual void leave (const Dimension	           &x);
   virtual void leave (const DimensionDescription	           &x);
