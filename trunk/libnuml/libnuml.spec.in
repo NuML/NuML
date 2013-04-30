@@ -57,7 +57,7 @@ Release: %{release}
 Group: Development/Libraries
 Source: http://downloads.sourceforge.net/numl/libnuml-%{package_version}-src.zip
 URL: http://numl.org/Software/libNUML
-Packager: libNUML Team <dada@ieee.org>
+Packager: libNUML Team <joseph.dada@manchester.ac.uk>
 License: LGPL
 Prefix: /usr
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
@@ -84,8 +84,8 @@ Requires: bzip2
 %{!?libxml2:Conflicts: libnuml-libxml2}
 %{!?xerces:Conflicts: libnuml-xerces}
 
-########SBML library
-#%{?libsbml:Requires: libsbml >= 4.0.1}
+########NUML library
+#%{?libsbml:Requires: libnuml >= 1.0.1}
 
 
 %description
@@ -109,7 +109,7 @@ Requires: %{name} = %{version}-%{release}
 %{!?libxml2:Conflicts: libnuml-libxml2-devel}
 %{!?xerces:Conflicts: libnuml-xerces-devel}
 
-%{!?libsbml:Conflicts: libnuml-libsbml-devel}
+%{!?libnuml:Conflicts: libnuml-libnuml-devel}
 
 %description devel
 The %{name}-devel package contains the libraries, include files and 
@@ -213,7 +213,7 @@ libNUML Octave bindings.
 %build
 rm -rf $RPM_BUILD_ROOT
 export CFLAGS="$RPM_OPT_FLAGS"
-%configure --with-%{xmlparser} --with-libsbml --enable-layout --with-check --with-swig@SWIG_CONFIG_OPT@ \
+%configure --with-%{xmlparser} --with-libnuml --enable-layout --with-check --with-swig@SWIG_CONFIG_OPT@ \
      --with-doxygen@DOXYGEN_CONFIG_OPT@ %{?_with_java: --with-java} %{?_with_csharp: --with-csharp} \
      %{?_with_perl: --with-perl} %{?_with_ruby: --with-ruby} \
      %{?_with_python: --with-python} %{?_with_octave: --with-octave}
