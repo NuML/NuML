@@ -85,7 +85,7 @@ Requires: bzip2
 %{!?xerces:Conflicts: libnuml-xerces}
 
 ########NUML library
-#%{?libsbml:Requires: libnuml >= 1.0.1}
+#%{?libnuml:Requires: libnuml >= 1.0.1}
 
 
 %description
