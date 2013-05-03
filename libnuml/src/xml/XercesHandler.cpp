@@ -58,7 +58,7 @@ using namespace xercesc;
 
 /** @endcond doxygen-ignored */
 
-LIBSBML_CPP_NAMESPACE_BEGIN
+LIBNUML_CPP_NAMESPACE_BEGIN
 
 /** @cond doxygen-libnuml-internal */
 
@@ -232,4 +232,4 @@ XercesHandler::setDocumentLocator (const xercesc::Locator* const locator)
 
 /** @endcond doxygen-libnuml-internal */
 
-LIBSBML_CPP_NAMESPACE_END
+LIBNUML_CPP_NAMESPACE_END
