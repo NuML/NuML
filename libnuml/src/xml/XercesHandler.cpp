@@ -24,8 +24,8 @@
 *      California Institute of Technology
 *      Pasadena, CA, 91125, USA
 *
-*      http://www.sbml.org
-*      mailto:sbml-team@caltech.edu
+*      http://www.numl.org
+*      mailto:numl-team@caltech.edu
 *
 * Adapted for NUML by:
 *
@@ -43,13 +43,13 @@
 #include <xercesc/sax/Locator.hpp>
 #include <xercesc/internal/ReaderMgr.hpp>
 
-#include <sbml/xml/XMLHandler.h>
-#include <sbml/xml/XMLToken.h>
+#include <numl/xml/XMLHandler.h>
+#include <numl/xml/XMLToken.h>
 
-#include <sbml/xml/XercesAttributes.h>
-#include <sbml/xml/XercesNamespaces.h>
-#include <sbml/xml/XercesTranscode.h>
-#include <sbml/xml/XercesHandler.h>
+#include <numl/xml/XercesAttributes.h>
+#include <numl/xml/XercesNamespaces.h>
+#include <numl/xml/XercesTranscode.h>
+#include <numl/xml/XercesHandler.h>
 
 /** @cond doxygen-ignored */
 
@@ -60,7 +60,7 @@ using namespace xercesc;
 
 LIBSBML_CPP_NAMESPACE_BEGIN
 
-/** @cond doxygen-libsbml-internal */
+/** @cond doxygen-libnuml-internal */
 
 /**
  * @return the prefix portion of the XML qualified name, or an empty
@@ -230,6 +230,6 @@ XercesHandler::setDocumentLocator (const xercesc::Locator* const locator)
   mLocator = locator;
 }
 
-/** @endcond doxygen-libsbml-internal */
+/** @endcond doxygen-libnuml-internal */
 
 LIBSBML_CPP_NAMESPACE_END
