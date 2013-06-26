@@ -44,51 +44,31 @@
 
 #include <numl/common/libnuml-version.h>
 #include <numl/common/operationReturnValues.h>
-
 #include <numl/common/numlfwd.h>
 
-#include <numl/NMBase.h>
-#include <numl/NUMLList.h>
+#include <numl/NUMLTypes.h>
 
-#include <numl/NUMLDocument.h>
-#include <numl/xml/XMLError.h>
+#include "ListWrapper.h"
 
-#include <numl/OntologyTerm.h>
+#include <sbml/xml/XMLError.h>
+#include <sbml/xml/XMLAttributes.h>
+#include <sbml/xml/XMLConstructorException.h>
+#include <sbml/xml/XMLNamespaces.h>
+#include <sbml/xml/XMLToken.h>
+#include <sbml/xml/XMLNode.h>
+#include <sbml/xml/XMLTriple.h>
+#include <sbml/xml/XMLInputStream.h>
+#include <sbml/xml/XMLOutputStream.h>
+#include <sbml/xml/XMLError.h>
+#include <sbml/xml/XMLErrorLog.h>
 
-//#include <numl/Result.h>
-
-#include <numl/ResultComponent.h>
-#include <numl/Dimension.h>
-
-#include <numl/DimensionDescription.h>
-
-#include <numl/CompositeValue.h>
-#include <numl/Tuple.h>
-#include <numl/AtomicValue.h>
-
-#include <numl/CompositeDescription.h>
-#include <numl/TupleDescription.h>
-#include <numl/AtomicDescription.h>
-
-#include <numl/NUMLReader.h>
-#include <numl/NUMLWriter.h>
-
-#include <numl/xml/XMLAttributes.h>
-#include <numl/xml/XMLNamespaces.h>
-#include <numl/xml/XMLToken.h>
-#include <numl/xml/XMLNode.h>
-#include <numl/xml/XMLTriple.h>
-#include <numl/xml/XMLInputStream.h>
-#include <numl/xml/XMLOutputStream.h>
-#include <numl/xml/XMLError.h>
-#include <numl/xml/XMLErrorLog.h>
-#include <numl/xml/XMLParser.h>
-#include <numl/xml/XMLHandler.h>
-#include <numl/xml/XMLTokenizer.h>
+#include <sbml/math/ASTNode.h>
+//#include <sbml/xml/XMLParser.h>
+//#include <sbml/xml/XMLHandler.h>
+//#include <sbml/xml/XMLTokenizer.h>
 
 //#include <numl/annotation/CVTerm.h>
 //#include <numl/annotation/ModelHistory.h>
-//#include <numl/annotation/RDFAnnotation.h>
+#include <sbml/annotation/RDFAnnotation.h>
 
-#include "ListWrapper.h"
 

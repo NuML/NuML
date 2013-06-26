@@ -25,11 +25,11 @@
 #include <iostream>
 #include <string.h>
 
-#include <numl/xml/XMLAttributes.h>
-#include <numl/xml/XMLNamespaces.h>
-#include <numl/xml/XMLInputStream.h>
-#include <numl/xml/XMLOutputStream.h>
-#include <numl/xml/XMLError.h>
+#include <sbml/xml/XMLAttributes.h>
+#include <sbml/xml/XMLNamespaces.h>
+#include <sbml/xml/XMLInputStream.h>
+#include <sbml/xml/XMLOutputStream.h>
+#include <sbml/xml/XMLError.h>
 
 //#include <numl/validator/ConsistencyValidator.h>
 //#include <numl/validator/IdentifierConsistencyValidator.h>
@@ -402,8 +402,8 @@ NUMLDocument::setLevelAndVersion (unsigned int level, unsigned int version,
   if (mLevel == 1)
   {
     if (numlDecl)
-      mNUMLNamespaces->getNamespaces()->add("http://www.numl.org/numl/level1", "numl");
-    mNUMLNamespaces->getNamespaces()->add("http://www.numl.org/numl/level1");
+      mNUMLNamespaces->getNamespaces()->add("http://www.numl.org/numl/level1/version1", "numl");
+    mNUMLNamespaces->getNamespaces()->add("http://www.numl.org/numl/level1/version1");
   }
 
   mNUMLNamespaces->setLevel(mLevel);
@@ -429,7 +429,7 @@ NUMLDocument::createObject (XMLInputStream& stream)
 		{
 			if (mOntologyTerms.size() != 0)
 			{
-				logError(NotSchemaConformant);
+				logError(NUMLNotSchemaConformant);
 			}
 			object = &mOntologyTerms;
 		}
@@ -437,7 +437,7 @@ NUMLDocument::createObject (XMLInputStream& stream)
 		{
 			if (mResultComponents.size() != 0)
 			{
-				logError(NotSchemaConformant);
+				logError(NUMLNotSchemaConformant);
 			}
 			object = &mResultComponents;
 		}
@@ -705,7 +705,7 @@ NUMLDocument::readAttributes (const XMLAttributes& attributes)
   unsigned int match = 0;
   if (mNUMLNamespaces->getNamespaces() == NULL)
   {
-    logError(InvalidNamespaceOnNUML);
+    logError(NUMLInvalidNamespaceOnNUML);
   }
   else 
   {
@@ -716,18 +716,18 @@ NUMLDocument::readAttributes (const XMLAttributes& attributes)
         match = 1;
         if (mLevel != 1)
         {
-          logError(MissingOrInconsistentLevel);
+          logError(NUMLMissingOrInconsistentLevel);
         }
         if (mVersion != 1)
         {
-          logError(MissingOrInconsistentVersion);
+          logError(NUMLMissingOrInconsistentVersion);
         }
        break;
       }
     }
     if (match == 0)
     {
-      logError(InvalidNamespaceOnNUML);
+      logError(NUMLInvalidNamespaceOnNUML);
     }
     else
     {

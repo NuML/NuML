@@ -1,10 +1,10 @@
 /**
 * Begin svn Header
-* $Rev$:	Revision of last commit
-* $Author$:	Author of last commit
-* $Date$:	Date of last commit
-* $HeadURL$
-* $Id$
+* $Rev: 26 $:	Revision of last commit
+* $Author: josephodada@gmail.com $:	Author of last commit
+* $Date: 2013-04-24 17:06:40 +0100 (Wed, 24 Apr 2013) $:	Date of last commit
+* $HeadURL: https://numl.googlecode.com/svn/trunk/libnuml/examples/c++/createExampleNUMLDoc.cpp $
+* $Id: createNUML.cpp 26 2013-04-24 16:06:40Z josephodada@gmail.com $
 * End svn Header
 * ****************************************************************************
 * This file is part of libNUML.  Please visit http://code.google.com/p/numl/for more
@@ -60,7 +60,7 @@ const static unsigned int Version = 1;
 // Main routine
 //
 //  Creates NUML models represented in "Example models expressed in XML using
-//  NUML" in Section 7 of the NUML Level 2 Version 4 specification(*).
+//  NUML" in Section 7 of the NUML Level 1 Version 1 specification(*).
 //
 //   (*) The specification document is available at the following URL:
 //       http://numl.org/Documents/Specifications

@@ -477,7 +477,7 @@ CompositeDescription::createObject (XMLInputStream& stream)
 	/*  {
 		  if (mTupleDescription.size() != 0)
 		  {
-			  logError(NotSchemaConformant);
+			  logError(NUMLNotSchemaConformant);
 		  }
 		  object = &mTupleDescription;
 	  }*/

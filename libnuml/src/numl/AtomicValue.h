@@ -27,11 +27,13 @@
 
 #include <numl/common/extern.h>
 #include <numl/common/numlfwd.h>
+//#include <numl/common/operationReturnValues.h>
 
 
 #ifdef __cplusplus
 #include <numl/NMBase.h>
 #include <numl/NUMLList.h>
+#include <numl/NUMLTypes.h>
 #include <string>
 #include <sstream>
 

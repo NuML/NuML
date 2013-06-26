@@ -27,9 +27,10 @@
 
 
 #include <numl/common/numlfwd.h>
+#include <numl/common/operationReturnValues.h>
 
 #include <numl/NUMLDocument.h>
-#include <numl/xml/XMLError.h>
+#include <sbml/xml/XMLError.h>
 
 #include <numl/NMBase.h>
 #include <numl/NUMLList.h>

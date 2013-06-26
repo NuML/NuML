@@ -274,7 +274,7 @@ Dimension::createObject (XMLInputStream& stream)
 		/*{
 				  if (mCompositeValue.size() != 0)
 				  {
-					  logError(NotSchemaConformant);
+					  logError(NUMLNotSchemaConformant);
 				  }
 				  object = &mCompositeValue;
 			  }*/

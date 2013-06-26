@@ -27,7 +27,7 @@
 #include <iomanip>
 #include <sstream>
 
-#include <numl/xml/XMLError.h>
+#include <sbml/xml/XMLError.h>
 #include <numl/NUMLError.h>
 #include <numl/NUMLErrorTable.h>
 
@@ -115,7 +115,6 @@ static struct numlCategoryString {
   { LIBNUML_CAT_NUML_L1V1_COMPAT,		"Translation to NUML L1V1"    },
   { LIBNUML_CAT_GENERAL_CONSISTENCY,	"NUML component consistency"  },
   { LIBNUML_CAT_IDENTIFIER_CONSISTENCY,	"NUML identifier consistency" },
-  { LIBNUML_CAT_SBO_CONSISTENCY,        "SBO term consistency"        },
   { LIBNUML_CAT_INTERNAL_CONSISTENCY,   "Internal consistency"        }
 };
 
@@ -175,7 +174,7 @@ NUMLError::NUMLError (  const unsigned int errorId
       }
     }
 
-    if ( index == 0 && mErrorId != UnknownError
+    if ( index == 0 && mErrorId != NUMLUnknownError
          && ! (mErrorId > LibNUMLAdditionalCodesLowerBound
                && mErrorId < NUMLCodesUpperBound) )
     {
@@ -212,7 +211,7 @@ NUMLError::NUMLError (  const unsigned int errorId
       // here, we translate the errors into the same basic error code and
       // add some elaboration to the error text message.
 
-      mErrorId  = NotSchemaConformant;
+      mErrorId  = NUMLNotSchemaConformant;
       mSeverity = LIBNUML_SEV_ERROR;
       newMsg << errorTable[3].message << " "; // FIXME
     }

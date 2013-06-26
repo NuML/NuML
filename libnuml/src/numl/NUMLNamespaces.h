@@ -26,7 +26,10 @@
 #define NUMLNamespaces_h
 
 #include <numl/common/extern.h>
-#include <numl/xml/XMLNamespaces.h>
+#include <sbml/xml/XMLNamespaces.h>
+
+#include <numl/common/common.h>
+#include <numl/common/numlfwd.h>
 
 
 
@@ -38,7 +41,7 @@ LIBNUML_CPP_NAMESPACE_BEGIN
 
 #define NUML_DEFAULT_LEVEL   1
 #define NUML_DEFAULT_VERSION 1
-#define NUML_XMLNS_L1        "http://www.numl.org/numl/level1"
+#define NUML_XMLNS_L1        "http://www.numl.org/numl/level1/version1"
 #define NUML_XMLNS_L1V1      "http://www.numl.org/numl/level1/version1"
 
 class LIBNUML_EXTERN NUMLNamespaces

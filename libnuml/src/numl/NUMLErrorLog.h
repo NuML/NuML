@@ -27,8 +27,8 @@
 
 
 #include <numl/common/extern.h>
-#include <numl/xml/XMLError.h>
-#include <numl/xml/XMLErrorLog.h>
+#include <sbml/xml/XMLError.h>
+#include <sbml/xml/XMLErrorLog.h>
 #include <numl/NUMLError.h>
 
 

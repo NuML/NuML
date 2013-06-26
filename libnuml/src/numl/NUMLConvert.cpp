@@ -22,8 +22,10 @@
 * ****************************************************************************
 **/
 
-#include <numl/util/List.h>
+#include <sbml/util/List.h>
 //#include <numl/math/ASTNode.h>
+#include <numl/common/extern.h>
+#include <numl/common/numlfwd.h>
 
 LIBNUML_CPP_NAMESPACE_BEGIN
 /** @cond doxygen-libnuml-internal **/
