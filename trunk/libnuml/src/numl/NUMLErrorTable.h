@@ -26,7 +26,7 @@
 #include <iostream>
 #include <sstream>
 
-#include <numl/xml/XMLError.h>
+#include <sbml/xml/XMLError.h>
 #include <numl/NUMLError.h>
 
 
@@ -35,18 +35,23 @@ LIBNUML_CPP_NAMESPACE_BEGIN
 /** @cond doxygen-libnuml-internal */
 
 typedef struct {
+  const char * ref_l1;
+} referenceEntry;
+
+typedef struct {
   unsigned int code;
   const char*  shortMessage;
   unsigned int category;
   unsigned int l1v1_severity;
   const char*  message;
+  referenceEntry reference;
 } numlErrorTableEntry;
 
 
 static const numlErrorTableEntry errorTable[] =
 {
   // 10000
-  { UnknownError,
+  { NUMLUnknownError,
     "Unknown internal libNUML error",
     LIBNUML_CAT_INTERNAL,
     LIBNUML_SEV_FATAL,
@@ -54,7 +59,7 @@ static const numlErrorTableEntry errorTable[] =
 
   //10101
   {
-    NotUTF8,
+    NUMLNotUTF8,
     "Not UTF8",
     LIBNUML_CAT_NUML,
     LIBNUML_SEV_ERROR,
@@ -68,7 +73,7 @@ static const numlErrorTableEntry errorTable[] =
 
   //10102
   {
-    UnrecognizedElement,
+    NUMLUnrecognizedElement,
     "Unrecognized element",
     LIBNUML_CAT_NUML,
     LIBNUML_SEV_ERROR,
@@ -81,7 +86,7 @@ static const numlErrorTableEntry errorTable[] =
 
   //10103
   {
-    NotSchemaConformant,
+    NUMLNotSchemaConformant,
     "Not conformant to NUML XML schema",
     LIBNUML_CAT_NUML,
     LIBNUML_SEV_ERROR,
@@ -93,7 +98,7 @@ static const numlErrorTableEntry errorTable[] =
 
   //10401
     {
-      MissingAnnotationNamespace,
+      NUMLMissingAnnotationNamespace,
       "Missing declaration of XML namespace for annotation",
       LIBNUML_CAT_NUML,
       LIBNUML_SEV_ERROR,
@@ -103,7 +108,7 @@ static const numlErrorTableEntry errorTable[] =
 
     //10402
     {
-      DuplicateAnnotationNamespaces,
+      NUMLDuplicateAnnotationNamespaces,
       "Multiple annotations using same XML namespace",
       LIBNUML_CAT_NUML,
       LIBNUML_SEV_ERROR,
@@ -125,7 +130,7 @@ static const numlErrorTableEntry errorTable[] =
 
     //20101
       {
-        InvalidNamespaceOnNUML,
+        NUMLInvalidNamespaceOnNUML,
         "Invalid XML namespace for NUML container",
         LIBNUML_CAT_NUML,
         LIBNUML_SEV_ERROR,
@@ -136,17 +141,17 @@ static const numlErrorTableEntry errorTable[] =
       },
     //21003
       {
-        ConstraintNotInXHTMLNamespace,
+        NUMLConstraintNotInXHTMLNamespace,
         "Constraint message is not in XHTML XML namespace",
         LIBNUML_CAT_NUML,
         LIBNUML_SEV_ERROR,
         "The contents of the <message> element in a <constraint> must be "
-        "explicitly placed in the XHTML XML namespace. (References: L1V1 Section ??)"
+        "explicitly placed in the XHTML XML namespace. (References: L1V1 Section TODO)"
       },
 
       //21004
       {
-        ConstraintContainsXMLDecl,
+        NUMLConstraintContainsXMLDecl,
         "XML declarations not permitted in constraint messages",
         LIBNUML_CAT_NUML,
         LIBNUML_SEV_ERROR,
@@ -156,18 +161,18 @@ static const numlErrorTableEntry errorTable[] =
 
       //21005
       {
-        ConstraintContainsDOCTYPE,
+        NUMLConstraintContainsDOCTYPE,
         "XML DOCTYPE not permitted in constraint messages",
         LIBNUML_CAT_NUML,
         LIBNUML_SEV_ERROR,
         "The contents of the message element must not contain an XML DOCTYPE "
         "declaration (i.e., a string beginning with the characters \"<!DOCTYPE\". "
-        "(References: L1V1 Section??)"
+        "(References: L1V1 Section TODO)"
       },
 
       //21006
       {
-        InvalidConstraintContent,
+        NUMLInvalidConstraintContent,
         "Invalid content for constraint message",
         LIBNUML_CAT_NUML,
         LIBNUML_SEV_ERROR,
@@ -193,7 +198,7 @@ static const numlErrorTableEntry errorTable[] =
 
   //99301
   {
-    NoTimeSymbolInFunctionDef,
+    NUMLNoTimeSymbolInFunctionDef,
     "<csymbol> for 'time' used within the <math> of a function definition",
     LIBNUML_CAT_GENERAL_CONSISTENCY,
     LIBNUML_SEV_ERROR,
@@ -204,17 +209,17 @@ static const numlErrorTableEntry errorTable[] =
 
   //99502
   // This is an internal error that reverts to 10501
-  {
+/*  {
     InconsistentArgUnitsWarnings,
     "",
     LIBNUML_SEV_GENERAL_WARNING,
     LIBNUML_SEV_WARNING,
     ""
   },
-
+*/
 
   //99701
-  {
+ /* {
     UnrecognisedSBOTerm,
     "Unrecognized 'sboTerm' value",
     LIBNUML_CAT_SBO_CONSISTENCY,
@@ -232,9 +237,9 @@ static const numlErrorTableEntry errorTable[] =
     LIBNUML_SEV_WARNING,
     "The SBOTerm value used is considered obsolete."
   },
-
+*/
   //99901
-  {
+ /* {
     IncorrectCompartmentSpatialDimensions,
     "in NUML Level 1, only three-dimensional compartments are permitted",
     LIBNUML_CAT_INTERNAL_CONSISTENCY,
@@ -244,9 +249,9 @@ static const numlErrorTableEntry errorTable[] =
     "<compartment> to be correct, the value for the spatialDimensions "
     "member variable should be '3'."
   },
-
+*/
   //99925
-  {
+/*  {
     OffsetNotValidAttribute,
     "Attribute 'offset' on units only available in NUML Level 2 Version 1",
     LIBNUML_CAT_INTERNAL_CONSISTENCY,
@@ -255,7 +260,7 @@ static const numlErrorTableEntry errorTable[] =
     "Version 1. In order for the internal respresentation of a <unit> to "
     "be correct, the value for the offset member variable should be '0'."
   }
-
+*/
 
 };
 

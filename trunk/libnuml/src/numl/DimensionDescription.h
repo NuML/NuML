@@ -28,10 +28,10 @@
 #include <numl/common/extern.h>
 #include <numl/common/numlfwd.h>
 
-#include <numl/xml/XMLNode.h>
-#include <numl/xml/XMLAttributes.h>
-#include <numl/xml/XMLInputStream.h>
-#include <numl/xml/XMLOutputStream.h>
+#include <sbml/xml/XMLNode.h>
+#include <sbml/xml/XMLAttributes.h>
+#include <sbml/xml/XMLInputStream.h>
+#include <sbml/xml/XMLOutputStream.h>
 
 
 #include <numl/AtomicDescription.h>

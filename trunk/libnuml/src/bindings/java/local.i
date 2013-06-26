@@ -88,7 +88,7 @@
 
 COVARIANT_RTYPE_CLONE(OntologyTerms)
 COVARIANT_RTYPE_CLONE(OntologyTerm)
-COVARIANT_RTYPE_CLONE(Result)
+COVARIANT_RTYPE_CLONE(ResultComponents)
 COVARIANT_RTYPE_CLONE(ResultComponent)
 COVARIANT_RTYPE_CLONE(DimensionDescription)
 COVARIANT_RTYPE_CLONE(Dimension)
@@ -109,8 +109,8 @@ COVARIANT_RTYPE_CLONE(NUMLDocument)
 
 %typemap(jstype) OntologyTerm* OntologyTerms::get    "OntologyTerm"
 %typemap(jstype) OntologyTerm* OntologyTerms::remove "OntologyTerm"
-%typemap(jstype) ResultComponent* Result::get    "ResultComponent"
-%typemap(jstype) ResultComponent* Result::remove "ResultComponent"
+%typemap(jstype) ResultComponent* ResultComponents::get    "ResultComponent"
+%typemap(jstype) ResultComponent* ResultComponents::remove "ResultComponent"
 %typemap(jstype) DimensionDescription* ResultComponent::get    "DimensionDescription"
 %typemap(jstype) DimensionDescription* ResultComponent::remove "DimensionDescription"
 %typemap(jstype) Dimension* ResultComponent::get    "Dimension"
@@ -186,7 +186,7 @@ COVARIANT_RTYPE_CLONE(NUMLDocument)
 
 
 NUMLCONSTRUCTOR_EXCEPTION(OntologyTerms)
-NUMLCONSTRUCTOR_EXCEPTION(Result)
+NUMLCONSTRUCTOR_EXCEPTION(ResultComponents)
 NUMLCONSTRUCTOR_EXCEPTION(ResultComponent)
 NUMLCONSTRUCTOR_EXCEPTION(DimensionDescription)
 NUMLCONSTRUCTOR_EXCEPTION(Dimension)

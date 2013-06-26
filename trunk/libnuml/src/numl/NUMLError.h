@@ -26,7 +26,7 @@
 #define NUMLError_h
 
 #include <numl/common/extern.h>
-#include <numl/xml/XMLError.h>
+#include <sbml/xml/XMLError.h>
 #include <numl/NUMLNamespaces.h>
 
 
@@ -45,122 +45,85 @@ BEGIN_C_DECLS
  */
 typedef enum
 {
-   UnknownError                          = 10000 /*!< Unknown internal libNUML error */
- , NotUTF8                               = 10101 /*!< Not UTF8 */
- , UnrecognizedElement                   = 10102 /*!< Unrecognized element */
- , NotSchemaConformant                   = 10103 /*!< Not conformant to NUML XML schema */
- , InvalidMathElement                    = 10201 /*!< Invalid MathML */
- , MultipleAssignmentOrRateRules         = 10304 /*!< Multiple rules for the same variable */
- , MultipleEventAssignmentsForId         = 10305 /*!< Multiple event assignments for the same variable */
- , EventAndAssignmentRuleForId           = 10306 /*!< <code>variable</code> value used in both event assignments and assignment rules */
- , DuplicateMetaId                       = 10307 /*!< Duplicate <code>metaid</code> identifier */
- , InvalidSBOTermSyntax                  = 10308 /*!< Invalid <code>sboTerm</code> value syntax */
- , InvalidMetaidSyntax                   = 10309 /*!< Invalid <code>metaid</code> value syntax */
- , InvalidIdSyntax                       = 10310 /*!< Invalid identifier syntax */
- , InvalidUnitIdSyntax                   = 10311 /*!< Invalid unit identifier syntax */
- , MissingAnnotationNamespace            = 10401 /*!< Missing declaration of XML namespace for annotation */
- , DuplicateAnnotationNamespaces         = 10402 /*!< Multiple annotations using same XML namespace */
+   NUMLUnknownError                          = 10000 /*!< Unknown internal libNUML error */
+ , NUMLNotUTF8                               = 10101 /*!< Not UTF8 */
+ , NUMLUnrecognizedElement                   = 10102 /*!< Unrecognized element */
+ , NUMLNotSchemaConformant                   = 10103 /*!< Not conformant to NUML XML schema */
+ , NUMLInvalidMathElement                    = 10201 /*!< Invalid MathML */
+ , NUMLMultipleAssignmentOrRateRules         = 10304 /*!< Multiple rules for the same variable */
+ , NUMLMultipleEventAssignmentsForId         = 10305 /*!< Multiple event assignments for the same variable */
+ , NUMLEventAndAssignmentRuleForId           = 10306 /*!< <code>variable</code> value used in both event assignments and assignment rules */
+ , NUMLDuplicateMetaId                       = 10307 /*!< Duplicate <code>metaid</code> identifier */
+ , NUMLInvalidSBOTermSyntax                  = 10308 /*!< Invalid <code>sboTerm</code> value syntax */
+ , NUMLInvalidMetaidSyntax                   = 10309 /*!< Invalid <code>metaid</code> value syntax */
+ , NUMLInvalidIdSyntax                       = 10310 /*!< Invalid identifier syntax */
+ , NUMLInvalidUnitIdSyntax                   = 10311 /*!< Invalid unit identifier syntax */
+ , NUMLMissingAnnotationNamespace            = 10401 /*!< Missing declaration of XML namespace for annotation */
+ , NUMLDuplicateAnnotationNamespaces         = 10402 /*!< Multiple annotations using same XML namespace */
  , NUMLNamespaceInAnnotation             = 10403 /*!< Invalid use of NUML XML namespace in annotation */
- , MissingOntologyTerms					 = 10502 /*!<Missing OntologyTerms*/
- , MissingResultComponents				 = 10503 /*!<Missing ResultComponents*/
- , InconsistentArgUnits                  = 10501 /*!< Units of arguments to function call do not match function's definition */
- , AssignRuleCompartmentMismatch         = 10511 /*!< Mismatched units in assignment rule for compartment */
- , AssignRuleSpeciesMismatch             = 10512 /*!< Mismatched units in assignment rule for species */
- , AssignRuleParameterMismatch           = 10513 /*!< Mismatched units in assignment rule for parameter */
- , InitAssignCompartmenMismatch          = 10521 /*!< Mismatched units in initial assignment to compartment */
- , InitAssignSpeciesMismatch             = 10522 /*!< Mismatched units in initial assignment to species */
- , InitAssignParameterMismatch           = 10523 /*!< Mismatched units in initial assignment to parameter */
- , RateRuleCompartmentMismatch           = 10531 /*!< Mismatched units in rate rule for compartment */
- , RateRuleSpeciesMismatch               = 10532 /*!< Mismatched units in rate rule for species */
- , RateRuleParameterMismatch             = 10533 /*!< Mismatched units in rate rule for parameter */
- , KineticLawNotSubstancePerTime         = 10541 /*!< Kinetic law units are not <code>substance</code>/<code>time</code> */
- , DelayUnitsNotTime                     = 10551 /*!< Units of delay are not units of time */
- , EventAssignCompartmentMismatch        = 10561 /*!< Mismatched units in event assignment for compartment */
- , EventAssignSpeciesMismatch            = 10562 /*!< Mismatched units in event assignment for species */
- , EventAssignParameterMismatch          = 10563 /*!< Mismatched units in event assignment for parameter */
- , OverdeterminedSystem                  = 10601 /*!< Model is overdetermined */
- , InvalidModelSBOTerm                   = 10701 /*!< Invalid <code>sboTerm</code> value for model */
- , InvalidFunctionDefSBOTerm             = 10702 /*!< Invalid <code>sboTerm</code> value for function definition */
- , InvalidParameterSBOTerm               = 10703 /*!< Invalid <code>sboTerm</code> value for parameter */
- , InvalidInitAssignSBOTerm              = 10704 /*!< Invalid <code>sboTerm</code> value for initial assignment */
- , InvalidRuleSBOTerm                    = 10705 /*!< Invalid <code>sboTerm</code> value for rule */
- , InvalidConstraintSBOTerm              = 10706 /*!< Invalid <code>sboTerm</code> value for constraint */
- , InvalidReactionSBOTerm                = 10707 /*!< Invalid <code>sboTerm</code> value for reaction */
- , InvalidSpeciesReferenceSBOTerm        = 10708 /*!< Invalid <code>sboTerm</code> value for species reference */
- , InvalidKineticLawSBOTerm              = 10709 /*!< Invalid <code>sboTerm</code> value for kinetic law */
- , InvalidEventSBOTerm                   = 10710 /*!< Invalid <code>sboTerm</code> value for event */
- , InvalidEventAssignmentSBOTerm         = 10711 /*!< Invalid <code>sboTerm</code> value for event assignment */
- , InvalidCompartmentSBOTerm             = 10712 /*!< Invalid <code>sboTerm</code> value for compartment */
- , InvalidSpeciesSBOTerm                 = 10713 /*!< Invalid <code>sboTerm</code> value for species */
- , InvalidCompartmentTypeSBOTerm         = 10714 /*!< Invalid <code>sboTerm</code> value for compartment type */
- , InvalidSpeciesTypeSBOTerm             = 10715 /*!< Invalid <code>sboTerm</code> value for species type */
- , InvalidTriggerSBOTerm                 = 10716 /*!< Invalid <code>sboTerm</code> value for event trigger */
- , InvalidDelaySBOTerm                   = 10717 /*!< Invalid <code>sboTerm</code> value for event delay */
- , NotesNotInXHTMLNamespace              = 10801 /*!< Notes not placed in XHTML namespace */
- , NotesContainsXMLDecl                  = 10802 /*!< XML declarations not permitted in notes */
- , NotesContainsDOCTYPE                  = 10803 /*!< XML <code>DOCTYPE</code> not permitted in notes */
- , InvalidNotesContent                   = 10804 /*!< Invalid notes content */
- , InvalidNamespaceOnNUML               = 20101 /*!< Invalid XML namespace for NUML container */
- , MissingOrInconsistentLevel            = 20102 /*!< Missing or inconsistent value for <code>level</code> attribute */
- , MissingOrInconsistentVersion          = 20103 /*!< Missing or inconsistent value for <code>version</code> attribute */
- , AnnotationNotesNotAllowedLevel1       = 20104 /*!< Annotation on <code>&lt;numl&gt;</code> not permitted in NUML Level&nbsp;1 */
- , MissingModel                          = 20201 /*!< Missing model */
- , IncorrectOrderInModel                 = 20202 /*!< Incorrect ordering of components in model definition */
- , EmptyListElement                      = 20203 /*!< A given <code>listOf___</code>, if present, cannot be empty */
- , NeedCompartmentIfHaveSpecies          = 20204 /*!< Missing compartment in species definition */
- , FunctionDefMathNotLambda              = 20301 /*!< Invalid expression in function definition */
- , InvalidApplyCiInLambda                = 20302 /*!< Invalid forward reference in <code>&lt;apply&gt;</code><code>&lt;ci&gt;</code>...<code>&lt;/ci&gt;</code><code>&lt;/apply&gt;</code> value */
- , ConstraintNotInXHTMLNamespace         = 21003 /*!< Constraint message is not in XHTML XML namespace */
- , ConstraintContainsXMLDecl             = 21004 /*!< XML declarations not permitted in constraint messages */
- , ConstraintContainsDOCTYPE             = 21005 /*!< XML <code>DOCTYPE</code> not permitted in constraint messages */
- , InvalidConstraintContent              = 21006 /*!< Invalid content for constraint message */
+ , NUMLMissingOntologyTerms					 = 10502 /*!<Missing OntologyTerms*/
+ , NUMLMissingResultComponents				 = 10503 /*!<Missing ResultComponents*/
+ , NUMLInconsistentArgUnits                  = 10501 /*!< Units of arguments to function call do not match function's definition */
+ , NUMLAssignRuleCompartmentMismatch         = 10511 /*!< Mismatched units in assignment rule for compartment */
+ , NUMLOverdeterminedSystem                  = 10601 /*!< Model is overdetermined */
+ , NUMLInvalidModelSBOTerm                   = 10701 /*!< Invalid <code>sboTerm</code> value for model */
+ , NUMLInvalidFunctionDefSBOTerm             = 10702 /*!< Invalid <code>sboTerm</code> value for function definition */
+ , NUMLInvalidRuleSBOTerm                    = 10705 /*!< Invalid <code>sboTerm</code> value for rule */
+ , NUMLInvalidConstraintSBOTerm              = 10706 /*!< Invalid <code>sboTerm</code> value for constraint */
+ , NUMLNotesNotInXHTMLNamespace              = 10801 /*!< Notes not placed in XHTML namespace */
+ , NUMLNotesContainsXMLDecl                  = 10802 /*!< XML declarations not permitted in notes */
+ , NUMLNotesContainsDOCTYPE                  = 10803 /*!< XML <code>DOCTYPE</code> not permitted in notes */
+ , NUMLInvalidNotesContent                   = 10804 /*!< Invalid notes content */
+ , NUMLInvalidNamespaceOnNUML               = 20101 /*!< Invalid XML namespace for NUML container */
+ , NUMLMissingOrInconsistentLevel            = 20102 /*!< Missing or inconsistent value for <code>level</code> attribute */
+ , NUMLMissingOrInconsistentVersion          = 20103 /*!< Missing or inconsistent value for <code>version</code> attribute */
+ , NUMLAnnotationNotesNotAllowedLevel1       = 20104 /*!< Annotation on <code>&lt;numl&gt;</code> not permitted in NUML Level&nbsp;1 */
+ , NUMLMissingModel                          = 20201 /*!< Missing model */
+ , NUMLIncorrectOrderInModel                 = 20202 /*!< Incorrect ordering of components in model definition */
+ , NUMLEmptyListElement                      = 20203 /*!< A given <code>listOf___</code>, if present, cannot be empty */
+ , NUMLNeedCompartmentIfHaveSpecies          = 20204 /*!< Missing compartment in species definition */
+ , NUMLFunctionDefMathNotLambda              = 20301 /*!< Invalid expression in function definition */
+ , NUMLInvalidApplyCiInLambda                = 20302 /*!< Invalid forward reference in <code>&lt;apply&gt;</code><code>&lt;ci&gt;</code>...<code>&lt;/ci&gt;</code><code>&lt;/apply&gt;</code> value */
+ , NUMLConstraintNotInXHTMLNamespace         = 21003 /*!< Constraint message is not in XHTML XML namespace */
+ , NUMLConstraintContainsXMLDecl             = 21004 /*!< XML declarations not permitted in constraint messages */
+ , NUMLConstraintContainsDOCTYPE             = 21005 /*!< XML <code>DOCTYPE</code> not permitted in constraint messages */
+ , NUMLInvalidConstraintContent              = 21006 /*!< Invalid content for constraint message */
 
- , EventAssignmentForConstantEntity      = 21212 /*!< Cannot assign to a constant component in an event assignment */
+ , NUMLEventAssignmentForConstantEntity      = 21212 /*!< Cannot assign to a constant component in an event assignment */
 
- , GeneralWarningNotSpecified            = 29999 /*!< Unknown error */
+ , NUMLGeneralWarningNotSpecified            = 29999 /*!< Unknown error */
 
   /* Lower bound for additional error codes returned by libNUML but not
    * defined in NUML specifications. */
 
  , LibNUMLAdditionalCodesLowerBound      = 90000 /*!< Lower bound of libNUML-specific codes */
 
- , CannotConvertToL1V1                   = 90001 /*!< Cannot convert to NUML Level&nbsp;1 Version&nbsp;1 */
+ , NUMLCannotConvertToL1V1                   = 90001 /*!< Cannot convert to NUML Level&nbsp;1 Version&nbsp;1 */
 
   /* L1Compatability */
 
- , NoEventsInL1                          = 91001 /*!< NUML Level&nbsp;1 does not support events */
- , StrictUnitsRequiredInL1               = 91014 /*!< NUML Level&nbsp;1 requires strict unit consistency */
+ , NUMLNoEventsInL1                          = 91001 /*!< NUML Level&nbsp;1 does not support events */
+ , NUMLStrictUnitsRequiredInL1               = 91014 /*!< NUML Level&nbsp;1 requires strict unit consistency */
 
-  /* L2v1 compatability */
-
- , NoConstraintsInL2v1                   = 92001 /*!< NUML Level&nbsp;2 Version&nbsp;1 does not support constraints */
-, StrictUnitsRequiredInL2v1             = 92008 /*!< NUML Level&nbsp;2 Version&nbsp;1 requires strict unit consistency */
+ , NUMLNoConstraintsInL2v1                   = 92001 /*!< NUML Level&nbsp;2 Version&nbsp;1 does not support constraints */
+, NUMLStrictUnitsRequiredInL2v1             = 92008 /*!< NUML Level&nbsp;2 Version&nbsp;1 requires strict unit consistency */
 
   /* These are errors checked by libNUML that were never
    * published in a spec. */
 
  , InvalidNUMLLevelVersion              = 99101 /*!< Invalid NUML Level and Version */
- , InvalidRuleOrdering                   = 99106 /*!< Invalid ordering of rules */
- , NoTimeSymbolInFunctionDef             = 99301 /*!< <code>&lt;csymbol&gt;</code> for <code>time</code> used within the <code>&lt;math&gt;</code> of a function definition */
+ , NUMLInvalidRuleOrdering                   = 99106 /*!< Invalid ordering of rules */
+ , NUMLNoTimeSymbolInFunctionDef             = 99301 /*!< <code>&lt;csymbol&gt;</code> for <code>time</code> used within the <code>&lt;math&gt;</code> of a function definition */
 
 
   /* These are internal errors that reverts to 10501. */
 
-  /** @cond doxygen-libnuml-internal */
- , InconsistentArgUnitsWarnings          = 99502 /*!< NUML L2v3 validation rule #10501 */
- , InconsistentPowerUnitsWarnings        = 99503 /*!< NUML L2v3 validation rule #10501 */
- , InconsistentExponUnitsWarnings        = 99504 /*!< NUML L2v3 validation rule #10501 */
-  /** @endcond doxygen-libnuml-internal */
-
- , UndeclaredUnits                       = 99505 /*!< Undeclared units */
- , UnrecognisedSBOTerm                   = 99701 /*!< Unrecognized <code>sboTerm</code> value */
- , ObseleteSBOTerm                       = 99702 /*!< Obsolete <code>sboTerm</code> value */
+ , NUMLUnrecognisedSBOTerm                   = 99701 /*!< Unrecognized <code>sboTerm</code> value */
+ , NUMLObseleteSBOTerm                       = 99702 /*!< Obsolete <code>sboTerm</code> value */
 
   /* Internal consistency checks */
 
- , IncorrectCompartmentSpatialDimensions = 99901 /*!< in NUML Level&nbsp;1, only three-dimensional compartments are permitted */
- , CompartmentTypeNotValidAttribute      = 99902 /*!< Compartment types not supported in this Level+Version of NUML */
- , OffsetNotValidAttribute               = 99925 /*!< Attribute <code>offset</code> on units only available in NUML Level&nbsp;2 Version&nbsp;1 */
+ , NUMLOffsetNotValidAttribute               = 99925 /*!< Attribute <code>offset</code> on units only available in NUML Level&nbsp;2 Version&nbsp;1 */
 
   /* Bounds */
 
@@ -183,7 +146,9 @@ typedef enum
  */
 typedef enum 
 {
-    LIBNUML_CAT_NUML = (LIBNUML_CAT_XML + 1)
+	LIBNUML_CAT_INTERNAL,
+
+	LIBNUML_CAT_NUML = (LIBSBML_CAT_XML + 1)
     /*!< General NUML error  not falling into another category below. */
 
   , LIBNUML_CAT_NUML_L1_COMPAT
@@ -208,8 +173,8 @@ typedef enum
      * identifiers in a numl objects.  With respect to the NUML specification,
      * these concern failures in applying the validation rules numbered
      * 103xx in the Level&nbsp;2 Versions&nbsp;2 and&nbsp;3 specifications. */
-  , LIBNUML_CAT_SBO_CONSISTENCY
-    /*!< Category of errors that can occur while validating SBO identifiers
+ /* , LIBNUML_CAT_SBO_CONSISTENCY
+    !< Category of errors that can occur while validating SBO identifiers
      * in a numl objects.  With respect to the NUML specification, these concern
      * failures in applying the validation rules numbered 107xx in the
      * Level&nbsp;2 Versions&nbsp;2 and&nbsp;3 specifications. */
@@ -237,6 +202,10 @@ typedef enum
    * we only report one of the 4 XMLError_Severity values.  Translation
    * of the codes is done in NUMLError.cpp.
    */
+
+	LIBNUML_SEV_ERROR = LIBSBML_SEV_ERROR,
+	LIBNUML_SEV_FATAL = LIBSBML_SEV_FATAL,
+	LIBNUML_SEV_WARNING = LIBSBML_SEV_WARNING,
 
     LIBNUML_SEV_SCHEMA_ERROR    = (LIBNUML_SEV_FATAL + 1)
     /*!< The XML content does not conform to
@@ -391,7 +360,6 @@ public:
    , const unsigned int severity = LIBNUML_SEV_ERROR
    , const unsigned int category = LIBNUML_CAT_NUML
   );
-
 
   /**
    * Copy constructor; creates a copy of this NUMLError.

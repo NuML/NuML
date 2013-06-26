@@ -22,18 +22,18 @@
 * ****************************************************************************
 **/
 
-#include <numl/xml/XMLError.h>
-#include <numl/xml/XMLErrorLog.h>
-#include <numl/xml/XMLInputStream.h>
+#include <sbml/xml/XMLError.h>
+#include <sbml/xml/XMLErrorLog.h>
+#include <sbml/xml/XMLInputStream.h>
 
-#include <NUMLErrorLog.h>
+#include <numl/NUMLErrorLog.h>
 #include <numl/NUMLVisitor.h>
 #include <numl/NUMLDocument.h>
 #include <numl/NUMLError.h>
 #include <numl/NUMLReader.h>
 
-#include <numl/compress/CompressCommon.h>
-#include <numl/compress/InputDecompressor.h>
+#include <sbml/compress/CompressCommon.h>
+#include <sbml/compress/InputDecompressor.h>
 
 /** @cond doxygen-ignored */
 
@@ -248,7 +248,7 @@ NUMLReader::readInternal (const char* content, bool isFile)
       }
       else if (strcmp_insensitive(stream.getEncoding().c_str(), "UTF-8") != 0)
       {
-        d->getErrorLog()->logError(NotUTF8);
+        d->getErrorLog()->logError(NUMLNotUTF8);
       }
 
       if (stream.getVersion() == "")
@@ -262,11 +262,11 @@ NUMLReader::readInternal (const char* content, bool isFile)
 
       if(d->getOntologyTerms() ==0)
       {
-        d->getErrorLog()->logError(MissingOntologyTerms);
+        d->getErrorLog()->logError(NUMLMissingOntologyTerms);
       }
       else if (d->getResultComponents() == 0)
       {
-        d->getErrorLog()->logError(MissingResultComponents);
+        d->getErrorLog()->logError(NUMLMissingResultComponents);
       }
       else if (d->getLevel() == 1)
       {

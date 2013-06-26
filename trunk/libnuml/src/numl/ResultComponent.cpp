@@ -24,10 +24,10 @@
 
 #include <limits>
 
-#include <numl/xml/XMLNode.h>
-#include <numl/xml/XMLAttributes.h>
-#include <numl/xml/XMLInputStream.h>
-#include <numl/xml/XMLOutputStream.h>
+#include <sbml/xml/XMLNode.h>
+#include <sbml/xml/XMLAttributes.h>
+#include <sbml/xml/XMLInputStream.h>
+#include <sbml/xml/XMLOutputStream.h>
 
 
 #include <numl/NUMLDocument.h>
@@ -286,7 +286,7 @@ ResultComponent::readAttributes (const XMLAttributes& attributes)
 	{
 		logEmptyString(id, level, version, "<resultComponent>");
 	}
-	if (!SyntaxChecker::isValidNUMLSId(mId)) logError(InvalidIdSyntax);
+	if (!SyntaxChecker::isValidSBMLSId(mId)) logError(NUMLInvalidIdSyntax);
 
 }
 
@@ -345,7 +345,7 @@ ResultComponent::createObject (XMLInputStream& stream)
 	//	cout<<"Dimension Element is Here";
 		if (mDimension.size() != 0)
 		{
-			logError(NotSchemaConformant);
+			logError(NUMLNotSchemaConformant);
 		}
 		object = &mDimension;
 	}
@@ -354,7 +354,7 @@ ResultComponent::createObject (XMLInputStream& stream)
 
 		if (mDimensionDescription.size() != 0)
 		{
-			logError(NotSchemaConformant);
+			logError(NUMLNotSchemaConformant);
 		}
 		object = &mDimensionDescription;
 	}
@@ -379,7 +379,7 @@ int
 ResultComponent::setId (const std::string& sid)
 {
 
-  if (!(SyntaxChecker::isValidNUMLSId(sid)))
+  if (!(SyntaxChecker::isValidSBMLSId(sid)))
   {
     return LIBNUML_INVALID_ATTRIBUTE_VALUE;
   }

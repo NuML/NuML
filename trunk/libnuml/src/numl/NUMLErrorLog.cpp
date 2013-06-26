@@ -27,8 +27,8 @@
 #include <string>
 #include <list>
 
-#include <numl/xml/XMLToken.h>
-#include <numl/xml/XMLParser.h>
+#include <sbml/xml/XMLToken.h>
+#include <sbml/xml/XMLParser.h>
 #include <numl/NUMLError.h>
 #include <numl/NUMLErrorLog.h>
 

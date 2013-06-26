@@ -28,7 +28,7 @@
 
 #include <numl/common/extern.h>
 #include <numl/common/numlfwd.h>
-#include <numl/util/util.h>
+#include <sbml/util/util.h>
 
 
 #ifdef __cplusplus

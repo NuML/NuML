@@ -44,7 +44,7 @@
 #ifndef ListWrapper_h
 #define ListWrapper_h
 
-#include <numl/util/List.h>
+#include <sbml/util/List.h>
 #include <numl/common/extern.h>
 
 LIBNUML_CPP_NAMESPACE_USE

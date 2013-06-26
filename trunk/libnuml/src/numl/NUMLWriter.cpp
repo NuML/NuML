@@ -28,14 +28,14 @@
 #include <sstream>
 
 #include <numl/common/common.h>
-#include <numl/xml/XMLOutputStream.h>
+#include <sbml/xml/XMLOutputStream.h>
 
 #include <numl/NUMLError.h>
 #include <numl/NUMLDocument.h>
 #include <numl/NUMLWriter.h>
 
-#include <numl/compress/CompressCommon.h>
-#include <numl/compress/OutputCompressor.h>
+#include <sbml/compress/CompressCommon.h>
+#include <sbml/compress/OutputCompressor.h>
 
 /** @cond doxygen-ignored */
 

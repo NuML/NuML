@@ -24,14 +24,23 @@
 
 #include <sstream>
 
-#include <numl/xml/XMLError.h>
+#include <sbml/xml/XMLError.h>
+#include <sbml/xml/XMLErrorLog.h>
+#include <sbml/xml/XMLOutputStream.h>
+#include <sbml/xml/XMLInputStream.h>
+#include <sbml/xml/XMLToken.h>
+#include <sbml/xml/XMLNode.h>
+
+#include <sbml/util/util.h>
+
+/*#include <numl/xml/XMLError.h>
 #include <numl/xml/XMLErrorLog.h>
 #include <numl/xml/XMLOutputStream.h>
 #include <numl/xml/XMLInputStream.h>
 #include <numl/xml/XMLToken.h>
 #include <numl/xml/XMLNode.h>
 
-#include <numl/util/util.h>
+#include <numl/util/util.h> */
 
 #include <numl/NUMLError.h>
 #include <numl/NUMLErrorLog.h>
@@ -41,10 +50,10 @@
 #include <numl/NUMLList.h>
 #include <numl/NMBase.h>
 
-#ifdef USE_LAYOUT
+/*#ifdef USE_LAYOUT
  #include <numl/layout/LineSegment.h>
 #endif
-
+*/
 /** @cond doxygen-ignored */
 
 using namespace std;
@@ -855,7 +864,7 @@ NMBase::readAnnotation (XMLInputStream& stream)
     // the numl container
     if (getLevel() == 1 && getTypeCode() == NUML_DOCUMENT)
     {
-      logError(AnnotationNotesNotAllowedLevel1);
+      logError(NUMLAnnotationNotesNotAllowedLevel1);
     }
 
 
@@ -864,7 +873,7 @@ NMBase::readAnnotation (XMLInputStream& stream)
 
     if (mAnnotation)
     {
-      logError(NotSchemaConformant, getLevel(), getVersion(),
+      logError(NUMLNotSchemaConformant, getLevel(), getVersion(),
 	       "Only one <annotation> element is permitted inside any "
 	       "particular containing element.");
     }
@@ -909,21 +918,21 @@ NMBase::checkXHTML(const XMLNode * xhtml)
 
   if (name == "notes")
   {
-    errorNS   = NotesNotInXHTMLNamespace;
-    errorXML  = NotesContainsXMLDecl;
-    errorDOC  = NotesContainsDOCTYPE;
-    errorELEM = InvalidNotesContent;
+    errorNS   = NUMLNotesNotInXHTMLNamespace;
+    errorXML  = NUMLNotesContainsXMLDecl;
+    errorDOC  = NUMLNotesContainsDOCTYPE;
+    errorELEM = NUMLInvalidNotesContent;
   }
   else if (name == "message")
   {
-    errorNS   = ConstraintNotInXHTMLNamespace;
-    errorXML  = ConstraintContainsXMLDecl;
-    errorDOC  = ConstraintContainsDOCTYPE;
-    errorELEM = InvalidConstraintContent;
+    errorNS   = NUMLConstraintNotInXHTMLNamespace;
+    errorXML  = NUMLConstraintContainsXMLDecl;
+    errorDOC  = NUMLConstraintContainsDOCTYPE;
+    errorELEM = NUMLInvalidConstraintContent;
   }
   else                                  // We shouldn't ever get to this point.
   {
-    logError(UnknownError);
+    logError(NUMLUnknownError);
     return;
   }
 
@@ -1037,7 +1046,7 @@ NMBase::checkAnnotation()
       if (find(prefixes.begin(), prefixes.end(), prefix)
                                                != prefixes.end())
       {
-        logError(DuplicateAnnotationNamespaces);
+        logError(NUMLDuplicateAnnotationNamespaces);
       }
       prefixes.push_back(prefix);
     }
@@ -1067,14 +1076,14 @@ NMBase::checkAnnotation()
 
       if (!implicitNSdecl)
       {
-        logError(MissingAnnotationNamespace);
+        logError(NUMLMissingAnnotationNamespace);
       }
     }
     // cannot declare numl namespace
  /* TODO   while(!match && n < topLevel.getNamespaces().getLength())
     {
       match += !strcmp(topLevel.getNamespaces().getURI(n).c_str(),
-                                       "http://www.numl.org/numl/level1");
+                                       "http://www.numl.org/numl/level1/version1");
       n++;
     }*/
     if (match > 0)
@@ -1085,7 +1094,7 @@ NMBase::checkAnnotation()
 
     if (implicitNSdecl && prefix.empty())
     {
-      logError(MissingAnnotationNamespace);
+      logError(NUMLMissingAnnotationNamespace);
       logError(NUMLNamespaceInAnnotation);
     }
     nNodes++;
@@ -1108,7 +1117,7 @@ NMBase::readNotes (XMLInputStream& stream)
     // the numl container
     if (getLevel() == 1 && getTypeCode() == NUML_DOCUMENT)
     {
-      logError(AnnotationNotesNotAllowedLevel1);
+      logError(NUMLAnnotationNotesNotAllowedLevel1);
     }
 
     // If a notes element already exists, then it is an error.
@@ -1117,13 +1126,13 @@ NMBase::readNotes (XMLInputStream& stream)
 
     if (mNotes)
     {
-      logError(NotSchemaConformant, getLevel(), getVersion(),
+      logError(NUMLNotSchemaConformant, getLevel(), getVersion(),
                "Only one <notes> element is permitted inside a "
 	       "particualr containing element.");
     }
     else if (mAnnotation)
     {
-      logError(NotSchemaConformant, getLevel(), getVersion(),
+      logError(NUMLNotSchemaConformant, getLevel(), getVersion(),
                "Incorrect ordering of <annotation> and <notes> elements -- "
 	       "<notes> must come before <annotation> due to the way that "
 	       "the XML Schema for NUML is defined.");
@@ -1219,7 +1228,7 @@ NMBase::logUnknownAttribute( string attribute,
       << "definition of an NUML Level " << level
       << " Version " << version << " " << element << " element.";
       
-  getErrorLog()->logError(NotSchemaConformant, level, version, msg.str());
+  getErrorLog()->logError(NUMLNotSchemaConformant, level, version, msg.str());
 }
 /** @endcond doxygen-libnuml-internal */
 
@@ -1238,7 +1247,7 @@ NMBase::logUnknownElement( string element,
   msg << "Element '" << element << "' is not part of the definition of "
       << "NUML Level " << level << " Version " << version << ".";
       
-  getErrorLog()->logError(UnrecognizedElement,
+  getErrorLog()->logError(NUMLUnrecognizedElement,
 			  level, version, msg.str());
 }
 /** @endcond doxygen-libnuml-internal */
@@ -1260,7 +1269,7 @@ NMBase::logEmptyString( string attribute,
   msg << "Attribute '" << attribute << "' on an "
     << element << " must not be an empty string.";
       
-  getErrorLog()->logError(NotSchemaConformant,
+  getErrorLog()->logError(NUMLNotSchemaConformant,
 			  level, version, msg.str());
 }
 /** @endcond doxygen-libnuml-internal */
@@ -1307,7 +1316,7 @@ NMBase::readAttributes (const XMLAttributes& attributes)
   if (isSetMetaId())
   {
     if (!SyntaxChecker::isValidXMLID(mMetaId))
-      logError(InvalidMetaidSyntax, getLevel(), getVersion());
+      logError(NUMLInvalidMetaidSyntax, getLevel(), getVersion());
   }
 }
 /** @endcond doxygen-libnuml-internal */
@@ -1346,7 +1355,7 @@ NMBase::checkOrderAndLogError (NMBase* object, int expected)
 
   if (actual != -1 && actual < expected)
   {
-    NUMLErrorCode_t error = IncorrectOrderInModel;
+    NUMLErrorCode_t error = NUMLIncorrectOrderInModel;
 
     /* TODO
     if (object->getTypeCode() == NUML_NUMLLIST)
@@ -1380,9 +1389,9 @@ NMBase::checkNUMLListPopulated(NMBase* object)
     if (static_cast <NUMLList*> (object)->size() == 0)
     {
       NUMLTypeCode_t tc = static_cast<NUMLList*>(object)->getItemTypeCode();
-      NUMLErrorCode_t error = EmptyListElement;
+      NUMLErrorCode_t error = NUMLEmptyListElement;
 
-      // By default, the error will be the EmptyListElement error, unless
+      // By default, the error will be the NUMLEmptyListElement error, unless
       // we have a special case for which NUML has a separate error code.
       switch (tc)
       {
@@ -1427,7 +1436,7 @@ NMBase::checkDefaultNamespace(const XMLNamespaces* xmlns, const std::string& ele
       errMsg << "xmlns=\"" << defaultURI << "\" in <" << elementName
              << "> element is an invalid namespace." << endl;
       
-      logError(NotSchemaConformant, level, version, errMsg.str());
+      logError(NUMLNotSchemaConformant, level, version, errMsg.str());
     }
   }
 }
@@ -1834,7 +1843,7 @@ NMBase_getColumn (const NMBase_t *sb)
   * The valid combinations of NUML Level, Version and Namespace as of this release
   * of libNUML are the following:
   * <ul>
-  * <li> Level&nbsp;1 Version&nbsp;1 "http://www.numl.org/numl/level1"
+  * <li> Level&nbsp;1 Version&nbsp;1 "http://www.numl.org/numl/level1/version1"
   * </ul>
   *
   * @param sb the NMBase_t structure

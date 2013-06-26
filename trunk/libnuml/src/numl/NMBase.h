@@ -28,12 +28,12 @@
 
 #include <numl/common/extern.h>
 #include <numl/common/numlfwd.h>
-#include <numl/util/List.h>
+#include <sbml/util/List.h>
 #include <numl/NUMLTypeCodes.h>
 //#include <numl/annotation/RDFAnnotation.h>
 //#include <numl/annotation/CVTerm.h>
 #include <numl/NUMLNamespaces.h>
-#include <numl/SyntaxChecker.h>
+#include <sbml/SyntaxChecker.h> //change from numl
 #include <numl/NUMLVisitor.h>
 
 
@@ -42,6 +42,9 @@
 
 #include <string>
 #include <stdexcept>
+#include <algorithm>
+
+#include <numl/NUMLErrorLog.h>
 
 LIBNUML_CPP_NAMESPACE_BEGIN
 

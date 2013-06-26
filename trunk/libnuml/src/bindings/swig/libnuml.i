@@ -80,7 +80,9 @@ LIBNUML_CPP_NAMESPACE_USE
 %import  numl/common/libnuml-namespace.h
 %import  numl/common/extern.h
 %import  numl/common/numlfwd.h
-%import  numl/xml/XMLExtern.h
+%import  sbml/common/extern.h
+%import  sbml/xml/XMLExtern.h
+
 
 /**
  * Wraps List class by ListWrapper<TYPENAME> template class.
@@ -358,6 +360,7 @@ LIBNUML_CPP_NAMESPACE_USE
   }
 }
 
+
 /*
  * Wraps "static void RDFAnnotationParser::parseRDFAnnotation(const XMLNode *annotation, 
  * List *CVTerms)" function as 
@@ -395,7 +398,7 @@ LIBNUML_CPP_NAMESPACE_USE
 %include <numl/NMBase.h>
 
 %include <numl/NUMLDocument.h>
-%include <numl/xml/XMLError.h>
+%include <sbml/xml/XMLError.h>
 
 %include <numl/NUMLList.h>
 
@@ -417,27 +420,18 @@ LIBNUML_CPP_NAMESPACE_USE
 %include <numl/NUMLReader.h>
 %include <numl/NUMLWriter.h>
 
-%include <numl/xml/XMLAttributes.h>
-%include <numl/xml/XMLNamespaces.h>
-%include <numl/xml/XMLToken.h>
-%include <numl/xml/XMLNode.h>
-%include <numl/xml/XMLTriple.h>
-%include <numl/xml/XMLInputStream.h>
-%include <numl/xml/XMLOutputStream.h>
-%include <numl/xml/XMLError.h>
-%include <numl/xml/XMLErrorLog.h>
-%include <numl/xml/XMLParser.h>
-%include <numl/xml/XMLHandler.h>
-%include <numl/xml/XMLTokenizer.h>
-
-%include numl/xml/XMLAttributes.h
-%include numl/xml/XMLNamespaces.h
-%include numl/xml/XMLToken.h
-%include numl/xml/XMLNode.h
-%include numl/xml/XMLTriple.h
-%include numl/xml/XMLOutputStream.h
-%include numl/xml/XMLError.h
-%include numl/xml/XMLErrorLog.h
+%include <sbml/xml/XMLAttributes.h>
+%include sbml/xml/XMLConstructorException.h
+%include <sbml/xml/XMLNamespaces.h>
+%include <sbml/xml/XMLToken.h>
+%include <sbml/xml/XMLNode.h>
+%include <sbml/xml/XMLTriple.h>
+%include <sbml/xml/XMLInputStream.h>
+%include <sbml/xml/XMLOutputStream.h>
+%include <sbml/xml/XMLError.h>
+%include <sbml/xml/XMLErrorLog.h>
+%include <sbml/math/ASTNode.h>
+%include <sbml/annotation/RDFAnnotation.h>
 
 %include numl/NUMLErrorLog.h
 %include numl/NUMLError.h
