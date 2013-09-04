@@ -138,7 +138,7 @@ LIBNUML_CPP_NAMESPACE_USE
 %ignore ASTNode::setUserData;
 %ignore ASTNode::getUserData;
 %ignore ASTNode::setParentNUMLObject;
-
+%ignore ASTNode::getClass;
 /**
  * SWIG makes no distinction between int and long arguments.
  * (SWIG 1.3 Manual, Section 6.15.2)
