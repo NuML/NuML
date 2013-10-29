@@ -80,7 +80,7 @@ public:
 	* (identifier) attribute of an OntologyTerm is required to have a value.
 	* Thus, callers are cautioned to assign a value after calling this
 	* constructor.  Setting the identifier can be accomplished using the
-	* method @if clike SBase::setId() @endif@if java SBase::setId(String id) @endif.
+	* method @if clike NMBase::setId() @endif@if java NMBase::setId(String id) @endif.
 	*
 	* @param numlns an NUMLNamespaces object.
 	*

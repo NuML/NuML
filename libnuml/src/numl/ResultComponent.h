@@ -57,7 +57,7 @@ class NUMLVisitor;
 class LIBNUML_EXTERN ResultComponent: public NMBase {
 public:
 
-	ResultComponent();
+//	ResultComponent();
 	/**
 	* Creates a new ResultComponent using the given NUML @p level and @p version
 	* values.
@@ -240,13 +240,13 @@ public:
 	 * NUML objects as XML elements.  Be sure to call your parents
 	 * implementation of this method as well.
 	 */
-	virtual void writeElements(XMLOutputStream& stream) const;
+	void writeElements(XMLOutputStream& stream) const;
 
 
 
 	virtual ~ResultComponent();
 
-protected:
+//protected:
 	/**
 	* @return the NUML object corresponding to next XMLToken in the
 	* XMLInputStream or NULL if the token was not recognized.
@@ -269,6 +269,9 @@ protected:
 	*/
 	virtual void writeAttributes (XMLOutputStream& stream) const;
 
+
+protected:
+	ResultComponent();
 
 	std::string  mId;
 	DimensionDescription mDimensionDescription;
@@ -474,6 +477,10 @@ protected:
 LIBNUML_CPP_NAMESPACE_END
 
 #endif  /* __cplusplus */
+
+//LIBNUML_EXTERN
+//ResultComponent_t *
+//ResultComponent_createDimensionDescription(void);
 
 #ifndef SWIG
 

@@ -28,7 +28,6 @@ if(WITH_JAVA)
   add_subdirectory(java)
 endif(WITH_JAVA)
 
-
 endif(WITH_EXAMPLES)
 
 

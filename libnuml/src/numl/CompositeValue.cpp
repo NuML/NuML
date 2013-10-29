@@ -314,6 +314,7 @@ int CompositeValue::setIndexValue(const std::string& indexValue) {
 
 }
 
+
 /*
  * @return the indexValue of this NUML object.
  */
@@ -323,6 +324,14 @@ CompositeValue::getIndexValue () const
   return mIndexValue;
 }
 
+/*
+ * Sets the indexValue attribute of this NUML object to a copy of indexValue.
+ */
+int CompositeValue::setDescription(const std::string& description) {
+	mDescription = description;
+	return LIBNUML_OPERATION_SUCCESS;
+
+}
 /*
  * @return the description of this NUML object.
  */

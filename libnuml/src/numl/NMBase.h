@@ -209,7 +209,7 @@ public:
    * @see appendAnnotation(const std::string& annotation)
    * @see unsetAnnotation()
    */
-  std::string getAnnotationString ();
+//TODO  std::string getAnnotationString ();
 
 
   /**
@@ -389,6 +389,25 @@ public:
    */
   int setMetaId (const std::string& metaid);
 
+  /** @cond doxygen-libnuml-internal */
+    /*
+     * NOTE: THIS IS FOR BACKWARD COMPATABILITY REASONS
+     *
+     * Sets the value of the "id" attribute of this NUML object to a copy
+     * of @p id.
+     *
+     * The string @p sid is copied.  Note that NUML has strict requirements
+     * for the syntax of identifiers.  @htmlinclude id-syntax.html
+     *
+     * @param sid the string to use as the identifier of this object
+     *
+     * @return integer value indicating success/failure of the
+     * function.  The possible values returned by this function are:
+     * @li @link OperationReturnValues_t#LIBNUML_OPERATION_SUCCESS LIBNUML_OPERATION_SUCCESS @endlink
+     * @li @link OperationReturnValues_t#LIBNUML_INVALID_ATTRIBUTE_VALUE LIBNUML_INVALID_ATTRIBUTE_VALUE @endlink
+     */
+     virtual int setId (const std::string& sid);
+    /** @endcond */
 
   /** @endcond doxygen-libnuml-internal */
 
@@ -411,7 +430,7 @@ public:
    * @li LIBNUML_OPERATION_SUCCESS
    * @li LIBNUML_INVALID_ATTRIBUTE_VALUE
    */
-  int setName (const std::string& name);
+ // TODO int setName (const std::string& name);
 
   /** @cond doxygen-libnuml-internal */
   /**

@@ -178,7 +178,7 @@ ResultComponent::createCompositeValue ()
      */
   }
 
-  /* if the NUMLList is empty it doesnt know its parent */
+  /* if the NUMLList is empty it doesn't know its parent */
   if (mDimension.size() == 0)
   {
 	  mDimension.setNUMLDocument(this->getNUMLDocument());

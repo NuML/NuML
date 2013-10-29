@@ -385,9 +385,9 @@ public:
 	*/
 	AtomicValue* createAtomicValue();
 
-	void setAtomicValue(AtomicValue* atomicValue) ;
+//	void setAtomicValue(AtomicValue* atomicValue) ;
 
-	void setTuple(Tuple* tuple) ;
+//	void setTuple(Tuple* tuple) ;
 
 	/**
 	 * Subclasses should override this method to write out their contained
