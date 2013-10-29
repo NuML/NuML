@@ -39,8 +39,8 @@
 #include <numl/OntologyTerm.h>
 
 #include <numl/ResultComponent.h>
-#include <numl/Dimension.h>
 
+#include <numl/Dimension.h>
 #include <numl/DimensionDescription.h>
 
 #include <numl/CompositeValue.h>

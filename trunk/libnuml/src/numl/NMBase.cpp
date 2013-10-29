@@ -262,9 +262,16 @@ NMBase::getName () const
   {
     switch(type)
     {
-    case NUML_DIMENSIONDESCRIPTION:
+    case NUML_RESULTCOMPONENT:
       return static_cast <const ResultComponent *> (this)->getName();
       break;
+
+    case NUML_DIMENSIONDESCRIPTION:
+      return static_cast <const DimensionDescription*> (this)->getName();
+      break;
+    case NUML_COMPOSITEDESCRIPTION:
+         return static_cast <const CompositeDescription*> (this)->getName();
+         break;
 
     default:
       return mEmptyString;
@@ -459,6 +466,19 @@ NMBase::setMetaId (const std::string& metaid)
   }
 }
 
+
+/** @cond doxygen-libnuml-internal */
+
+/*
+ * NOTE: THIS IS FOR BACKWARD COMPATABILITY REASONS
+ *
+ * Sets the id of this NUML object to a copy of sid.
+ */
+int
+NMBase::setId (const std::string& sid)
+{
+  return LIBNUML_UNEXPECTED_ATTRIBUTE;
+}
 
 /*
  * NOTE: THIS IS FOR BACKWARD COMPATABILITY REASONS

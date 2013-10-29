@@ -38,9 +38,9 @@ if(WITH_JAVA)
 add_subdirectory(java)
 endif()
 
-#if(WITH_PYTHON)
-#add_subdirectory(python)
-#endif()
+if(WITH_PYTHON)
+add_subdirectory(python)
+endif()
 
 
 #if(WITH_PERL)

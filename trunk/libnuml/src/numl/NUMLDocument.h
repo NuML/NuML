@@ -47,6 +47,7 @@
 LIBNUML_CPP_NAMESPACE_BEGIN
 
 class OntologyTerm;
+class ResultComponent;
 class NUMLVisitor;
 class XMLError;
 

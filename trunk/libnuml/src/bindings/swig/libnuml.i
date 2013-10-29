@@ -316,8 +316,10 @@ LIBNUML_CPP_NAMESPACE_USE
 %newobject *::remove;
 //%newobject Result::removeResultComponent;
 %newobject ResultComponent::removeDimension;
+%newobject ResultComponent::createDimensionDescription;
 %newobject ResultComponent::removeDimensionDescription;
 %newobject DimensionDescription::removeCompositeDescription;
+%newobject ResultComponent::createCompositeDescription;
 %newobject DimensionDesription::removeTupleDescription;
 %newobject DimensionDescription::removeAtomicDescription;
 %newobject Dimension::removeCompositeValue;
@@ -405,8 +407,8 @@ LIBNUML_CPP_NAMESPACE_USE
 %include <numl/OntologyTerm.h>
 
 %include <numl/ResultComponent.h>
-%include <numl/Dimension.h>
 
+%include <numl/Dimension.h>
 %include <numl/DimensionDescription.h>
 
 %include <numl/CompositeValue.h>
@@ -416,9 +418,6 @@ LIBNUML_CPP_NAMESPACE_USE
 %include <numl/CompositeDescription.h>
 %include <numl/TupleDescription.h>
 %include <numl/AtomicDescription.h>
-
-%include <numl/NUMLReader.h>
-%include <numl/NUMLWriter.h>
 
 %include <sbml/xml/XMLAttributes.h>
 %include sbml/xml/XMLConstructorException.h
@@ -435,5 +434,4 @@ LIBNUML_CPP_NAMESPACE_USE
 
 %include numl/NUMLErrorLog.h
 %include numl/NUMLError.h
-
 
