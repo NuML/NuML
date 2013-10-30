@@ -25,13 +25,10 @@ def main (args):
     print(main.__doc__)
     sys.exit(1);
 
-  # create the document
-  doc = libnuml.NUMLDocument(1, 1);
-#  doc.setLevel(1);
-#  doc.setVersion(1); 
+# create the document
+  doc = libnuml.NUMLDocument(1, 1);  
 
 # Header Information encoded in OntologyTerm objects
-
 # 
 # No.     Term    			Source Term Id 	Ontology URI
 # 1       concentration   	SBO:0000196     http://www.ebi.ac.uk/sbo/
