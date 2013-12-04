@@ -75,6 +75,74 @@ def main (args):
 
   rComp = doc.createResultComponent();
   rComp.setId("result_comp1");
+  
+#1st dimension is the time
+  compDesc = rComp.createCompositeDescription();
+  compDesc.setName("Time");
+  compDesc.setIndexType("float");
+  compDesc.setOntologyTerm("term1");
+
+#2nd dimension is Metabilites
+  subCompDesc = compDesc.createCompositeDescription();
+  subCompDesc.setName("Metabolites");
+  subCompDesc.setIndexType("string");
+  subCompDesc.setOntologyTerm("term2");
+
+# the actual data description of data
+  aDesc= subCompDesc.createAtomicDescription();
+  aDesc.setMetaId("double");
+  aDesc.setName("Concentration");
+  aDesc.setOntologyTerm("term3");
+  
+  
+  #encoding the data
+	#row 1
+  #first column in row 1
+  compValue = rComp.createCompositeValue();
+  compValue.setIndexValue("0");
+
+  #2nd column in row 1
+  subCompValue = compValue.createCompositeValue();
+  subCompValue.setIndexValue("BL");
+  aValue = subCompValue.createAtomicValue();
+  aValue.setValue("0");
+
+  #3rd column in this row 1
+  subCompValue = compValue.createCompositeValue();
+  subCompValue.setIndexValue("B");
+  aValue = subCompValue.createAtomicValue();
+  aValue.setValue("1.66058");
+
+  #4th column in this row 1
+  subCompValue = compValue.createCompositeValue();
+  subCompValue.setIndexValue("DLL");
+  aValue = subCompValue.createAtomicValue();
+  aValue.setValue("0.0884913");
+
+
+  #row 2
+  #first column in row 2
+  compValue = rComp.createCompositeValue();
+  compValue.setIndexValue("20");
+
+  #2nd column in row 2
+  subCompValue = compValue.createCompositeValue();
+  subCompValue.setIndexValue("BL");
+  aValue = subCompValue.createAtomicValue();
+  aValue.setValue("0.23");
+
+  #3rd column in this row 2
+  subCompValue = compValue.createCompositeValue();
+  subCompValue.setIndexValue("B");
+  aValue = subCompValue.createAtomicValue();
+  aValue.setValue("1.76058");
+
+  #4th column in this row 2
+  subCompValue = compValue.createCompositeValue();
+  subCompValue.setIndexValue("DLL");
+  aValue = subCompValue.createAtomicValue();
+  aValue.setValue("0.0984913");
+
 
 #---------------------------------------------------------------------------
 #

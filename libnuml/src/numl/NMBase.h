@@ -564,6 +564,24 @@ public:
    */
   unsigned int getVersion () const;
 
+  /**
+     * Returns the libnuml type code for this object.
+     *
+     * This method may return the type code of this NUML object, or it may
+     * return @link NUMLTypeCode_t#NUML_UNKNOWN NUML_UNKNOWN@endlink.  This
+     * is because subclasses of NMBase are not required to implement this
+     * method to return a type code.  This method is meant primarily for the
+     * LibNUML C interface, in which class and subclass information is not
+     * readily available.
+     *
+     * @return the @if clike #NUMLTypeCode_t value@else NUML object type code@endif@~
+     * of this NUML object or
+     * @link NUMLTypeCode_t#NUML_UNKNOWNNUML_UNKNOWN@endlink (the default).
+     *
+     * @see getElementName()
+     * @see getPackageName()
+     */
+ //   virtual int getTypeCode () const;
 
   /**
    * Returns the libNUML type code for this object.

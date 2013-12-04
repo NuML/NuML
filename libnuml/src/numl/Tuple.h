@@ -118,7 +118,7 @@ public:
 	*
 	* @see getElementName()
 	*/
-	virtual NUMLTypeCode_t getTypeCode () const { return NUML_NUMLLIST; };
+	virtual NUMLTypeCode_t getTypeCode () const { return NUML_TUPLE; };
 
 
 	/**

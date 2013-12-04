@@ -31,7 +31,7 @@ static
 const char* NUML_TYPE_CODE_STRINGS[] =
 {
     "(Unknown NUML Type)"
-  ,"Document"
+  , "Document"
   , "OntologyTerms"
   , "OntologyTerm"
   , "ResultComponent"

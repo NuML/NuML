@@ -661,6 +661,23 @@ NMBase::getVersion () const
     return NUMLDocument::getDefaultVersion();
 }
 
+/*
+ * @return the typecode (int) of this NUML object orNUML_UNKNOWN
+ * (default).
+ *
+ * This method MAY return the typecode of this NUML object or it MAY
+ * returnNUML_UNKNOWN.  That is, subclasses of NMBase are not required to
+ * implement this method to return a typecode.  This method is meant
+ * primarily for the LibNUML C interface where class and subclass
+ * information is not readily available.
+ *
+ * @see getElementName()
+ */
+/*int
+NMBase::getTypeCode () const
+{
+  return NUML_UNKNOWN;
+}*/
 
 /*
  * @return the NUMLTypeCode_t of this NUML object or NUML_UNKNOWN
@@ -1798,7 +1815,8 @@ LIBNUML_EXTERN
 NUMLTypeCode_t
 NMBase_getTypeCode (const NMBase_t *sb)
 {
-  return sb->getTypeCode();
+	return (sb != NULL) ? sb->getTypeCode() :NUML_UNKNOWN;
+  //return sb->getTypeCode();
 }
 
 

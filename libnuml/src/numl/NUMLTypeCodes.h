@@ -56,13 +56,10 @@ typedef enum
   , NUML_COMPOSITEDESCRIPTION
   , NUML_TUPLEDESCRIPTION
   , NUML_ATOMICDESCRIPTION
-
   , NUML_NUMLLIST
   , NUML_CONSTRAINT
 
-
 } NUMLTypeCode_t;
-
 
 /**
  * This method takes an NUML type code and returns a string representing

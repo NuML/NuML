@@ -313,7 +313,7 @@ NMBase::getAnnotationString ()
 NUMLTypeCode_t
 OntologyTerms::getItemTypeCode () const
 {
-  return NUML_ONTOLOGYTERMS;
+  return NUML_ONTOLOGYTERM;
 }
 
 

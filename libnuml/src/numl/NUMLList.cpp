@@ -323,6 +323,30 @@ NUMLList::setParentNUMLObject (NMBase* sb)
   mParentNUMLObject = sb;
   for_each( mItems.begin(), mItems.end(), SetParentNUMLObject(this) );
 }
+
+
+/*
+ * @return the typecode (int) of this NUML object or NUML_UNKNOWN
+ * (default).
+ */
+/*int
+NUMLList::getTypeCode () const
+{
+  return NUML_NUMLLIST;
+}
+*/
+
+/*
+ * @return the typecode (int) of NUML objects contained in this NUMList or
+ * NUML_UNKNOWN (default).
+ */
+/*int
+NUMLList::getItemTypeCode () const
+{
+  return NUML_UNKNOWN;
+}*/
+
+
 /** @endcond doxygen-libnuml-internal */
 
 
