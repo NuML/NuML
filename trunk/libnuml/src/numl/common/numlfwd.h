@@ -99,17 +99,29 @@ typedef CLASS_OR_STRUCT NUMLDocument           NUMLDocument_t;
  */
 typedef CLASS_OR_STRUCT OntologyTerm        OntologyTerm_t;
 
-/**
- * @var typedef class CompositeDescription CompositeDescription_t
- * @copydoc CompositeDescription
- */
-typedef CLASS_OR_STRUCT CompositeDescription       CompositeDescription_t;
 
+/**
+ * @var typedef class Dimension Dimension_t
+ * @copydoc Dimension
+ */
+typedef CLASS_OR_STRUCT Dimension       Dimension_t;
 /**
  * @var typedef class CompositeValue CompositeValue_t
  * @copydoc CompositeValue
  */
 typedef CLASS_OR_STRUCT CompositeValue       CompositeValue_t;
+
+/**
+ * @var typedef class Tuple Tuple_t
+ * @copydoc Tuple
+ */
+typedef CLASS_OR_STRUCT Tuple       Tuple_t;
+
+/**
+ * @var typedef class AtomicValue AtomicValue_t
+ * @copydoc AtomicValue
+ */
+typedef CLASS_OR_STRUCT AtomicValue       AtomicValue_t;
 
 /**
  * @var typedef class Method Method_t
@@ -134,6 +146,30 @@ typedef CLASS_OR_STRUCT CompositeValue       CompositeValue_t;
  * @copydoc ResultComponent
  */
 typedef CLASS_OR_STRUCT ResultComponent       ResultComponent_t;
+
+/**
+ * @var typedef class DimensionDescription DimensionDescription_t
+ * @copydoc DimensionDescription
+ */
+typedef CLASS_OR_STRUCT DimensionDescription       DimensionDescription_t;
+
+/**
+ * @var typedef class CompositeDescription CompositeDescription_t
+ * @copydoc CompositeDescription
+ */
+typedef CLASS_OR_STRUCT CompositeDescription       CompositeDescription_t;
+
+/**
+ * @var typedef class TupleDescription TupleDescription_t
+ * @copydoc TupleDescription
+ */
+typedef CLASS_OR_STRUCT TupleDescription       TupleDescription_t;
+
+/**
+ * @var typedef class AtomicDescription AtomicDescription_t
+ * @copydoc AtomicDescription
+ */
+typedef CLASS_OR_STRUCT AtomicDescription       AtomicDescription_t;
 
 /**
  * @var typedef class NUMLReader NUMLReader_t

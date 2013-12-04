@@ -317,9 +317,9 @@ LIBNUML_CPP_NAMESPACE_USE
 //%newobject Result::removeResultComponent;
 %newobject ResultComponent::removeDimension;
 %newobject ResultComponent::createDimensionDescription;
-%newobject ResultComponent::removeDimensionDescription;
-%newobject DimensionDescription::removeCompositeDescription;
+//%newobject ResultComponent::removeDimensionDescription;
 %newobject ResultComponent::createCompositeDescription;
+%newobject DimensionDescription::removeCompositeDescription;
 %newobject DimensionDesription::removeTupleDescription;
 %newobject DimensionDescription::removeAtomicDescription;
 %newobject Dimension::removeCompositeValue;
@@ -345,13 +345,13 @@ LIBNUML_CPP_NAMESPACE_USE
  */
 
 
-%inline
-%{
-  int ASTNode_true(const ASTNode *node)
-  {
-    return 1;
-  }
-%}
+//%inline
+//%{
+//  int ASTNode_true(const ASTNode *node)
+//  {
+//    return 1;
+//  }
+//%}
 
 %extend ASTNode
 {

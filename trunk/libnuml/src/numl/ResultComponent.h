@@ -164,6 +164,27 @@ public:
 	//	virtual void setParentNUMLObject (NMBase* sb);
 
 	/**
+	 * Returns the libNUML type code for this %NUML object.
+	 *
+	 * @if clike LibNUML attaches an identifying code to every
+	 * kind of NUML object.  These are known as <em>NUML type codes</em>.
+	 * The set of possible type codes is defined in the enumeration
+	 * #NUMLTypeCode_t.  The names of the type codes all begin with the
+	 * characters @c NUML_. @endif@if java LibNUML attaches an
+	 * identifying code to every kind of NUML object.  These are known as
+	 * <em>NUML type codes</em>.  In other languages, the set of type codes
+	 * is stored in an enumeration; in the Java language interface for
+	 * libNUML, the type codes are defined as static integer constants in
+	 * interface class {@link libnumlConstants}.  The names of the type codes
+	 * all begin with the characters @c NUML_. @endif
+	 *
+	 * @return the NUML type code for this object, or @c NUML_UNKNOWN (default).
+	 *
+	 * @see getElementName()
+	 */
+	virtual NUMLTypeCode_t getTypeCode() const;
+
+	/**
 	* Returns the XML element name of this object, which for ResultComponent, is
 	* always @c "model".
 	*
@@ -310,7 +331,7 @@ public:
 	*
 	* @see getElementName()
 	*/
-	virtual NUMLTypeCode_t getTypeCode () const { return NUML_RESULTCOMPONENT; };
+	virtual NUMLTypeCode_t getTypeCode () const { return NUML_RESULTCOMPONENTS; };
 
 
 	/**
@@ -467,7 +488,7 @@ protected:
 
 	/**
 	* @return the NUML object corresponding to next XMLToken in the
-	* XMLInputStream or NULL if the token was not recognized.
+	* XMLInputStream or NULL if the token wascreateDimensionDescription not recognized.
 	*/
 	virtual NMBase* createObject (XMLInputStream& stream);
 
@@ -484,10 +505,19 @@ LIBNUML_CPP_NAMESPACE_END
 
 #ifndef SWIG
 
+#include <stdio.h>
+
 LIBNUML_CPP_NAMESPACE_BEGIN
 BEGIN_C_DECLS
 
 //TODO
+LIBNUML_EXTERN
+DimensionDescription_t *
+ResultComponent_createDimensionDescription(ResultComponent_t *rComp);
+
+LIBNUML_EXTERN
+CompositeDescription_t *
+ResultComponent_createCompositeDescription(ResultComponent_t *rComp);
 
 END_C_DECLS
 LIBNUML_CPP_NAMESPACE_END

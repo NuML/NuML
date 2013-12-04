@@ -79,8 +79,11 @@ struct swig_type_info* GetDowncastSwigType (NMBase* sb)
     	  if(name == "NUMLList"){
     		  return SWIGTYPE_p_NUMLList;
     	  }
-    	  else if(name == "resultComponent"){
-    		  return SWIGTYPE_p_ResultComponent;
+    	  else if(name == "resultComponents"){
+    		  return SWIGTYPE_p_ResultComponents;
+    	  }
+    	  else if(name=="ontologyTerms"){
+    	  	  return SWIGTYPE_p_OntologyTerms;
     	  }
     	  else if(name=="dimension"){
     		  return SWIGTYPE_p_Dimension;
@@ -100,16 +103,16 @@ struct swig_type_info* GetDowncastSwigType (NMBase* sb)
     	  else if(name=="tuple"){
     		  return SWIGTYPE_p_Tuple;
     	  }
-    	  else if(name=="atomicDescription"){
+    	 /* else if(name=="atomicDescription"){
     		  return SWIGTYPE_p_AtomicDescription;
     	  }
     	  else if(name=="atomicValue"){
     		  return SWIGTYPE_p_AtomicValue;
-    	  }
+    	  }*/
     	  return SWIGTYPE_p_NUMLList;
 
       default:
-    	  return SWIGTYPE_p_NMBase;
+    	   return SWIGTYPE_p_NMBase;
     }
 
     return SWIGTYPE_p_NMBase;

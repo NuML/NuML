@@ -176,7 +176,7 @@ public:
 	*
 	* @see getElementName()
 	*/
-	virtual NUMLTypeCode_t getTypeCode () const { return NUML_DIMENSION; };
+	virtual NUMLTypeCode_t getTypeCode () const { return NUML_DIMENSIONDESCRIPTION; };
 
 
 	/**

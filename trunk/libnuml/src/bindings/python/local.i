@@ -341,6 +341,7 @@ XMLOutputStream::writeAttribute
 SWIGPYTHON__CMP__(NMBase)
 SWIGPYTHON__CMP__(NUMLWriter)
 SWIGPYTHON__CMP__(NUMLReader)
+SWIGPYTHON__CMP__(ResultComponent)
 SWIGPYTHON__CMP__(ASTNode)
 SWIGPYTHON__CMP__(XMLNamespaces)
 SWIGPYTHON__CMP__(NUMLNamespaces)

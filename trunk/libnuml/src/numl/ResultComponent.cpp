@@ -114,6 +114,19 @@ ResultComponent::~ResultComponent ()
 }
 
 /*
+ * @return the NUMLTypeCode_t of this NUML object or NUML_UNKNOWN
+ * (default).
+ *
+ * @see getElementName()
+ */
+
+NUMLTypeCode_t
+ResultComponent::getTypeCode () const
+{
+	return NUML_RESULTCOMPONENT;
+}
+
+/*
  * @return the name of this element ie "resultComponent".
  */
 const string&
@@ -404,7 +417,7 @@ NMBase::getAnnotationString ()
 NUMLTypeCode_t
 ResultComponents::getItemTypeCode () const
 {
-  return NUML_RESULTCOMPONENTS;
+  return NUML_RESULTCOMPONENT;
 }
 
 
@@ -550,5 +563,19 @@ ResultComponents::createObject (XMLInputStream& stream)
   return object;
 }
 /** @endcond doxygen-libnuml-internal */
+
+LIBNUML_EXTERN
+DimensionDescription_t *
+ResultComponent_createDimensionDescription(ResultComponent_t *rComp)
+{
+  return rComp->createDimensionDescription();
+}
+
+LIBNUML_EXTERN
+CompositeDescription_t *
+ResultComponent_createCompositeDescription(ResultComponent_t *rComp)
+{
+  return rComp->createCompositeDescription();
+}
 
 LIBNUML_CPP_NAMESPACE_END

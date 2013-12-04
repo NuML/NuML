@@ -265,7 +265,7 @@ public:
 	*/
 	unsigned int size () const;
 
-	/** @cond doxygen-libsbml-internal */
+	/** @cond doxygen-libnuml-internal */
 
 	/**
 	* Sets the parent NUMLDocument of this NUML object.
@@ -283,11 +283,80 @@ public:
 	*/
 	virtual void setParentNUMLObject (NMBase* sb);
 
-	/** @endcond doxygen-libsbml-internal */
+
+	/** @endcond */
+
+	  /**
+	   * Returns the libnuml type code for this object, namely, @c
+	   * NUMLLIST.
+	   *
+	   * @if clike LibNUML attaches an identifying code to every kind of NUML
+	   * object.  These are known as <em>NUML type codes</em>.  The set of
+	   * possible type codes is defined in the enumeration #SedTypeCode_t.
+	   * The names of the type codes all begin with the characters @c
+	   * NUML_. @endif@if java LibNUML attaches an identifying code to every
+	   * kind of NUML object.  These are known as <em>NUML type codes</em>.  In
+	   * other languages, the set of type codes is stored in an enumeration; in
+	   * the Java language interface for libnuml, the type codes are defined as
+	   * static integer constants in the interface class {@link
+	   * libsbmlConstants}.  The names of the type codes all begin with the
+	   * characters @c NUML_. @endif@if python LibNUML attaches an identifying
+	   * code to every kind of NUML object.  These are known as <em>NUML type
+	 NUMLLISTem>.  In the Python language interface for libnuml, the type
+	   * codes are defined as static integer constants in the interface class
+	   * @link libnuml@endlink.  The names of the type codes all begin with the
+	   * characters @c NUML_. @endif@if csharp LibNUML attaches an identifying
+	   * code to every kind of NUML object.  These are known as <em>NUML type
+	   * codes</em>.  In the C# language interface for libnuml, the type codes
+	   * are defined as static integer constants in the interface class @link
+	   * libsbmlcs.libnuml@endlink.  The names of the type codes all begin with
+	   * the characters @c NUML_. @endif@~
+	   *
+	   * @return the NUML type code for this object, or @link SedTypeCode_t#Sed_UNKNOWN SEDML_UNKNOWN@endlink (default).
+	   *
+	   * @see getElementName()
+	   */
+//	  virtual int getTypeCode () const;
+
+
+	  /**
+	   * Get the type code of the objects contained in this SedListOf.
+	   *
+	   * @if clike LibNUML attaches an identifying code to every kind of NUML
+	   * object.  These are known as <em>NUML type codes</em>.  The set of
+	   * possible type codes is defined in the enumeration #SedTypeCode_t.
+	   * The names of the type codes all begin with the characters @c
+	   * NUML_. @endif@if java LibNUML attaches an identifying code to every
+	   * kind of NUML object.  These are known as <em>NUML type codes</em>.  In
+	   * other languages, the set of type codes is stored in an enumeration; in
+	   * the Java language interface for libnuml, the type codes are defined as
+	   * static integer constants in the interface class {@link
+	   * libsbmlConstants}.  The names of the type codes all begin with the
+	   * characters @c NUML_. @endif@if python LibNUML attaches an identifying
+	   * code to every kind of NUML object.  These are known as <em>NUML type
+	   * codes</em>.  In the Python language interface for libnuml, the type
+	   * codes are defined as static integer constants in the interface class
+	   * @link libnuml@endlink.  The names of the type codes all begin with the
+	   * characters @c NUML_. @endif@if csharp LibNUML attaches an identifying
+	   * code to every kind of NUML object.  These are known as <em>NUML type
+	   * codes</em>.  In the C# language interface for libnuml, the type codes
+	   * are defined as static integer constants in the interface class @link
+	   * libsbmlcs.libnuml@endlink.  The names of the type codes all begin with
+	   * the characters @c NUML_. @endif@~
+	   *
+	   * @return the NUML type code for the objects contained in this SedListOf
+	   * instance, or @link SedTypeCode_t#Sed_UNKNOWN SEDML_UNKNOWN@endlink (default).
+	   */
+	//  virtual int getItemTypeCode () const;
+
+
+
+
+	/** @endcond doxygen-libnuml-internal */
 
 	/**
 	* Returns the libNUML type code for this object, namely, @c
-	* NUML_LIST_OF.
+	* NUMLLIST.
 	*
 	* @if clike LibNUML attaches an identifying code to every
 	* kind of NUML object.  These are known as <em>NUML type codes</em>.
@@ -338,17 +407,17 @@ public:
 	virtual const std::string& getElementName () const;
 
 
-	/** @cond doxygen-libsbml-internal */
+	/** @cond doxygen-libnuml-internal */
 	/**
 	* Subclasses should override this method to write out their contained
 	* NUML objects as XML elements.  Be sure to call your parents
 	* implementation of this method as well.
 	*/
 	virtual void writeElements (XMLOutputStream& stream) const;
-	/** @endcond doxygen-libsbml-internal */
+	/** @endcond doxygen-libnuml-internal */
 
 protected:
-	/** @cond doxygen-libsbml-internal */
+	/** @cond doxygen-libnuml-internal */
 
 	/**
 	* Subclasses should override this method to read values from the given
@@ -371,7 +440,7 @@ protected:
 
 	std::vector<NMBase*> mItems;
 
-	/** @endcond doxygen-libsbml-internal */
+	/** @endcond doxygen-libnuml-internal */
 };
 
 LIBNUML_CPP_NAMESPACE_END
