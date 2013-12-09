@@ -219,14 +219,11 @@ ResultComponent::createDimensionDescription ()
 	}
 	catch (...)
 	{
-		/* here we do not create a default object as the level/version must
-		 * match the parent object
-		 *
-		 * so do nothing
-		 */
+		// here we do not create a default object as the level/version must match the parent object
+
 	}
 
-	/* if the NUMLList is empty it doesnt know its parent */
+	// if the NUMLList is empty it doesnt know its parent
 	if (mDimensionDescription.size() == 0)
 	{
 		mDimensionDescription.setNUMLDocument(this->getNUMLDocument());

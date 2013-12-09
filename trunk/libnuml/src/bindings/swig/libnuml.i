@@ -316,9 +316,9 @@ LIBNUML_CPP_NAMESPACE_USE
 %newobject *::remove;
 //%newobject Result::removeResultComponent;
 %newobject ResultComponent::removeDimension;
-%newobject ResultComponent::createDimensionDescription;
-//%newobject ResultComponent::removeDimensionDescription;
-%newobject ResultComponent::createCompositeDescription;
+//%newobject ResultComponent::createDimensionDescription;
+%newobject ResultComponent::removeDimensionDescription;
+//%newobject ResultComponent::createCompositeDescription;
 %newobject DimensionDescription::removeCompositeDescription;
 %newobject DimensionDesription::removeTupleDescription;
 %newobject DimensionDescription::removeAtomicDescription;
