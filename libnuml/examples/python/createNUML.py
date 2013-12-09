@@ -75,6 +75,7 @@ def main (args):
 
   rComp = doc.createResultComponent();
   rComp.setId("result_comp1");
+  dimD = rComp.createDimensionDescription();
   
 #1st dimension is the time
   compDesc = rComp.createCompositeDescription();
@@ -90,13 +91,11 @@ def main (args):
 
 # the actual data description of data
   aDesc= subCompDesc.createAtomicDescription();
-  aDesc.setMetaId("double");
-  aDesc.setName("Concentration");
-  aDesc.setOntologyTerm("term3");
-  
+  aDesc.setName("Concentration");  
+  aDesc.setOntologyTerm("term3");  
   
   #encoding the data
-	#row 1
+  #row 1
   #first column in row 1
   compValue = rComp.createCompositeValue();
   compValue.setIndexValue("0");
@@ -106,7 +105,7 @@ def main (args):
   subCompValue.setIndexValue("BL");
   aValue = subCompValue.createAtomicValue();
   aValue.setValue("0");
-
+  
   #3rd column in this row 1
   subCompValue = compValue.createCompositeValue();
   subCompValue.setIndexValue("B");
@@ -143,13 +142,6 @@ def main (args):
   aValue = subCompValue.createAtomicValue();
   aValue.setValue("0.0984913");
 
-
-#---------------------------------------------------------------------------
-#
-# Creates a CompositeDescription object inside DimesionDescription in the ResultComponent object.
-#
-#---------------------------------------------------------------------------
-#TODO will added later
 
   # write the document
   libnuml.writeNUML(doc, args[1]);
