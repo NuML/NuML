@@ -3,7 +3,7 @@
 ### Project Information
 The Numerical Markup Language (NuML) aims to standardize the exchange and archiving of numerical results. NuML originates from the numerical aspects of the [Systems Biology Results Markup Language (SBRML)][1] with the aim of re-using it in multiple other standardization efforts.
 
-This project hosts the [schema][2], the specification of NuML, as well as the [library for reading and writing NuML (libNUML)][3].
+This project hosts the [schema][2], the [specification of NuML][4], as well as the [library for reading and writing NuML (libNUML)][3].
 
 ### Get involved:
 
@@ -17,6 +17,7 @@ Join our mailing list at: [http://groups.google.com/group/numl-discuss/](http://
 ### Software supporting NuML:
 
 * [SBRML.NET](http://sbrml.sourceforge.net/SBRML/Welcome.html)
+
  
 ### Example of a NuML Document
 	<?xml version="1.0" encoding="UTF-8"?>
@@ -64,3 +65,4 @@ Join our mailing list at: [http://groups.google.com/group/numl-discuss/](http://
 [1]: http://www.comp-sys-bio.org/tiki-index.php?page=SBRML
 [2]: https://raw.githubusercontent.com/NuML/NuML/master/NUMLSchema.xsd
 [3]: https://github.com/NuML/NuML/tree/master/libnuml  
+[4]: https://github.com/NuML/NuML/blob/master/numl-spec-l1v1.pdf
