@@ -51,17 +51,18 @@ getSeverityForEntry(unsigned int index,
                     unsigned int level,
                     unsigned int version)
 {
-  if ( level == 1 )
-  {
-    switch (version)
-    {
-    case 1:
-      return errorTable[index].l1v1_severity;
+  return errorTable[index].l1v1_severity;
+  //if (level == 1)
+  //{
+  //  switch (version)
+  //  {
+  //  case 1:
+  //    return errorTable[index].l1v1_severity;
 
-    default:
-      return errorTable[index].l1v1_severity;
-    }
-  }
+  //  default:
+  //    return errorTable[index].l1v1_severity;
+  //  }
+  //}
 }
 
 

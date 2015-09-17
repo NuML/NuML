@@ -174,7 +174,7 @@ NUMLWriter::writeNUML (const NUMLDocument* d, const std::string& filename)
       stream = new(std::nothrow) std::ofstream(filename.c_str());
     }
   }
-  catch ( ZlibNotLinked& zlib)
+  catch ( ZlibNotLinked& /*zlib*/)
   {
     // libNUML is not linked with zlib.
     XMLErrorLog *log = (const_cast<NUMLDocument *>(d))->getErrorLog();
@@ -184,7 +184,7 @@ NUMLWriter::writeNUML (const NUMLDocument* d, const std::string& filename)
     log->add(XMLError( XMLFileUnwritable, oss.str(), 0, 0) );
     return false;
   } 
-  catch ( Bzip2NotLinked& bz2)
+  catch ( Bzip2NotLinked& /*bz2*/)
   {
     // libNUML is not linked with bzip2.
     XMLErrorLog *log = (const_cast<NUMLDocument *>(d))->getErrorLog();

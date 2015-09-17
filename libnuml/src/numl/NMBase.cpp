@@ -225,25 +225,25 @@ NMBase::getMetaId ()
 const string&
 NMBase::getId () const
 {
-	NUMLTypeCode_t type = this->getTypeCode();
+  NUMLTypeCode_t type = this->getTypeCode();
 
-	switch(type)
-	{
-	case NUML_ONTOLOGYTERM:
-		return static_cast <const OntologyTerm *> (this)->getId();
-		break;
-	case NUML_RESULTCOMPONENT:
-			return static_cast <const ResultComponent *> (this)->getId();
-			break;
-	case NUML_DIMENSIONDESCRIPTION:
-			return static_cast <const DimensionDescription *> (this)->getId();
-			break;
-	default:
-		return mEmptyString;
-		break;
-	}
+  switch(type)
+  {
+  case NUML_ONTOLOGYTERM:
+    return static_cast <const OntologyTerm *> (this)->getId();
+    break;
+  case NUML_RESULTCOMPONENT:
+      return static_cast <const ResultComponent *> (this)->getId();
+      break;
+  case NUML_DIMENSIONDESCRIPTION:
+      return static_cast <const DimensionDescription *> (this)->getId();
+      break;
+  default:
+    return mEmptyString;
+    break;
+  }
 
-	return mEmptyString;
+  return mEmptyString;
 }
 
 
@@ -278,8 +278,9 @@ NMBase::getName () const
       break;
     }
 
-    return mEmptyString;
   }
+
+  return mEmptyString;
 }
 
 /*
@@ -385,7 +386,7 @@ NMBase::getParentNUMLObject ()
 unsigned int
 NMBase::getLine () const
 {
-	return mLine;
+  return mLine;
 }
 
 
@@ -395,7 +396,7 @@ NMBase::getLine () const
 unsigned int
 NMBase::getColumn () const
 {
-	return mColumn;
+  return mColumn;
 }
 
 
@@ -405,7 +406,7 @@ NMBase::getColumn () const
 List*
 NMBase::getCVTerms()
 {
-	return mCVTerms;
+  return mCVTerms;
 }
 
 
@@ -415,7 +416,7 @@ NMBase::getCVTerms()
 List*
 NMBase::getCVTerms() const
 {
-	return mCVTerms;
+  return mCVTerms;
 }
 
 /*
@@ -773,53 +774,53 @@ NMBase::read (XMLInputStream& stream)
 
   while ( stream.isGood() )
   {
-	  stream.skipText();
-	  const XMLToken& next = stream.peek();
+    stream.skipText();
+    const XMLToken& next = stream.peek();
 
-	  // Re-check stream.isGood() because stream.peek() could hit something.
-	  if ( !stream.isGood() ) break;
+    // Re-check stream.isGood() because stream.peek() could hit something.
+    if ( !stream.isGood() ) break;
 
-	  if ( next.isEndFor(element) )
-	  {
-		  stream.next();
-		  break;
-	  }
-	  else if ( next.isStart() )
-	  {
-		  NMBase * object = createObject(stream);
+    if ( next.isEndFor(element) )
+    {
+      stream.next();
+      break;
+    }
+    else if ( next.isStart() )
+    {
+      NMBase * object = createObject(stream);
 
-		  if (object)
-		  {
-			  //TODO
-			//  checkOrderAndLogError(object, position);
-			  position = object->getElementPosition();
+      if (object)
+      {
+        //TODO
+      //  checkOrderAndLogError(object, position);
+        position = object->getElementPosition();
 
-			  object->setNUMLDocument(mNUML);
-			  object->setParentNUMLObject(static_cast <NMBase*>(this));
+        object->setNUMLDocument(mNUML);
+        object->setParentNUMLObject(static_cast <NMBase*>(this));
 
-			  object->read(stream);
+        object->read(stream);
 
-			  if ( !stream.isGood() ) break;
+        if ( !stream.isGood() ) break;
 
-			/*  if (object->getTypeCode() == NUML_SPECIES_REFERENCE
-					  && object->getLevel() > 1)
-			  {
-				  static_cast <SpeciesReference *> (object)->sortMath();
-			  }*/
-			  checkNUMLListPopulated(object);
-		  }
-		  else if ( !( readOtherXML(stream)
-				  || readAnnotation(stream)
-				  || readNotes(stream) ))
-		  {
-			  logUnknownElement(next.getName(), getLevel(), getVersion());
-			  stream.skipPastEnd( stream.next() );
-		  }
-	  }
-	  else
-	  {
-		  stream.skipPastEnd( stream.next() );
-	  }
+      /*  if (object->getTypeCode() == NUML_SPECIES_REFERENCE
+            && object->getLevel() > 1)
+        {
+          static_cast <SpeciesReference *> (object)->sortMath();
+        }*/
+        checkNUMLListPopulated(object);
+      }
+      else if ( !( readOtherXML(stream)
+          || readAnnotation(stream)
+          || readNotes(stream) ))
+      {
+        logUnknownElement(next.getName(), getLevel(), getVersion());
+        stream.skipPastEnd( stream.next() );
+      }
+    }
+    else
+    {
+      stream.skipPastEnd( stream.next() );
+    }
   }
 }
 /** @endcond doxygen-libnuml-internal */
@@ -911,8 +912,8 @@ NMBase::readAnnotation (XMLInputStream& stream)
     if (mAnnotation)
     {
       logError(NUMLNotSchemaConformant, getLevel(), getVersion(),
-	       "Only one <annotation> element is permitted inside any "
-	       "particular containing element.");
+         "Only one <annotation> element is permitted inside any "
+         "particular containing element.");
     }
 
     delete mAnnotation;
@@ -951,7 +952,6 @@ NMBase::checkXHTML(const XMLNode * xhtml)
 
   const string&  name = xhtml->getName();
   unsigned int i, errorNS, errorXML, errorDOC, errorELEM;
-  int n;
 
   if (name == "notes")
   {
@@ -1165,14 +1165,14 @@ NMBase::readNotes (XMLInputStream& stream)
     {
       logError(NUMLNotSchemaConformant, getLevel(), getVersion(),
                "Only one <notes> element is permitted inside a "
-	       "particualr containing element.");
+         "particualr containing element.");
     }
     else if (mAnnotation)
     {
       logError(NUMLNotSchemaConformant, getLevel(), getVersion(),
                "Incorrect ordering of <annotation> and <notes> elements -- "
-	       "<notes> must come before <annotation> due to the way that "
-	       "the XML Schema for NUML is defined.");
+         "<notes> must come before <annotation> due to the way that "
+         "the XML Schema for NUML is defined.");
     }
 
     delete mNotes;
@@ -1276,8 +1276,8 @@ NMBase::logUnknownAttribute( string attribute,
  */
 void
 NMBase::logUnknownElement( string element,
-			  const unsigned int level,
-			  const unsigned int version )
+        const unsigned int level,
+        const unsigned int version )
 {
   ostringstream msg;
 
@@ -1285,7 +1285,7 @@ NMBase::logUnknownElement( string element,
       << "NUML Level " << level << " Version " << version << ".";
       
   getErrorLog()->logError(NUMLUnrecognizedElement,
-			  level, version, msg.str());
+        level, version, msg.str());
 }
 /** @endcond doxygen-libnuml-internal */
 
@@ -1307,7 +1307,7 @@ NMBase::logEmptyString( string attribute,
     << element << " must not be an empty string.";
       
   getErrorLog()->logError(NUMLNotSchemaConformant,
-			  level, version, msg.str());
+        level, version, msg.str());
 }
 /** @endcond doxygen-libnuml-internal */
 
@@ -1437,7 +1437,7 @@ NMBase::checkNUMLListPopulated(NMBase* object)
         break;
 
       case NUML_RESULTCOMPONENTS:
-    	  //error = EmptyNUMLListOfResultComponents;
+        //error = EmptyNUMLListOfResultComponents;
         break;
 
       default: ;
@@ -1815,7 +1815,7 @@ LIBNUML_EXTERN
 NUMLTypeCode_t
 NMBase_getTypeCode (const NMBase_t *sb)
 {
-	return (sb != NULL) ? sb->getTypeCode() :NUML_UNKNOWN;
+  return (sb != NULL) ? sb->getTypeCode() :NUML_UNKNOWN;
   //return sb->getTypeCode();
 }
 
