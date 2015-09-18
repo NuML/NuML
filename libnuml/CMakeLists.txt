@@ -506,6 +506,23 @@ else(UNIX)
         add_definitions( -D_MT)
         endif(WITH_STATIC_RUNTIME)
 
+      # CMake no longer creates PDB files for static libraries after 2.8.11
+      # so we store debug information in the object files instead
+      if (${CMAKE_VERSION} VERSION_GREATER "2.8.11")
+        foreach(flag_var
+            CMAKE_CXX_FLAGS CMAKE_CXX_FLAGS_DEBUG CMAKE_CXX_FLAGS_RELEASE
+            CMAKE_CXX_FLAGS_MINSIZEREL CMAKE_CXX_FLAGS_RELWITHDEBINFO
+            CMAKE_C_FLAGS CMAKE_C_FLAGS_DEBUG CMAKE_C_FLAGS_RELEASE
+            CMAKE_C_FLAGS_MINSIZEREL CMAKE_C_FLAGS_RELWITHDEBINFO)
+      
+            if(${flag_var} MATCHES "/Zi")
+              STRING(REPLACE "/Zi"  "/Z7" "${flag_var}" "${${flag_var}}")
+            endif(${flag_var} MATCHES "/Zi")
+      
+        endforeach(flag_var)      
+      endif()
+
+
         file(GLOB WIN32_BINARIES ${LIBNUML_DEPENDENCY_DIR}/bin/*.dll)
         INSTALL(FILES ${WIN32_BINARIES} DESTINATION bin)
         file(GLOB WIN32_DEPENDENCIES ${LIBNUML_DEPENDENCY_DIR}/lib/*.lib)
