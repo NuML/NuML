@@ -41,8 +41,8 @@ AtomicDescription::AtomicDescription (unsigned int level, unsigned int version) 
    NMBase ( level, version )
   , mId                 ( ""   )
   , mName               ( ""   )
-  , mValueType          ( ""   )
   , mOntologyTerm       ( ""   )
+  , mValueType          ( ""   )
 
 {
   if (!hasValidLevelVersionNamespaceCombination())
@@ -54,8 +54,8 @@ AtomicDescription::AtomicDescription (NUMLNamespaces *numlns) :
     NMBase                   ( numlns )
   , mId                 ( ""   )
   , mName               ( ""   )
-  , mValueType          ( ""   )
   , mOntologyTerm       ( ""   )
+  , mValueType          ( ""   )
 {
   if (!hasValidLevelVersionNamespaceCombination())
     throw NUMLConstructorException();
@@ -220,8 +220,8 @@ void AtomicDescription::writeAttributes(XMLOutputStream& stream) const
 {
 	NMBase::writeAttributes(stream);
 
-	const unsigned int level = getLevel();
-	const unsigned int version = getVersion();
+	//const unsigned int level = getLevel();
+	//const unsigned int version = getVersion();
 
 	stream.writeAttribute("id", mId);
 	stream.writeAttribute("name", mName);

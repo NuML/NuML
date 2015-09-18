@@ -83,7 +83,7 @@ TupleDescription::getItemTypeCode () const
 /*
  * @return the annotation of this NUML object by string.
  *
-/* TODO std::string
+ * TODO std::string
 NMBase::getAnnotationString ()
 {
   return XMLNode::convertXMLNodeToString(getAnnotation());
@@ -225,7 +225,7 @@ NMBase*
 TupleDescription::createObject (XMLInputStream& stream)
 {
   const string& name   = stream.peek().getName();
-  AtomicDescription *aDescription;
+  AtomicDescription *aDescription = NULL;
 
   if (name == "atomicDescription")
   {

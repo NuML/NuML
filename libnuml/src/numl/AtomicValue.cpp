@@ -203,8 +203,8 @@ AtomicValue::writeAttributes (XMLOutputStream& stream) const
 {
   NMBase::writeAttributes(stream);
 
-  const unsigned int level   = getLevel  ();
-  const unsigned int version = getVersion();
+  //const unsigned int level   = getLevel  ();
+  //const unsigned int version = getVersion();
 
   //TODO
 

@@ -402,7 +402,7 @@ ResultComponent::setId (const std::string& sid)
 
 /*
  * @return the NUMLTypeCode_t of NUML objects contained in this ResultComponents or
- * NUML_UNKNOWN (default)./*
+ * NUML_UNKNOWN (default).
  * @return the annotation of this NUML object by string.
  */
 /* TODO std::string

@@ -103,8 +103,8 @@ NMBase::NMBase (unsigned int level, unsigned int version) :
    mNUML      ( 0 )
  , mNUMLNamespaces (0)
  , mLine      ( 0 )
- , mDept      ( 0 )
  , mColumn    ( 0 )
+ , mDept      ( 0 )
  , mParentNUMLObject (0)
  , mHasBeenDeleted (false)
  , mEmptyString ("")
@@ -119,8 +119,8 @@ NMBase::NMBase (NUMLNamespaces *numlns) :
    mNUML      ( 0 )
  , mNUMLNamespaces (0)
  , mLine      ( 0 )
- , mDept     ( 0 )
  , mColumn    ( 0 )
+ , mDept     ( 0 )
  , mParentNUMLObject (0)
  , mHasBeenDeleted (false)
  , mEmptyString ("")
@@ -511,8 +511,8 @@ NMBase::hasValidLevelVersionNamespaceCombination()
   bool valid = true;
   bool numlDeclared = false;
   std::string declaredURI("");
-  unsigned int index = 0;
-  unsigned int version = getVersion();
+  //unsigned int index = 0;
+  //unsigned int version = getVersion();
   XMLNamespaces *xmlns = getNamespaces();
   if (xmlns)
   {

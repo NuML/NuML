@@ -422,8 +422,8 @@ NUMLDocument::createObject (XMLInputStream& stream)
 {
 	const string& name   = stream.peek().getName();
 	NMBase*        object = 0;
-	unsigned int level = getLevel();
-	unsigned int version = getVersion();
+	//unsigned int level = getLevel();
+	//unsigned int version = getVersion();
 
 	if (name == "ontologyTerms")
 		{

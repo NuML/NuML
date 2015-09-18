@@ -168,7 +168,7 @@ NMBase::getAnnotationString ()
 
 /*
  * @return the NUMLTypeCode_t of NUML objects contained in this CompositeValue or
- * NUML_UNKNOWN (default)./*
+ * NUML_UNKNOWN (default).
  * @return the annotation of this NUML object by string.
  */
 NUMLTypeCode_t
@@ -390,8 +390,8 @@ CompositeValue::writeAttributes (XMLOutputStream& stream) const
 {
   NUMLList::writeAttributes(stream);
 
-  const unsigned int level   = getLevel  ();
-  const unsigned int version = getVersion();
+  //const unsigned int level   = getLevel  ();
+  //const unsigned int version = getVersion();
 
   stream.writeAttribute("indexValue", mIndexValue);
   stream.writeAttribute("description", mDescription);

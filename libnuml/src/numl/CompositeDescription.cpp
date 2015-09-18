@@ -132,7 +132,7 @@ NMBase::getAnnotationString ()
 
 /*
  * @return the NUMLTypeCode_t of NUML objects contained in this CompositeDescription or
- * NUML_UNKNOWN (default)./*
+ * NUML_UNKNOWN (default).
  * @return the annotation of this NUML object by string.
  */
 NUMLTypeCode_t

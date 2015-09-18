@@ -275,8 +275,8 @@ OntologyTerm::writeAttributes (XMLOutputStream& stream) const
 {
   NMBase::writeAttributes(stream);
 
-  const unsigned int level   = getLevel  ();
-  const unsigned int version = getVersion();
+  //const unsigned int level   = getLevel  ();
+  //const unsigned int version = getVersion();
 
   stream.writeAttribute("id", mId);
   stream.writeAttribute("term", mTerm);
@@ -301,7 +301,7 @@ OntologyTerms::clone () const
 
 /*
  * @return the NUMLTypeCode_t of NUML objects contained in this OntologyTerms or
- * NUML_UNKNOWN (default)./*
+ * NUML_UNKNOWN (default).
  * @return the annotation of this NUML object by string.
  */
 /* TODO std::string

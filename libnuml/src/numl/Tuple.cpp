@@ -83,7 +83,7 @@ Tuple::getItemTypeCode () const
 /*
  * @return the annotation of this NUML object by string.
  *
-/* TODO std::string
+ * TODO std::string
 NMBase::getAnnotationString ()
 {
   return XMLNode::convertXMLNodeToString(getAnnotation());
