@@ -698,6 +698,16 @@ public:
   /** @endcond doxygen-libnuml-internal */
 
 protected:
+
+
+  /**
+   *
+   * Subclasses should override this method to write their xmlns attriubutes
+   * (if any) to the XMLOutputStream.
+   *
+   */
+  virtual void writeXMLNS(XMLOutputStream& stream) const;
+
   /** @cond doxygen-libnuml-internal */
 
   /**
@@ -806,25 +816,25 @@ protected:
    * Helper to log a common type of error.
    */
   void logUnknownAttribute( std::string attribute,
-			    const unsigned int level,
-			    const unsigned int version,
-			    const std::string element );
+          const unsigned int level,
+          const unsigned int version,
+          const std::string element );
 
 
   /**
    * Helper to log a common type of error.
    */
   void logUnknownElement( const std::string element,
-			  const unsigned int level,
-			  const unsigned int version );
+        const unsigned int level,
+        const unsigned int version );
 
  
   /**
    * Helper to log a common type of error.
    */
   void logEmptyString( std::string attribute,
-			    const unsigned int level,
-			    const unsigned int version,
+          const unsigned int level,
+          const unsigned int version,
           std::string element);
 
 

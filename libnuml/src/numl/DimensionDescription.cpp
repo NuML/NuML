@@ -35,25 +35,25 @@ LIBNUML_CPP_NAMESPACE_BEGIN
 DimensionDescription::DimensionDescription (unsigned int level, unsigned int version) :
 NUMLList ( level, version )
 {
-	if (!hasValidLevelVersionNamespaceCombination())
-		throw NUMLConstructorException();
+  if (!hasValidLevelVersionNamespaceCombination())
+    throw NUMLConstructorException();
 }
 
 
 DimensionDescription::DimensionDescription (NUMLNamespaces *numlns) :
-   	NUMLList                  ( numlns )
-    						{
-	if (!hasValidLevelVersionNamespaceCombination())
-		throw NUMLConstructorException();
-    						}
+    NUMLList                  ( numlns )
+                {
+  if (!hasValidLevelVersionNamespaceCombination())
+    throw NUMLConstructorException();
+                }
 
 DimensionDescription::DimensionDescription() {
-	// TODO Auto-generated constructor stub
+  // TODO Auto-generated constructor stub
 
 }
 
 DimensionDescription::~DimensionDescription() {
-	// TODO Auto-generated destructor stub
+  // TODO Auto-generated destructor stub
 }
 
 /** @endcond doxygen-libnuml-internal */
@@ -68,7 +68,7 @@ DimensionDescription::~DimensionDescription() {
 bool
 DimensionDescription::accept (NUMLVisitor& v) const
 {
-	return v.visit(*this);
+  return v.visit(*this);
 }
 
 /*
@@ -77,8 +77,8 @@ DimensionDescription::accept (NUMLVisitor& v) const
 const string&
 DimensionDescription::getElementName () const
 {
-	static const string dimensionDescription  = "dimensionDescription";
-	return dimensionDescription;
+  static const string dimensionDescription  = "dimensionDescription";
+  return dimensionDescription;
 }
 
 /*
@@ -87,7 +87,7 @@ DimensionDescription::getElementName () const
 DimensionDescription*
 DimensionDescription::clone () const
 {
-	return new DimensionDescription(*this);
+  return new DimensionDescription(*this);
 }
 
 
@@ -98,14 +98,14 @@ DimensionDescription::clone () const
 NUMLTypeCode_t
 DimensionDescription::getItemTypeCode () const
 {
-	return NUML_COMPOSITEDESCRIPTION;
+  return NUML_COMPOSITEDESCRIPTION;
 }
 
 /* return nth item in list */
 CompositeDescription *
 DimensionDescription::get(unsigned int n)
 {
-	return static_cast<CompositeDescription*>(NUMLList::get(n));
+  return static_cast<CompositeDescription*>(NUMLList::get(n));
 }
 
 
@@ -113,7 +113,7 @@ DimensionDescription::get(unsigned int n)
 const CompositeDescription *
 DimensionDescription::get(unsigned int n) const
 {
-	return static_cast<const CompositeDescription*>(NUMLList::get(n));
+  return static_cast<const CompositeDescription*>(NUMLList::get(n));
 }
 
 /*
@@ -123,7 +123,7 @@ DimensionDescription::get(unsigned int n) const
 CompositeDescription*
 DimensionDescription::getCompositeDescription()
 {
-	return 0; //&mCompositeDescription;
+  return 0; //&mCompositeDescription;
 }
 
 /**
@@ -131,11 +131,11 @@ DimensionDescription::getCompositeDescription()
 */
 struct IdEqS : public unary_function<NMBase*, bool>
 {
-	const string& id;
+  const string& id;
 
-	IdEqS (const string& id) : id(id) { }
-	bool operator() (NMBase* sb)
-    						   { return static_cast <CompositeDescription *> (sb)->getId() == id; }
+  IdEqS (const string& id) : id(id) { }
+  bool operator() (NMBase* sb)
+                   { return static_cast <CompositeDescription *> (sb)->getId() == id; }
 };
 
 
@@ -152,8 +152,8 @@ DimensionDescription::getDimensionDescription()
 CompositeDescription*
 DimensionDescription::get (const std::string& sid)
 {
-	return const_cast<CompositeDescription*>(
-			static_cast<const DimensionDescription&>(*this).get(sid) );
+  return const_cast<CompositeDescription*>(
+      static_cast<const DimensionDescription&>(*this).get(sid) );
 }
 
 
@@ -161,10 +161,10 @@ DimensionDescription::get (const std::string& sid)
 const CompositeDescription*
 DimensionDescription::get (const std::string& sid) const
 {
-	vector<NMBase*>::const_iterator result;
+  vector<NMBase*>::const_iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEqS(sid) );
-	return (result == mItems.end()) ? 0 : static_cast <CompositeDescription*> (*result);
+  result = find_if( mItems.begin(), mItems.end(), IdEqS(sid) );
+  return (result == mItems.end()) ? 0 : static_cast <CompositeDescription*> (*result);
 }
 
 
@@ -172,7 +172,7 @@ DimensionDescription::get (const std::string& sid) const
 CompositeDescription*
 DimensionDescription::remove (unsigned int n)
 {
-	return static_cast<CompositeDescription*>(NUMLList::remove(n));
+  return static_cast<CompositeDescription*>(NUMLList::remove(n));
 }
 
 
@@ -180,18 +180,18 @@ DimensionDescription::remove (unsigned int n)
 CompositeDescription*
 DimensionDescription::remove (const std::string& sid)
 {
-	NMBase* item = 0;
-	vector<NMBase*>::iterator result;
+  NMBase* item = 0;
+  vector<NMBase*>::iterator result;
 
-	result = find_if( mItems.begin(), mItems.end(), IdEqS(sid) );
+  result = find_if( mItems.begin(), mItems.end(), IdEqS(sid) );
 
-	if (result != mItems.end())
-	{
-		item = *result;
-		mItems.erase(result);
-	}
+  if (result != mItems.end())
+  {
+    item = *result;
+    mItems.erase(result);
+  }
 
-	return static_cast <CompositeDescription*> (item);
+  return static_cast <CompositeDescription*> (item);
 }
 
 
@@ -203,8 +203,34 @@ DimensionDescription::remove (const std::string& sid)
 int
 DimensionDescription::getElementPosition () const
 {
-	return 0;
+  return 0;
 }
+/** @endcond doxygen-libnuml-internal */
+
+/** @cond doxygen-libnuml-internal */
+
+
+void DimensionDescription::writeXMLNS(XMLOutputStream& stream) const
+{
+  if (getNUMLDocument() != NULL)
+  {
+    NMBase::writeXMLNS(stream);
+  }
+
+  XMLNamespaces* ns = getNamespaces();
+
+  if (ns != NULL)
+  {
+    stream << *getNamespaces();
+  }
+  else
+  {
+    XMLNamespaces ns; 
+    ns.add(NUML_XMLNS_L1V1);
+    stream << ns;
+  }
+}
+
 /** @endcond doxygen-libnuml-internal */
 
 
@@ -217,39 +243,39 @@ NMBase*
 DimensionDescription::createObject (XMLInputStream& stream)
 {
 
-	//const string& name   = stream.peek().getName();
+  //const string& name   = stream.peek().getName();
 
-	const XMLToken& element = stream.peek();
-	const string& name = element.getName();
-	NMBase*        object = 0;
+  const XMLToken& element = stream.peek();
+  const string& name = element.getName();
+  NMBase*        object = 0;
 
-	if (name == "compositeDescription")
-	{
-		try
-		{
+  if (name == "compositeDescription")
+  {
+    try
+    {
 
-			object = new CompositeDescription(getNUMLNamespaces());
-		}
-		catch (NUMLConstructorException*)
-		{
-			object = new CompositeDescription(NUMLDocument::getDefaultLevel(), NUMLDocument::getDefaultVersion());
-		}
-		catch ( ... )
-		{
-			object = new CompositeDescription(NUMLDocument::getDefaultLevel(), NUMLDocument::getDefaultVersion());
-		}
-		if (object) mItems.push_back(object);
+      object = new CompositeDescription(getNUMLNamespaces());
+    }
+    catch (NUMLConstructorException*)
+    {
+      object = new CompositeDescription(NUMLDocument::getDefaultLevel(), NUMLDocument::getDefaultVersion());
+    }
+    catch ( ... )
+    {
+      object = new CompositeDescription(NUMLDocument::getDefaultLevel(), NUMLDocument::getDefaultVersion());
+    }
+    if (object) mItems.push_back(object);
 
-	}
-	else if(name == "tupleDescription")
-	{
+  }
+  else if(name == "tupleDescription")
+  {
 
-	}else if(name == "atomicDescription")
-	{
+  }else if(name == "atomicDescription")
+  {
 
-	}
+  }
 
-	return object;
+  return object;
 }
 
 LIBNUML_CPP_NAMESPACE_END

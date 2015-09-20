@@ -835,6 +835,7 @@ NMBase::write (XMLOutputStream& stream) const
 {
   stream.startElement( getElementName() );
 
+  writeXMLNS( stream );
   writeAttributes( stream );
   writeElements  ( stream );
 
@@ -846,6 +847,13 @@ NMBase::write (XMLOutputStream& stream) const
 }
 
 /** @endcond doxygen-libnuml-internal */
+
+
+void 
+NMBase::writeXMLNS(XMLOutputStream& stream) const
+{
+
+}
 
 /** @cond doxygen-libnuml-internal */
 /*
