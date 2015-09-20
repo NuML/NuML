@@ -43,14 +43,11 @@
 #include <numl/NMBase.h>
 #include <numl/NUMLList.h>
 
+#include <string>
+
 #ifdef __cplusplus
 
-#include <string>
 LIBNUML_CPP_NAMESPACE_BEGIN
-
-class CompositeDescription;
-class TupleDescription;
-class AtomicDescription;
 
 class NUMLDocument;
 /*

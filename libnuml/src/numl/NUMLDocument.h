@@ -55,21 +55,51 @@ class XMLError;
 /** @cond doxygen-libnuml-internal */
 /* Internal constants for setting/unsetting particular consistency checks. */
 
+#ifndef IdCheckON
 #define IdCheckON         0x01;
+#endif
+#ifndef IdCheckOFF
 #define IdCheckOFF        0xfe;
+#endif
+#ifndef NUMLCheckON
 #define NUMLCheckON       0x02;
+#endif
+#ifndef NUMLCheckOFF
 #define NUMLCheckOFF      0xfd;
+#endif
+#ifndef SBOCheckON
 #define SBOCheckON        0x04;
+#endif
+#ifndef SBOCheckOFF
 #define SBOCheckOFF       0xfb;
+#endif
+#ifndef MathCheckON
 #define MathCheckON       0x08;
+#endif
+#ifndef MathCheckOFF
 #define MathCheckOFF      0xf7;
+#endif
+#ifndef UnitsCheckON
 #define UnitsCheckON      0x10;
+#endif
+#ifndef UnitsCheckOFF
 #define UnitsCheckOFF     0xef;
+#endif
+#ifndef OverdeterCheckON
 #define OverdeterCheckON  0x20;
+#endif
+#ifndef OverdeterCheckOFF
 #define OverdeterCheckOFF 0xdf;
+#endif
+#ifndef PracticeCheckON
 #define PracticeCheckON   0x40;
+#endif
+#ifndef PracticeCheckOFF
 #define PracticeCheckOFF  0xbf;
+#endif
+#ifndef AllChecksON
 #define AllChecksON       0x7f;
+#endif
 
 /** @endcond doxygen-libnuml-internal */
 
@@ -184,12 +214,12 @@ public:
   virtual NUMLDocument* clone () const;
 
   /**
-  	 * Get a the number of ontologyTerm objects in this NUMLDocument.
-  	 *
-  	 * @return the number of ontologyTerms in the NUMLDocument.
-  	 *
-  	 */
-  	unsigned int getNumOntologyTerms () const;
+     * Get a the number of ontologyTerm objects in this NUMLDocument.
+     *
+     * @return the number of ontologyTerms in the NUMLDocument.
+     *
+     */
+    unsigned int getNumOntologyTerms () const;
 
   /**
          * Returns the OntologyTerms object stored in this NUMLDocument.
@@ -254,12 +284,12 @@ public:
        const ResultComponents* getResultComponents () const;
 
     /**
-	 * Get a the number of resultComponent objects in this NUMLDocument.
-	 *
-	 * @return the number of resultComponents in the NUMLDocument.
-	 *
-	 */
-	unsigned int getNumResultComponents() const;
+   * Get a the number of resultComponent objects in this NUMLDocument.
+   *
+   * @return the number of resultComponents in the NUMLDocument.
+   *
+   */
+  unsigned int getNumResultComponents() const;
 
 
   /**
