@@ -225,24 +225,6 @@ NMBase::getMetaId ()
 const string&
 NMBase::getId () const
 {
-  NUMLTypeCode_t type = this->getTypeCode();
-
-  switch(type)
-  {
-  case NUML_ONTOLOGYTERM:
-    return static_cast <const OntologyTerm *> (this)->getId();
-    break;
-  case NUML_RESULTCOMPONENT:
-      return static_cast <const ResultComponent *> (this)->getId();
-      break;
-  case NUML_DIMENSIONDESCRIPTION:
-      return static_cast <const DimensionDescription *> (this)->getId();
-      break;
-  default:
-    return mEmptyString;
-    break;
-  }
-
   return mEmptyString;
 }
 
@@ -256,30 +238,6 @@ NMBase::getId () const
 const string&
 NMBase::getName () const
 {
-  NUMLTypeCode_t type = this->getTypeCode();
-
-  if (getLevel() == 1)
-  {
-    switch(type)
-    {
-    case NUML_RESULTCOMPONENT:
-      return static_cast <const ResultComponent *> (this)->getName();
-      break;
-
-    case NUML_DIMENSIONDESCRIPTION:
-      return static_cast <const DimensionDescription*> (this)->getName();
-      break;
-    case NUML_COMPOSITEDESCRIPTION:
-         return static_cast <const CompositeDescription*> (this)->getName();
-         break;
-
-    default:
-      return mEmptyString;
-      break;
-    }
-
-  }
-
   return mEmptyString;
 }
 

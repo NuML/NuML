@@ -285,6 +285,11 @@ public:
   */
   virtual const CompositeDescription* get (const std::string& sid) const;
 
+  virtual const std::string& getId() const;
+  virtual int setId(const std::string& id);
+
+  virtual const std::string& getName() const;
+  virtual int setName(const std::string& name);
 
   /**
   * Removes the nth item from this DimensionDescription items and returns a pointer to

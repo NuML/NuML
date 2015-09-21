@@ -38,12 +38,13 @@
 
 
 
-#ifdef __cplusplus
+
 
 #include <vector>
 
 #include <numl/NMBase.h>
 
+#ifdef __cplusplus
 LIBNUML_CPP_NAMESPACE_BEGIN
 
 /*

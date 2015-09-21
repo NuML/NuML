@@ -28,7 +28,7 @@
 #include <numl/common/extern.h>
 #include <numl/common/numlfwd.h>
 
-#ifdef __cplusplus
+
 
 //#include <numl/NUMLVisitor.h>
 #include <numl/NMBase.h>
@@ -36,6 +36,7 @@
 
 #include <numl/NUMLList.h>
 
+#ifdef __cplusplus
 LIBNUML_CPP_NAMESPACE_BEGIN
 
 /*

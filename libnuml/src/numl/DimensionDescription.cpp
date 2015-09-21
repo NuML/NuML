@@ -234,6 +234,33 @@ void DimensionDescription::writeXMLNS(XMLOutputStream& stream) const
 /** @endcond doxygen-libnuml-internal */
 
 
+const std::string& 
+DimensionDescription::getId() const
+{
+  return mId;
+}
+
+int 
+DimensionDescription::setId(const std::string& id)
+{
+  mId = id;
+  return LIBNUML_OPERATION_SUCCESS;
+}
+
+const std::string& 
+DimensionDescription::getName() const
+{
+  return mName;
+}
+
+int 
+DimensionDescription::setName(const std::string& name)
+{
+  mName = name;
+  return LIBNUML_OPERATION_SUCCESS;
+}
+
+
 /** @cond doxygen-libnuml-internal */
 /*
  * @return the NUML object corresponding to next XMLToken in the

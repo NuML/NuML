@@ -37,15 +37,13 @@
 #include <numl/NUMLVisitor.h>
 
 
-#ifdef __cplusplus
-
-
 #include <string>
 #include <stdexcept>
 #include <algorithm>
 
 #include <numl/NUMLErrorLog.h>
 
+#ifdef __cplusplus
 LIBNUML_CPP_NAMESPACE_BEGIN
 
 class NUMLErrorLog;
@@ -167,7 +165,7 @@ public:
    * 
    * @return the id of this NUML object.
    */
-  const std::string& getId () const;
+  virtual const std::string& getId () const;
   /** @endcond doxygen-libnuml-internal */
 
 
@@ -179,7 +177,7 @@ public:
    * 
    * @return the name of this NUML object.
    */
-  const std::string& getName () const;
+  virtual const std::string& getName () const;
   /**
    * Returns the content of the "annotation" subelement of this object as a
    * character string.

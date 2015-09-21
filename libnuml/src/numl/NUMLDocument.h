@@ -37,13 +37,14 @@
 #include <numl/ResultComponent.h>
 
 
-#ifdef __cplusplus
+
 
 #include <string>
 #include <algorithm>
 #include <iosfwd>
 #include <time.h>
 
+#ifdef __cplusplus
 LIBNUML_CPP_NAMESPACE_BEGIN
 
 class OntologyTerm;

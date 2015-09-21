@@ -28,11 +28,12 @@
 #include <numl/Tuple.h>
 #include <numl/AtomicValue.h>
 
-#ifdef __cplusplus
+
 
 #include <numl/NMBase.h>
 #include <numl/NUMLList.h>
 
+#ifdef __cplusplus
 LIBNUML_CPP_NAMESPACE_BEGIN
 
 //class CompositeValue;

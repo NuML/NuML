@@ -26,11 +26,12 @@
 #define NUMLVisitor_h
 
 
-#ifdef __cplusplus
+
 
 
 #include <numl/NUMLTypeCodes.h>
 
+#ifdef __cplusplus
 LIBNUML_CPP_NAMESPACE_BEGIN
 
 /**
