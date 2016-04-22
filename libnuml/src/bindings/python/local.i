@@ -33,6 +33,11 @@
  */
 %feature("autodoc", "1");
 
+%{
+#include <sbml/common/libsbml-namespace.h>
+LIBSBML_CPP_NAMESPACE_USE
+%}
+
 %include "local-contrib.i"
 
 

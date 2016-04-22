@@ -702,14 +702,12 @@ libNUML version ${PACKAGE_VERSION}
 ----------------------------------------------------------------------
 
    More information and the latest version are available online at
-   http://code.google.com/p/numl/
+   https://github.com/NuML/NuML
 
    Please report problems using the issue tracker at
-   http://code.google.com/p/numl/issue-tracker
+   https://github.com/NuML/NuML/issues
 
-   To contact the developers directly, email joseph.dada@manchester.ac.uk
-
-   Configured on host "$ENV{COMPUTERNAME}" ${HOSTNAME}
+   Configured on host $ENV{COMPUTERNAME} ${HOSTNAME}
      host type                     = ${CMAKE_SYSTEM_NAME}
      host operating system         = ${CMAKE_SYSTEM_NAME} ${CMAKE_SYSTEM_VERSION}
      host CPU architecture         = ${CMAKE_SYSTEM_PROCESSOR}
