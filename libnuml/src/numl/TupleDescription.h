@@ -221,10 +221,10 @@ public:
   */
   AtomicDescription* createAtomicDescription();
 
-  virtual NMBase* createObject (XMLInputStream& stream);
+  virtual NMBase* createObject (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream);
 
   //write to the output stream
-  virtual void write(XMLOutputStream& stream) const;
+  virtual void write(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const;
 
 protected:
   /** @cond doxygen-libnuml-internal */
@@ -233,8 +233,8 @@ protected:
   * @return the NUML object corresponding to next XMLToken in the
   * XMLInputStream or NULL if the token was not recognized.
   */
-  virtual void readAttributes(const XMLAttributes & attributes);
-  virtual void writeAttributes(XMLOutputStream & stream) const;
+  virtual void readAttributes(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes & attributes);
+  virtual void writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream & stream) const;
   //virtual NMBase* createObject (XMLInputStream& stream);
   //TupleDescription *mTupleDescription;
 

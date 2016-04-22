@@ -190,7 +190,7 @@ AtomicDescription::~AtomicDescription()
  * parents implementation of this method as well.
  */
 void
-AtomicDescription::readAttributes (const XMLAttributes& attributes)
+AtomicDescription::readAttributes (const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes& attributes)
 {
   NMBase::readAttributes(attributes);
 
@@ -231,7 +231,7 @@ AtomicDescription::readAttributes (const XMLAttributes& attributes)
  * to the XMLOutputStream.  Be sure to call your parents implementation
  * of this method as well.
  */
-void AtomicDescription::writeAttributes(XMLOutputStream& stream) const
+void AtomicDescription::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const
 {
   NMBase::writeAttributes(stream);
 

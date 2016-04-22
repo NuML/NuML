@@ -289,7 +289,7 @@ CompositeDescription::getOntologyTerm () const
  * parents implementation of this method as well.
  */
 void
-CompositeDescription::readAttributes (const XMLAttributes& attributes)
+CompositeDescription::readAttributes (const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes& attributes)
 {
   NMBase::readAttributes(attributes);
 
@@ -331,7 +331,7 @@ CompositeDescription::readAttributes (const XMLAttributes& attributes)
  * of this method as well.
  */
 void
-CompositeDescription::writeAttributes (XMLOutputStream& stream) const
+CompositeDescription::writeAttributes (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const
 {
   NMBase::writeAttributes(stream);
 
@@ -428,7 +428,7 @@ CompositeDescription::createAtomicDescription ()
  * XMLInputStream or NULL if the token was not recognized.
  */
 NMBase*
-CompositeDescription::createObject (XMLInputStream& stream)
+CompositeDescription::createObject (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 {
   const string& name   = stream.peek().getName();
   NMBase*        object = 0;

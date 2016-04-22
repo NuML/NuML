@@ -400,10 +400,10 @@ protected:
   * @return the NUML object corresponding to next XMLToken in the
   * XMLInputStream or NULL if the token was not recognized.
   */
-  virtual NMBase* createObject (XMLInputStream& stream);
+  virtual NMBase* createObject (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream);
 
-  virtual void readAttributes(const XMLAttributes & attributes);
-  virtual void writeAttributes(XMLOutputStream & stream) const;
+  virtual void readAttributes(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes & attributes);
+  virtual void writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream & stream) const;
 
 //	TupleDescription mTupleDescription;
 //	AtomicDescription *mAtomicDescription;

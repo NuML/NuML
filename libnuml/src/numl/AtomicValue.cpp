@@ -186,7 +186,7 @@ AtomicValue::createObject (XMLInputStream& stream)
  * parents implementation of this method as well.
  */
 void
-AtomicValue::readAttributes (const XMLAttributes& attributes)
+AtomicValue::readAttributes (const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes& attributes)
 {
   NMBase::readAttributes(attributes);
 }
@@ -199,7 +199,7 @@ AtomicValue::readAttributes (const XMLAttributes& attributes)
  * of this method as well.
  */
 void
-AtomicValue::writeAttributes (XMLOutputStream& stream) const
+AtomicValue::writeAttributes (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const
 {
   NMBase::writeAttributes(stream);
 
@@ -212,7 +212,7 @@ AtomicValue::writeAttributes (XMLOutputStream& stream) const
 /** @endcond doxygen-libnuml-internal */
 
 void
-AtomicValue::writeChars(XMLOutputStream& stream) const
+AtomicValue::writeChars(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const
 {
   stream << mValue;
 }

@@ -414,7 +414,7 @@ public:
 	* NUML objects as XML elements.  Be sure to call your parents
 	* implementation of this method as well.
 	*/
-	virtual void writeElements (XMLOutputStream& stream) const;
+  virtual void writeElements (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const;
 	/** @endcond doxygen-libnuml-internal */
 
 protected:
@@ -425,7 +425,7 @@ protected:
 	* XMLAttributes set into their specific fields.  Be sure to call your
 	* parents implementation of this method as well.
 	*/
-	virtual void readAttributes (const XMLAttributes& attributes);
+  virtual void readAttributes (const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes& attributes);
 
 	/**
 	* Subclasses should override this method to write their XML attributes
@@ -437,7 +437,7 @@ protected:
 	*   stream.writeAttribute( "name", mName );
 	*   ...
 	*/
-	virtual void writeAttributes (XMLOutputStream& stream) const;
+  virtual void writeAttributes (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const;
 
 	std::vector<NMBase*> mItems;
 

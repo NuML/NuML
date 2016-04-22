@@ -348,7 +348,7 @@ protected:
   * @return the SBML object corresponding to next XMLToken in the
   * XMLInputStream or NULL if the token was not recognized.
   */
-  virtual NMBase* createObject (XMLInputStream& stream);
+  virtual NMBase* createObject (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream);
 
   /**
    *
@@ -356,7 +356,7 @@ protected:
    * (if any) to the XMLOutputStream.
    *
    */
-  virtual void writeXMLNS(XMLOutputStream& stream) const;
+  virtual void writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const;
 
   std::string  mId;
   std::string  mName;

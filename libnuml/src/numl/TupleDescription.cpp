@@ -181,7 +181,7 @@ TupleDescription::createAtomicDescription ()
  * parents implementation of this method as well.
  */
 void
-TupleDescription::readAttributes (const XMLAttributes& attributes)
+TupleDescription::readAttributes (const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes& attributes)
 {
   NMBase::readAttributes(attributes);
 
@@ -221,7 +221,7 @@ TupleDescription::readAttributes (const XMLAttributes& attributes)
  * of this method as well.
  */
 void
-TupleDescription::writeAttributes (XMLOutputStream& stream) const
+TupleDescription::writeAttributes (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const
 {
   NMBase::writeAttributes(stream);
 
@@ -237,7 +237,7 @@ TupleDescription::writeAttributes (XMLOutputStream& stream) const
  * XMLInputStream or NULL if the token was not recognized.
  */
 NMBase*
-TupleDescription::createObject (XMLInputStream& stream)
+TupleDescription::createObject (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 {
   const string& name   = stream.peek().getName();
   AtomicDescription *aDescription = NULL;
@@ -268,7 +268,7 @@ TupleDescription::createObject (XMLInputStream& stream)
 /** @cond doxygen-libnuml-internal */
 
 void
-TupleDescription::write(XMLOutputStream& stream) const
+TupleDescription::write(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const
 {
  // NUMLList::writeElements(stream);
 //  mAtomicDescription->writeElements(stream);

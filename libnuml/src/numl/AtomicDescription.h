@@ -34,6 +34,9 @@
 #include <string>
 #include <sstream>
 
+#include <sbml/xml/XMLAttributes.h>
+#include <sbml/xml/XMLOutputStream.h>
+
 #ifdef __cplusplus
 LIBNUML_CPP_NAMESPACE_BEGIN
 
@@ -226,8 +229,8 @@ protected:
   * XMLInputStream or NULL if the token was not recognized.
   */
   //virtual NMBase* createObject (XMLInputStream& stream);
-  virtual void readAttributes(const XMLAttributes & attributes);
-  virtual void writeAttributes(XMLOutputStream & stream) const;
+  virtual void readAttributes(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes & attributes);
+  virtual void writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream & stream) const;
 
   std::string  mId;
   std::string  mName;
