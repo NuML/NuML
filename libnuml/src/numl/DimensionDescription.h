@@ -53,7 +53,7 @@ class NUMLDocument;
 /*
  *
  */
-class DimensionDescription : public NUMLList
+class LIBNUML_EXTERN DimensionDescription : public NUMLList
 {
 public:
   DimensionDescription();
