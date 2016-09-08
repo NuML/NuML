@@ -702,7 +702,7 @@ NUMLReader::readNUMLFromFile(const std::string&)
 
     Parameter 'filename is the name or full pathname of the file to be
     read.
-getElementName()
+    getElementName()
     Returns a pointer to the NUMLDocument created from the NUML content.
 
     See also NUMLError.
