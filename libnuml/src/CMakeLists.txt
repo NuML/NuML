@@ -17,6 +17,8 @@
 #
 ###############################################################################
 
+# used to create CMake config files for projects using this library
+include(CMakePackageConfigHelpers)
 
 include(CheckLibraryExists)
 check_library_exists(m sqrt "" HAVE_LIBM)
@@ -144,10 +146,26 @@ endif()
 target_link_libraries(${LIBNUML_LIBRARY} ${LIBSBML_LIBRARY} ${EXTRA_LIBS})
 
 INSTALL(TARGETS ${LIBNUML_LIBRARY}
+  EXPORT ${LIBNUML_LIBRARY}-config
   RUNTIME DESTINATION bin
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  )
+  INCLUDES DESTINATION include
+)
+
+# and install the exported target configuration
+install(EXPORT ${LIBNUML_LIBRARY}-config DESTINATION ${PACKAGE_CONFIG_DIR})
+
+WRITE_BASIC_PACKAGE_VERSION_FILE(
+  ${CMAKE_CURRENT_BINARY_DIR}/${LIBNUML_LIBRARY}-config-version.cmake 
+  COMPATIBILITY AnyNewerVersion
+)
+
+install(
+  FILES ${CMAKE_CURRENT_BINARY_DIR}/${LIBNUML_LIBRARY}-config-version.cmake
+  DESTINATION ${PACKAGE_CONFIG_DIR}
+)
+
 
 endif()
 
@@ -160,10 +178,25 @@ endif(WIN32 AND NOT CYGWIN)
 target_link_libraries(${LIBNUML_LIBRARY}-static ${LIBSBML_LIBRARY} ${EXTRA_LIBS})
 
 INSTALL(TARGETS ${LIBNUML_LIBRARY}-static
+  EXPORT ${LIBNUML_LIBRARY}-static-config
   RUNTIME DESTINATION bin
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  )
+  INCLUDES DESTINATION include
+)
+
+# and install the exported target configuration
+install(EXPORT ${LIBNUML_LIBRARY}-static-config DESTINATION ${PACKAGE_CONFIG_DIR})
+
+WRITE_BASIC_PACKAGE_VERSION_FILE(
+  ${CMAKE_CURRENT_BINARY_DIR}/${LIBNUML_LIBRARY}-static-config-version.cmake 
+  COMPATIBILITY AnyNewerVersion
+)
+
+install(
+  FILES ${CMAKE_CURRENT_BINARY_DIR}/${LIBNUML_LIBRARY}-static-config-version.cmake
+  DESTINATION ${PACKAGE_CONFIG_DIR}
+)
   
 ##############################################################################
 #

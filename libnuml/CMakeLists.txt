@@ -63,6 +63,15 @@ set(LIBNUML_VERSION_NUMERIC "${LIBNUML_VERSION_MAJOR}${LIBNUML_VERSION_MINOR}${L
 set(PACKAGE_VERSION "${LIBNUML_VERSION_MAJOR}.${LIBNUML_VERSION_MINOR}.${LIBNUML_VERSION_PATCH}${LIBNUML_VERSION_RELEASE}")
 set(PACKAGE_NAME "libNUML")
 
+set(PACKAGE_CONFIG_DIR lib/cmake CACHE PATH
+    "Path into which the cmake config files should be installed")
+
+
+# PACKAGE_VERSION gets overridden by using other packages, so setting
+# the PROJECT_VERSION, which will be used when exporting targets in
+# src/CMakeLists.txt
+set(PROJECT_VERSION ${PACKAGE_VERSION})
+
 # add make dist and make check target as they are already familiar for
 # everyone using the gnumake build
 add_custom_target(dist COMMAND ${CMAKE_MAKE_PROGRAM} package_source)
