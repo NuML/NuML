@@ -215,22 +215,43 @@ if(WITH_CPP_NAMESPACE)
     add_definitions(-DLIBNUML_USE_CPP_NAMESPACE)
 endif()
 
+
+if (SWIG_EXECUTABLE AND NOT EXISTS "${SWIG_EXECUTABLE}")
+unset(SWIG_EXECUTABLE CACHE )
+unset(SWIG_DIR CACHE )
+unset(SWIG_VERSION CACHE )
+endif()
+
 if(WITH_SWIG)
     find_program(SWIG_EXECUTABLE
-        NAMES swig
-        PATHS
-		      c:/swigwin-2.0.7
-		      c:/swigwin-2.0.4
-              c:/swigwin-2.0.2
-              c:/swigwin-2.0.1
-              c:/swigwin-2.0.0
-              /usr/local/bin
-              /opt/local/bin
-              /usr/bin
-        DOC "The file name of the swig executable."
-        )
+      NAMES swig
+      PATHS
+        c:/swigwin-3.0.10
+        c:/swigwin-3.0.9
+        c:/swigwin-3.0.8
+        c:/swigwin-3.0.7
+        c:/swigwin-3.0.6
+        c:/swigwin-3.0.5
+        c:/swigwin-3.0.2
+        c:/swigwin-3.0.0
+        c:/swigwin-2.0.12
+        c:/swigwin-2.0.11
+        c:/swigwin-2.0.10
+        c:/swigwin-2.0.9
+        c:/swigwin-2.0.8
+        c:/swigwin-2.0.7
+        c:/swigwin-2.0.4
+        c:/swigwin-2.0.2
+        c:/swigwin-2.0.1
+        c:/swigwin-2.0.0
+        /usr/local/bin
+        /opt/local/bin
+        /usr/bin
+      DOC "The file name of the swig executable."
+      )
     set(SWIG_EXTRA_ARGS)
 endif(WITH_SWIG)
+
 
 ###############################################################################
 #
