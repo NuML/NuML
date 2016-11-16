@@ -18,7 +18,9 @@
 ###############################################################################
 
 # used to create CMake config files for projects using this library
+if (${CMAKE_VERSION} VERSION_GREATER 2.8.7)
 include(CMakePackageConfigHelpers)
+endif()
 
 include(CheckLibraryExists)
 check_library_exists(m sqrt "" HAVE_LIBM)
@@ -132,6 +134,12 @@ endif(MSVC)
 # Build library
 #
 
+SET (INCLUDE_DESTINATION)
+if (${CMAKE_VERSION} VERSION_GREATER "2.8.11")
+  set(INCLUDE_DESTINATION INCLUDES DESTINATION include)
+endif()
+
+
 if (NOT LIBNUML_SKIP_SHARED_LIBRARY)
 
 add_library (${LIBNUML_LIBRARY} SHARED ${LIBNUML_SOURCES} )
@@ -150,22 +158,25 @@ INSTALL(TARGETS ${LIBNUML_LIBRARY}
   RUNTIME DESTINATION bin
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  INCLUDES DESTINATION include
+  ${INCLUDE_DESTINATION}
 )
 
 # and install the exported target configuration
 install(EXPORT ${LIBNUML_LIBRARY}-config DESTINATION ${PACKAGE_CONFIG_DIR})
 
-WRITE_BASIC_PACKAGE_VERSION_FILE(
-  ${CMAKE_CURRENT_BINARY_DIR}/${LIBNUML_LIBRARY}-config-version.cmake 
-  COMPATIBILITY AnyNewerVersion
-)
+if (${CMAKE_VERSION} VERSION_GREATER 2.8.7)
 
-install(
-  FILES ${CMAKE_CURRENT_BINARY_DIR}/${LIBNUML_LIBRARY}-config-version.cmake
-  DESTINATION ${PACKAGE_CONFIG_DIR}
-)
+  WRITE_BASIC_PACKAGE_VERSION_FILE(
+    ${CMAKE_CURRENT_BINARY_DIR}/${LIBNUML_LIBRARY}-config-version.cmake 
+    COMPATIBILITY AnyNewerVersion
+  )
+  
+  install(
+    FILES ${CMAKE_CURRENT_BINARY_DIR}/${LIBNUML_LIBRARY}-config-version.cmake
+    DESTINATION ${PACKAGE_CONFIG_DIR}
+  )
 
+endif()
 
 endif()
 
@@ -182,21 +193,25 @@ INSTALL(TARGETS ${LIBNUML_LIBRARY}-static
   RUNTIME DESTINATION bin
   LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
   ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR}
-  INCLUDES DESTINATION include
+  ${INCLUDE_DESTINATION}
 )
 
 # and install the exported target configuration
 install(EXPORT ${LIBNUML_LIBRARY}-static-config DESTINATION ${PACKAGE_CONFIG_DIR})
 
-WRITE_BASIC_PACKAGE_VERSION_FILE(
-  ${CMAKE_CURRENT_BINARY_DIR}/${LIBNUML_LIBRARY}-static-config-version.cmake 
-  COMPATIBILITY AnyNewerVersion
-)
+if (${CMAKE_VERSION} VERSION_GREATER 2.8.7)
 
-install(
-  FILES ${CMAKE_CURRENT_BINARY_DIR}/${LIBNUML_LIBRARY}-static-config-version.cmake
-  DESTINATION ${PACKAGE_CONFIG_DIR}
-)
+  WRITE_BASIC_PACKAGE_VERSION_FILE(
+    ${CMAKE_CURRENT_BINARY_DIR}/${LIBNUML_LIBRARY}-static-config-version.cmake 
+    COMPATIBILITY AnyNewerVersion
+  )
+  
+  install(
+    FILES ${CMAKE_CURRENT_BINARY_DIR}/${LIBNUML_LIBRARY}-static-config-version.cmake
+    DESTINATION ${PACKAGE_CONFIG_DIR}
+  )
+
+endif()
   
 ##############################################################################
 #
