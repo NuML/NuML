@@ -60,7 +60,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/VERSION.txt")
 endif()
 
 set(LIBNUML_VERSION_NUMERIC "${LIBNUML_VERSION_MAJOR}${LIBNUML_VERSION_MINOR}${LIBNUML_VERSION_PATCH}${LIBNUML_VERSION_RELEASE}")
-set(PACKAGE_VERSION "${LIBNUML_VERSION_MAJOR}.${LIBNUML_VERSION_MINOR}.${LIBNUML_VERSION_PATCH}${LIBNUML_VERSION_RELEASE}")
+set(LIBNUML_VERSION "${LIBNUML_VERSION_MAJOR}.${LIBNUML_VERSION_MINOR}.${LIBNUML_VERSION_PATCH}${LIBNUML_VERSION_RELEASE}")
 set(PACKAGE_NAME "libNUML")
 
 set(PACKAGE_CONFIG_DIR lib/cmake CACHE PATH
@@ -70,7 +70,7 @@ set(PACKAGE_CONFIG_DIR lib/cmake CACHE PATH
 # PACKAGE_VERSION gets overridden by using other packages, so setting
 # the PROJECT_VERSION, which will be used when exporting targets in
 # src/CMakeLists.txt
-set(PROJECT_VERSION ${PACKAGE_VERSION})
+set(PROJECT_VERSION ${LIBNUML_VERSION})
 
 # add make dist and make check target as they are already familiar for
 # everyone using the gnumake build
@@ -501,11 +501,11 @@ if(UNIX)
         set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DLINUX")
     endif(APPLE)
 
-    add_definitions( -DPACKAGE_VERSION=\"${PACKAGE_VERSION}\"  -DPACKAGE_NAME=\"${PROJECT_NAME}\")
-    set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DPACKAGE_VERSION=\"${PACKAGE_VERSION}\"  -DPACKAGE_NAME=\"${PROJECT_NAME}\"")
+    add_definitions( -DPACKAGE_VERSION=\"${LIBNUML_VERSION}\"  -DPACKAGE_NAME=\"${PROJECT_NAME}\")
+    set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DPACKAGE_VERSION=\"${LIBNUML_VERSION}\"  -DPACKAGE_NAME=\"${PROJECT_NAME}\"")
 
 else(UNIX)
-    add_definitions(-DPACKAGE_VERSION=\"${PACKAGE_VERSION}\"  -DPACKAGE_NAME=\"${PROJECT_NAME}\")
+    add_definitions(-DPACKAGE_VERSION=\"${LIBNUML_VERSION}\"  -DPACKAGE_NAME=\"${PROJECT_NAME}\")
 		
     add_definitions(-DWIN32)
     set(BUILD_DEFINITIONS "${BUILD_DEFINITIONS} -DWIN32")
@@ -728,7 +728,7 @@ install(FILES ${DOCUMENTATION_FILES} DESTINATION ${MISC_PREFIX}.)
 
 message(STATUS "
 ----------------------------------------------------------------------
-libNUML version ${PACKAGE_VERSION}
+libNUML version ${LIBNUML_VERSION}
 ----------------------------------------------------------------------
 
    More information and the latest version are available online at

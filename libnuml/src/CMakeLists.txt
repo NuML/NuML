@@ -31,7 +31,7 @@ configure_file(
   "${CMAKE_CURRENT_BINARY_DIR}/numl/common/libnuml-config-common.h"
   )
 
-# Replace: @PACKAGE_VERSION@ and @LIBNUML_VERSION_NUMERIC@
+# Replace: @LIBNUML_VERSION@ and @LIBNUML_VERSION_NUMERIC@
 configure_file (
   "${CMAKE_CURRENT_SOURCE_DIR}/numl/common/libnuml-version.h.cmake"
   "${CMAKE_CURRENT_BINARY_DIR}/numl/common/libnuml-version.h"
