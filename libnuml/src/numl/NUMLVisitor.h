@@ -41,7 +41,10 @@ LIBNUML_CPP_NAMESPACE_BEGIN
 class NMBase;
 
 class NUMLDocument;
-class OntologyTerm;
+class OntologyTerm;class Constraint;
+
+
+
 //class Result;
 class ResultComponent;
 class Dimension;
@@ -52,9 +55,6 @@ class DimensionDescription;
 class CompositeDescription;
 class TupleDescription;
 class AtomicDescription;
-
-class Constraint;
-
 
 class NUMLList;
 
