@@ -36,6 +36,7 @@
 
 #include <sbml/compress/CompressCommon.h>
 #include <sbml/compress/OutputCompressor.h>
+#include <sbml/SBMLWriter.h>
 
 /** @cond doxygen-ignored */
 
@@ -270,7 +271,7 @@ NUMLWriter::writeToString (const NUMLDocument* d)
 bool 
 NUMLWriter::hasZlib()
 {
-  return LIBSBML_CPP_NAMESPACE_QUALIFIER hasZlib();
+  return LIBSBML_CPP_NAMESPACE_QUALIFIER SBMLWriter::hasZlib();
 }
 
 
@@ -283,7 +284,7 @@ NUMLWriter::hasZlib()
 bool 
 NUMLWriter::hasBzip2()
 {
-  return LIBSBML_CPP_NAMESPACE_QUALIFIER hasBzip2();
+  return LIBSBML_CPP_NAMESPACE_QUALIFIER SBMLWriter::hasBzip2();
 }
 
 

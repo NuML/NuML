@@ -25,15 +25,13 @@
 #include <sbml/xml/XMLError.h>
 #include <sbml/xml/XMLErrorLog.h>
 #include <sbml/xml/XMLInputStream.h>
+#include <sbml/SBMLReader.h>
 
 #include <numl/NUMLErrorLog.h>
 #include <numl/NUMLVisitor.h>
 #include <numl/NUMLDocument.h>
 #include <numl/NUMLError.h>
 #include <numl/NUMLReader.h>
-
-#include <sbml/compress/CompressCommon.h>
-#include <sbml/compress/InputDecompressor.h>
 
 /** @cond doxygen-ignored */
 
@@ -140,7 +138,7 @@ NUMLReader::readNUMLFromString (const std::string& xml)
 bool 
 NUMLReader::hasZlib()
 {
-  return LIBSBML_CPP_NAMESPACE_QUALIFIER hasZlib();
+  return LIBSBML_CPP_NAMESPACE_QUALIFIER SBMLReader::hasZlib();
 }
 
 
@@ -153,7 +151,7 @@ NUMLReader::hasZlib()
 bool 
 NUMLReader::hasBzip2()
 {
-  return LIBSBML_CPP_NAMESPACE_QUALIFIER hasBzip2();
+  return LIBSBML_CPP_NAMESPACE_QUALIFIER SBMLReader::hasBzip2();
 }
 
 
