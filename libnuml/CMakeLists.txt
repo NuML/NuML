@@ -257,29 +257,30 @@ endif(WITH_SWIG)
 #
 # Locate libsbml
 #
-find_library(LIBSBML_LIBRARY
-    NAMES libsbml-static.lib sbml-static libsbml.lib sbml
-    PATHS /usr/lib /usr/local/lib
-          ${LIBNUML_DEPENDENCY_DIR}/lib
-    DOC "The file name of the sbml library."
-)
 
-find_path(LIBSBML_INCLUDE_DIR
-    NAMES sbml/SBase.h
-    PATHS /usr/include /usr/local/include
-          /usr/include/libxml2
-          /usr/local/include/libxml2
-          ${LIBNUML_DEPENDENCY_DIR}/include
-    DOC "The directory containing the sbml include files."
-)
+
+# Update cmake path variables
+if (LIBNUML_DEPENDENCY_DIR AND EXISTS ${LIBNUML_DEPENDENCY_DIR})
+  set(CMAKE_PREFIX_PATH "${LIBNUML_DEPENDENCY_DIR}/lib/cmake;${CMAKE_PREFIX_PATH}")
+endif()
+
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules;${CMAKE_MODULE_PATH}")
+
+
+
+###############################################################################
+#
+# Locate libsbml
+#
+find_package(LIBSBML REQUIRED)
 
 set(LIBSBML_STATIC OFF CACHE BOOL "is libsbml statically compiled")
 if (WIN32 AND NOT CYGWIN)
-if (LIBSBML_LIBRARY AND LIBSBML_LIBRARY MATCHES ".*-static*$")
-set(LIBSBML_STATIC ON CACHE BOOL "is libsbml statically compiled")
-else()
-	option(LIBSBML_STATIC "The LibSBML library was statically compiled" ON)
-endif()
+  if (LIBSBML_LIBRARY AND LIBSBML_LIBRARY MATCHES ".*-static*$")
+    set(LIBSBML_STATIC ON CACHE BOOL "is libsbml statically compiled")
+  else()
+    option(LIBSBML_STATIC "The LibSBML library was statically compiled" ON)
+  endif()
 endif()
 
 if(NOT EXISTS "${LIBSBML_INCLUDE_DIR}/sbml/SBase.h")
@@ -295,55 +296,6 @@ endif()
 set(EXTRA_LIBS "" CACHE STRING "List of additional libraries to link against." )
 set(EXTRA_INCLUDE "" CACHE STRING "List of additional include directories to add." )
 set(EXTRA_DEFS "" CACHE STRING "List of additional flag to add." )
-
-
-###############################################################################
-#
-# Locate zlib
-#
-
-set(ZLIB_INITIAL_VALUE)
-find_library(LIBZ_LIBRARY
-    NAMES zdll.lib z zlib.lib
-    PATHS /usr/lib /usr/local/lib
-          ${LIBNUML_DEPENDENCY_DIR}/lib
-    DOC "The file name of the zip compression library."
-    )
-
-if(EXISTS ${LIBZ_LIBRARY})
-    set(ZLIB_INITIAL_VALUE ON)
-else()
-    set(ZLIB_INITIAL_VALUE OFF)
-endif()
-option(WITH_ZLIB     "Enable the use of zip compression."    ${ZLIB_INITIAL_VALUE} )
-
-if(WITH_ZLIB)
-
-    find_path(LIBZ_INCLUDE_DIR
-        NAMES zlib.h zlib/zlib.h
-        PATHS /usr/include /usr/local/include
-              ${LIBNUML_DEPENDENCY_DIR}/include
-        DOC "The directory containing the zlib include files."
-              )
-
-    add_definitions( -DUSE_ZLIB )
-
-    # make sure that we have a valid zip library
-    check_library_exists("${LIBZ_LIBRARY}" "gzopen" "" LIBZ_FOUND_SYMBOL)
-    if(NOT LIBZ_FOUND_SYMBOL)
-        # this is odd, but on windows this check always fails! must be a
-        # bug in the current cmake version so for now only issue this
-        # warning on linux
-        if(UNIX)
-            message(WARNING "The zlib library does not appear to be valid because it is missing certain required symbols. Please check that ${LIBZ_LIBRARY} is the zlib library. For details about the error, please see ${CMAKE_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/CMakeError.log")
-        endif()
-    endif()
-
-    if(NOT EXISTS "${LIBZ_INCLUDE_DIR}/zlib.h")
-        message(FATAL_ERROR "The zlib include directory does not appear to be valid. It should contain the file zlib.h, but it does not.")
-    endif()
-
-endif(WITH_ZLIB)
 
 
 ###############################################################################
