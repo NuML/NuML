@@ -39,10 +39,10 @@
 
 LIBNUML_CPP_NAMESPACE_BEGIN
 
-#define NUML_DEFAULT_LEVEL   1
-#define NUML_DEFAULT_VERSION 1
-#define NUML_XMLNS_L1        "http://www.numl.org/numl/level1/version1"
-#define NUML_XMLNS_L1V1      "http://www.numl.org/numl/level1/version1"
+const unsigned int NUML_DEFAULT_LEVEL = 1;
+const unsigned int NUML_DEFAULT_VERSION = 1;
+const char* const  NUML_XMLNS_L1 = "http://www.numl.org/numl/level1/version1";
+const char* const  NUML_XMLNS_L1V1 = "http://www.numl.org/numl/level1/version1";
 
 class LIBNUML_EXTERN NUMLNamespaces
 {
