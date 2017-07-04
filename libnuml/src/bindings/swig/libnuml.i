@@ -71,9 +71,6 @@ public class"
 
 LIBNUML_CPP_NAMESPACE_USE
 
-#ifdef USE_LAYOUT
-#include "../swig/layout.h"
-#endif /* USE_LAYOUT */
 #include "local.cpp"
 %}
 
