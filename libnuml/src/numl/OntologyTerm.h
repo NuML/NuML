@@ -15,6 +15,12 @@
 * ****************************************************************************
 **/
 
+/**
+ * @class OntologyTerm
+ * @brief ontology terms store information about what individual elements represents
+ */
+
+
 #ifndef ONTOLOGYTERM_H_
 #define ONTOLOGYTERM_H_
 
@@ -137,7 +143,6 @@ public:
 
 	virtual ~OntologyTerm();
 
-	/** @cond doxygen-libnuml-internal */
 	/*
 	 *
 	 * Sets the value of the "id" attribute of this NUML object.
@@ -169,7 +174,6 @@ public:
 	 */
 	int setId (const std::string& sid);
 
-	/** @cond doxygen-libnuml-internal */
 
 	/**
 	* Sets the value of the "term" attribute of this NUML object.
@@ -187,7 +191,6 @@ public:
 	*/
 	int setTerm (const std::string& term);
 
-	/** @cond doxygen-libnuml-internal */
 	/**
 	* Sets the value of the "sourceTermId" attribute of this NUML object.
 	*
@@ -204,7 +207,6 @@ public:
 	 */
 	int setSourceTermId(const std::string& sourceTermId);
 
-	/** @cond doxygen-libnuml-internal */
 	/**
 	 * Sets the value of the "ontologyURI" attribute of this NUML object.
 	 *
@@ -287,7 +289,6 @@ protected:
 	friend class IdentifierConsistencyValidator;
 	friend class InternalConsistencyValidator;
 
-	/** @endcond doxygen-libnuml-internal */
 };
 
 //structure for recognised ontologies
@@ -449,7 +450,6 @@ public:
 	virtual OntologyTerm* remove (const std::string& sid);
 
 
-	/** @cond doxygen-libnuml-internal */
 
 	/**
 	* Get the ordinal position of this element in the containing object
@@ -466,11 +466,10 @@ public:
 	*/
 	virtual int getElementPosition () const;
 
-	/** @endcond doxygen-libnuml-internal */
+
 
 
 protected:
-	/** @cond doxygen-libnuml-internal */
 
 	/**
 	* @return the NUML object corresponding to next XMLToken in the
@@ -478,7 +477,7 @@ protected:
 	*/
   virtual NMBase* createObject (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream);
 
-	/** @endcond doxygen-libnuml-internal */
+
 };
 
 

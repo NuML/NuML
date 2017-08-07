@@ -15,6 +15,12 @@
 * ****************************************************************************
 **/
 
+/**
+ * @class CompositeDescription
+ * @brief this class stores the component descriptions
+ */
+
+
 #ifndef COMPOSITEDESCRIPTION_H_
 #define COMPOSITEDESCRIPTION_H_
 
@@ -204,7 +210,6 @@ public:
   */
   int setIndexType (const std::string& indexType);
 
-  /** @cond doxygen-libnuml-internal */
 
   /**
   * Sets the value of the "ontologyTerm" attribute of this NUML object.
@@ -381,7 +386,6 @@ public:
 
 
 protected:
-  /** @cond doxygen-libnuml-internal */
 
   /**
   * @return the NUML object corresponding to next XMLToken in the
@@ -403,7 +407,7 @@ protected:
 
 
 
-  /** @endcond doxygen-libnuml-internal */
+  
 };
 LIBNUML_CPP_NAMESPACE_END
 

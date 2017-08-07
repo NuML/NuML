@@ -15,6 +15,12 @@
 * ****************************************************************************
 */
 
+/**
+ * @class Dimension
+ * @brief this class stores the dimension information
+ */
+
+
 #ifndef DIMENSION_H_
 #define DIMENSION_H_
 
@@ -304,8 +310,6 @@ public:
 	virtual CompositeValue* remove (const std::string& sid);
 
 
-	/** @cond doxygen-libnuml-internal */
-
 	/**
 	* Get the ordinal position of this element in the containing object
 	* (which in this case is the Model object).
@@ -321,8 +325,6 @@ public:
 	*/
 	virtual int getElementPosition () const;
 
-	/** @endcond doxygen-libnuml-internal */
-
 	/**
 	 * Subclasses should override this method to write out their contained
 	 * NUML objects as XML elements.  Be sure to call your parents
@@ -333,8 +335,7 @@ public:
 	virtual ~Dimension();
 
 protected:
-	/** @cond doxygen-libnuml-internal */
-
+	
 	/**
 	* @return the NUML object corresponding to next XMLToken in the
 	* XMLInputStream or NULL if the token was not recognized.
@@ -350,7 +351,6 @@ protected:
 	*/
 	void setType (DimensionType type);
 
-	/** @endcond doxygen-libnuml-internal */
 };
 
 LIBNUML_CPP_NAMESPACE_END

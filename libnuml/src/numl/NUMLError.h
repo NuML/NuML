@@ -15,6 +15,12 @@
 * ****************************************************************************
 **/
 
+/**
+ * @class NUMLError
+ * @brief contains all error information collected
+ */
+
+
 #ifndef NUMLError_h
 #define NUMLError_h
 
@@ -188,7 +194,6 @@ typedef enum
  */
 typedef enum
 {
-  /** @cond doxygen-libnuml-internal **/
 
   /* The following are used internally in NUMLErrorTable, but publicly,
    * we only report one of the 4 XMLError_Severity values.  Translation
@@ -217,7 +222,6 @@ typedef enum
      * for errors that have relevance to some
      * versions of NUML but not others. */
 
-  /** @endcond doxygen-libnuml-internal **/
 } NUMLErrorSeverity_t;
 
 END_C_DECLS
@@ -361,7 +365,6 @@ public:
 
 #ifndef SWIG
 
-  /** @cond doxygen-libnuml-internal **/
 
   /**
    * clone function
@@ -378,17 +381,15 @@ public:
    */
   virtual void print(std::ostream& stream) const;
 
-  /** @endcond doxygen-libnuml-internal **/
 
 #endif  /* !SWIG */
 
 protected:
-  /** @cond doxygen-libnuml-internal **/
-
+  
   virtual std::string stringForSeverity(unsigned int code) const;
   virtual std::string stringForCategory(unsigned int code) const;
 
-  /** @endcond doxygen-libnuml-internal **/
+  
 };
 
 LIBNUML_CPP_NAMESPACE_END

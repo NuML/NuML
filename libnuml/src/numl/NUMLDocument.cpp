@@ -1,11 +1,4 @@
-/**
-* Begin svn Header
-* $Rev$:	Revision of last commit
-* $Author$:	Author of last commit
-* $Date$:	Date of last commit
-* $HeadURL$
-* $Id$
-* End svn Header
+/*
 * ****************************************************************************
 * This file is part of libNUML.  Please visit http://code.google.com/p/numl/for more
 * information about NUML, and the latest version of libNUML.
@@ -44,11 +37,8 @@
 #include <numl/NUMLWriter.h>
 
 
-/** @cond doxygen-ignored */
 
 using namespace std;
-
-/** @endcond doxygen-ignored */
 
 LIBNUML_CPP_NAMESPACE_BEGIN
 
@@ -72,7 +62,6 @@ LIBNUML_CPP_NAMESPACE_BEGIN
 //};
 
 
-/** @cond doxygen-libnuml-internal */
 /*
  * Predicate returning true if the errors encountered are not ignorable.
  */
@@ -116,7 +105,6 @@ NUMLDocument::conversion_errors(unsigned int errors)
   //return false;
 }
 
-/** @endcond doxygen-libnuml-internal */
 
 
 /*
@@ -412,7 +400,6 @@ NUMLDocument::setLevelAndVersion (unsigned int level, unsigned int version,
   return conversionSuccess;
 }
 
-/** @cond doxygen-libnuml-internal */
 /*
  * @return the NUML object corresponding to next XMLToken in the
  * XMLInputStream or NULL if the token was not recognized.
@@ -555,7 +542,6 @@ NUMLDocument::printErrors (std::ostream& stream) const
     }
   }
 }
-/** @cond doxygen-libnuml-internal */
 
 /*
  * Sets the parent NUMLDocument of this NUML object.
@@ -585,7 +571,6 @@ NUMLDocument::setParentNUMLObject (NMBase* sb)
   mResultComponents.setParentNUMLObject(this);
 
 }
-/** @endcond doxygen-libnuml-internal */
 
 /*
  * @return the NUMLTypeCode_t of this NUML object or NUML_UNKNOWN
@@ -611,7 +596,6 @@ NUMLDocument::getElementName () const
 }
 
 
-/** @cond doxygen-libnuml-internal */
 /*
  * @return the ordinal position of the element with respect to its siblings
  * or -1 (default) to indicate the position is not significant.
@@ -621,7 +605,6 @@ NUMLDocument::getElementPosition () const
 {
   return 1;
 }
-/** @endcond doxygen-libnuml-internal */
 
 
 /**
@@ -645,7 +628,6 @@ NUMLDocument::getErrorLog ()
 }
 
 
-/** @cond doxygen-libnuml-internal */
 /*
  * Subclasses should override this method to read values from the given
  * XMLAttributes set into their specific fields.  Be sure to call your
@@ -737,10 +719,8 @@ NUMLDocument::readAttributes (const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttribute
 
   }
 }
-/** @endcond doxygen-libnuml-internal */
 
 
-/** @cond doxygen-libnuml-internal */
 /*
  * Subclasses should override this method to write their XML attributes
  * to the XMLOutputStream.  Be sure to call your parents implementation
@@ -771,10 +751,8 @@ NUMLDocument::writeAttributes (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& 
 
   stream.writeAttribute("version", mVersion);
 }
-/** @endcond doxygen-libnuml-internal */
 
 
-/** @cond doxygen-libnuml-internal */
 /*
  * Subclasses should override this method to write out their contained
  * NUML objects as XML elements.  Be sure to call your parents
@@ -787,11 +765,6 @@ NUMLDocument::writeElements (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& st
   if (mOntologyTerms.size()!=0)mOntologyTerms.write(stream);
   if (mResultComponents.size()!=0)mResultComponents.write(stream);
 }
-/** @endcond doxygen-libnuml-internal */
-
-
-
-/** @cond doxygen-c-only */
 
 
 
@@ -1089,5 +1062,4 @@ NUMLDocument_getNamespaces(NUMLDocument_t *d)
   return d->getNamespaces();
 }
 
-/** @endcond doxygen-c-only */
 LIBNUML_CPP_NAMESPACE_END

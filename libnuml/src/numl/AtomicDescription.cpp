@@ -1,11 +1,4 @@
-/**
-* Begin svn Header
-* $Rev$:	Revision of last commit
-* $Author$:	Author of last commit
-* $Date$:	Date of last commit
-* $HeadURL$
-* $Id$
-* End svn Header
+/*
 * ****************************************************************************
 * This file is part of libNUML.  Please visit http://code.google.com/p/numl/for more
 * information about NUML, and the latest version of libNUML. 
@@ -183,7 +176,6 @@ AtomicDescription::~AtomicDescription()
 {
 }
 
-/** @cond doxygen-libnuml-internal */
 /*
  * Subclasses should override this method to read values from the given
  * XMLAttributes set into their specific fields.  Be sure to call your
@@ -223,9 +215,6 @@ AtomicDescription::readAttributes (const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttr
   attributes.readInto("valueType", mValueType);
 
 }
-/** @endcond doxygen-libnuml-internal */
-
-/** @cond doxygen-libnuml-internal */
 /*
  * Subclasses should override this method to write their XML attributes
  * to the XMLOutputStream.  Be sure to call your parents implementation
@@ -244,7 +233,6 @@ void AtomicDescription::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutpu
   stream.writeAttribute("valueType", mValueType);
 
 }
-/** @endcond doxygen-libnuml-internal */
 
 
 LIBNUML_CPP_NAMESPACE_END

@@ -1,11 +1,4 @@
-/**
-* Begin svn Header
-* $Rev$:	Revision of last commit
-* $Author$:	Author of last commit
-* $Date$:	Date of last commit
-* $HeadURL$
-* $Id$
-* End svn Header
+/*
 * ****************************************************************************
 * This file is part of libNUML.  Please visit http://code.google.com/p/numl/for more
 * information about NUML, and the latest version of libNUML. 
@@ -55,8 +48,6 @@ DimensionDescription::DimensionDescription() {
 DimensionDescription::~DimensionDescription() {
   // TODO Auto-generated destructor stub
 }
-
-/** @endcond doxygen-libnuml-internal */
 
 /*
  * Accepts the given NUMLVisitor.
@@ -195,7 +186,6 @@ DimensionDescription::remove (const std::string& sid)
 }
 
 
-/** @cond doxygen-libnuml-internal */
 /*
  * @return the ordinal position of the element with respect to its siblings
  * or -1 (default) to indicate the position is not significant.
@@ -205,10 +195,6 @@ DimensionDescription::getElementPosition () const
 {
   return 0;
 }
-/** @endcond doxygen-libnuml-internal */
-
-/** @cond doxygen-libnuml-internal */
-
 
 void DimensionDescription::writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const
 {
@@ -230,8 +216,6 @@ void DimensionDescription::writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputS
     stream << ns;
   }
 }
-
-/** @endcond doxygen-libnuml-internal */
 
 
 const std::string& 
@@ -261,7 +245,6 @@ DimensionDescription::setName(const std::string& name)
 }
 
 
-/** @cond doxygen-libnuml-internal */
 /*
  * @return the NUML object corresponding to next XMLToken in the
  * XMLInputStream or NULL if the token was not recognized.

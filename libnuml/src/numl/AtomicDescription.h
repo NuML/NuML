@@ -153,8 +153,6 @@ public:
   */
   virtual const std::string& getName () const;
 
-  /** @cond doxygen-libnuml-internal */
-
 
   /**
   * Sets the ontologyTerm of the "ontologyTerm" attribute of this NUML object.
@@ -205,8 +203,6 @@ public:
   virtual ~AtomicDescription();
 
 protected:
-  /** @cond doxygen-libnuml-internal */
-
   /* this is a constructor that takes no arguments and
    * only exists because the validator code needs it
    */

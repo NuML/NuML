@@ -15,6 +15,7 @@
 * ****************************************************************************
 */
 
+
 #include <string>
 #include <iostream>
 #include <sstream>
@@ -24,8 +25,6 @@
 
 
 LIBNUML_CPP_NAMESPACE_BEGIN
-
-/** @cond doxygen-libnuml-internal */
 
 typedef struct {
   const char * ref_l1;
@@ -259,4 +258,4 @@ static const numlErrorTableEntry errorTable[] =
 
 LIBNUML_CPP_NAMESPACE_END
 
-/** @endcond doxygen-libnuml-internal */
+

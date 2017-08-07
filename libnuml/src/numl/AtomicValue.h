@@ -15,6 +15,12 @@
 * ****************************************************************************
 **/
 
+/**
+ * @class AtomicValue
+ * @brief This class stores the atomic values
+ */
+
+
 #ifndef ATOMICVALUE_H_
 #define ATOMICVALUE_H_
 
@@ -140,8 +146,6 @@ public:
 	virtual double getDoubleValue ();
 
 
-	/** @cond doxygen-libnuml-internal */
-
 	/**
 	* Sets the value of the "value" attribute of this NUML object.
 	*
@@ -160,14 +164,11 @@ public:
 	* @return a (deep) copy of this AtomicValue.
 	*/
 
-	/** @cond doxygen-libnuml-internal */
 	/**
 	 * Writes (serializes) this NUML object character value by writing it to XMLOutputStream.
 	 */
   void writeChars(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const;
-	/** @endcond doxygen-libnuml-internal */
 
-	/** @cond doxygen-libnuml-internal */
 	/**
 	 * Subclasses should override this method to write out their contained
 	 * NUML objects as XML elements.  Be sure to call your parents
@@ -175,7 +176,6 @@ public:
 	 *
 	 */
 	//virtual void write(XMLOutputStream& stream) const;
-	/** @endcond doxygen-libnuml-internal */
 
 //	virtual void write(XMLOutputStream& stream) const;
 
@@ -184,7 +184,6 @@ public:
 	virtual ~AtomicValue();
 
 protected:
-	/** @cond doxygen-libnuml-internal */
 
 	/* this is a constructor that takes no arguments and
 	 * only exists because the validator code needs it

@@ -1,11 +1,4 @@
-/**
-* Begin svn Header
-* $Rev$:	Revision of last commit
-* $Author$:	Author of last commit
-* $Date$:	Date of last commit
-* $HeadURL$
-* $Id$
-* End svn Header
+/*
 * ****************************************************************************
 * This file is part of libNUML.  Please visit http://code.google.com/p/numl/for more
 * information about NUML, and the latest version of libNUML. 
@@ -341,7 +334,6 @@ CompositeValue::getDescription () const
   return mDescription;
 }
 
-/** @cond doxygen-libnuml-internal */
 /*
  * Subclasses should override this method to read values from the given
  * XMLAttributes set into their specific fields.  Be sure to call your
@@ -377,9 +369,6 @@ CompositeValue::readAttributes (const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttribu
 	attributes.readInto("description", mDescription);
 }
 
-/** @endcond doxygen-libnuml-internal */
-
-/** @cond doxygen-libnuml-internal */
 /*
  * Subclasses should override this method to write their XML attributes
  * to the XMLOutputStream.  Be sure to call your parents implementation
@@ -396,7 +385,6 @@ CompositeValue::writeAttributes (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream
   stream.writeAttribute("indexValue", mIndexValue);
   stream.writeAttribute("description", mDescription);
 }
-/** @endcond doxygen-libnuml-internal */
 
 /*
  * Creates a new CompositeValue inside this CompositeValue, add to its list and returns it.
@@ -474,7 +462,6 @@ CompositeValue::createAtomicValue ()
 
 
 
-/** @cond doxygen-libnuml-internal */
 /*
  * @return the NUML object corresponding to next XMLToken in the
  * XMLInputStream or NULL if the token was not recognized.

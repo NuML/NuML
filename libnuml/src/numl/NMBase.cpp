@@ -1,11 +1,4 @@
-/**
-* Begin svn Header
-* $Rev$:	Revision of last commit
-* $Author$:	Author of last commit
-* $Date$:	Date of last commit
-* $HeadURL$
-* $Id$
-* End svn Header
+/*
 * ****************************************************************************
 * This file is part of libNUML.  Please visit http://code.google.com/p/numl/for more
 * information about NUML, and the latest version of libNUML.
@@ -54,29 +47,22 @@
  #include <numl/layout/LineSegment.h>
 #endif
 */
-/** @cond doxygen-ignored */
 
 using namespace std;
 
 LIBNUML_CPP_NAMESPACE_BEGIN
 
-/** @endcond doxygen-ignored */
 
 /**
  * elements permitted on the body element of xhtml
  */
 
-/** @cond doxygen-libnuml-internal */
 
 NUMLConstructorException::NUMLConstructorException() :
       std::invalid_argument("Level/version/namespaces combination is invalid")
 {
 }
 
-
-/** @endcond doxygen-libnuml-internal */
-
-/** @cond doxygen-libnuml-internal */
 /*
  * Only subclasses may create NMBase objects.
  */
@@ -91,10 +77,8 @@ NMBase::NMBase (const std::string& id, const std::string& name) :
 {
   mNUMLNamespaces = new NUMLNamespaces();
 }
-/** @endcond doxygen-libnuml-internal */
 
 
-/** @cond doxygen-libnuml-internal */
 /*
  * Creates a new NMBase object with the given sboTerm.
  * Only subclasses may create NMBase objects.
@@ -128,10 +112,8 @@ NMBase::NMBase (NUMLNamespaces *numlns) :
   if (!numlns) throw NUMLConstructorException();
   mNUMLNamespaces = numlns->clone();
 }
-/** @endcond doxygen-libnuml-internal */
 
 
-/** @cond doxygen-libnuml-internal */
 /*
  * Copy constructor. Creates a copy of this NMBase object.
  */
@@ -153,7 +135,6 @@ NMBase::NMBase(const NMBase& orig)
   this->mHasBeenDeleted = false;
 
 }
-/** @endcond doxygen-libnuml-internal */
 
 
 /*
@@ -214,8 +195,6 @@ NMBase::getMetaId ()
   return mMetaId;
 }
 
-
-/** @cond doxygen-libnuml-internal */
 
 /*
  * NOTE: THIS IS FOR BACKWARD COMPATABILITY REASONS
@@ -426,8 +405,6 @@ NMBase::setMetaId (const std::string& metaid)
 }
 
 
-/** @cond doxygen-libnuml-internal */
-
 /*
  * NOTE: THIS IS FOR BACKWARD COMPATABILITY REASONS
  *
@@ -451,8 +428,6 @@ NMBase::setName (const std::string& name)
   return static_cast <Model *> (this)->setName(name);
 }
 */
-
-/** @cond doxygen-libnuml-internal */
 
 /*
  * Sets the parent NUMLDocument of this NUML object.
@@ -503,9 +478,6 @@ NMBase::hasValidLevelVersionNamespaceCombination()
   return valid;
 }
 
-/** @cond doxygen-libnuml-internal */
-
-
 /**
   * Sets the parent NUML object of this NUML object.
   *
@@ -516,7 +488,6 @@ NMBase::setParentNUMLObject (NMBase* sb)
 {
   mParentNUMLObject = sb;
 }
-/** @endcond doxygen-libnuml-internal */
 
 NMBase*
 NMBase::getAncestorOfType(NUMLTypeCode_t type)
@@ -657,8 +628,6 @@ NMBase::getTypeCode () const
 }
 
 
-/** @cond doxygen-libnuml-internal */
-
 /* sets the NUMLnamespaces - internal use only*/
 void 
 NMBase::setNUMLNamespaces(NUMLNamespaces * numlns)
@@ -682,9 +651,6 @@ NMBase::getNUMLNamespaces() const
     return new NUMLNamespaces();
 }
 
-/** @endcond doxygen-libnuml-internal */
-
-
 
 /*
  * @return the partial NUML that describes this NUML object.
@@ -701,7 +667,6 @@ NMBase::toNUML ()
 }
 
 
-/** @cond doxygen-libnuml-internal */
 /*
  * Reads (initializes) this NUML object by reading from XMLInputStream.
  */
@@ -781,10 +746,7 @@ NMBase::read (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
     }
   }
 }
-/** @endcond doxygen-libnuml-internal */
 
-
-/** @cond doxygen-libnuml-internal */
 /*
  * Writes (serializes) this NUML object by writing it to XMLOutputStream.
  */
@@ -804,8 +766,6 @@ NMBase::write (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const
   stream.endElement( getElementName() );
 }
 
-/** @endcond doxygen-libnuml-internal */
-
 
 void 
 NMBase::writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const
@@ -813,7 +773,6 @@ NMBase::writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) cons
 
 }
 
-/** @cond doxygen-libnuml-internal */
 /*
  * Subclasses should override this method to write out their contained
  * NUML objects as XML elements.  Be sure to call your parents
@@ -831,10 +790,7 @@ NMBase::writeElements (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& ) const
 //TODO  const_cast <NMBase *> (this)->syncAnnotation();
  // if (mAnnotation) stream << *mAnnotation;
 }
-/** @endcond doxygen-libnuml-internal */
 
-
-/** @cond doxygen-libnuml-internal */
 /*
  * Subclasses should override this method to create, store, and then
  * return an NUML object corresponding to the next XMLToken in the
@@ -848,10 +804,7 @@ NMBase::createObject (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&)
 {
   return 0;
 }
-/** @endcond doxygen-libnuml-internal */
 
-
-/** @cond doxygen-libnuml-internal */
 /*
  * @return true if read an <annotation> element from the stream
  */
@@ -903,9 +856,7 @@ NMBase::readAnnotation (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 
   return false;
 }
-/** @endcond doxygen-libnuml-internal */
 
-/** @cond doxygen-libnuml-internal */
 /*
  * Checks that the XHTML is valid.
  * If the xhtml does not conform to the specification of valid xhtml within
@@ -1014,7 +965,6 @@ NMBase::checkXHTML(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode * xhtml)
   }
 }
 
-/** @endcond doxygen-libnuml-internal */
 /**
   * Checks the annotation does not declare an numl namespace.
   * If the annotation declares an numl namespace an error is logged.
@@ -1103,9 +1053,7 @@ NMBase::checkAnnotation()
     nNodes++;
   }
 }
-/** @endcond doxygen-libnuml-internal */
 
-/** @cond doxygen-libnuml-internal */
 /*
  * @return true if read a <notes> element from the stream
  */
@@ -1165,7 +1113,6 @@ NMBase::readNotes (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 }
 
 
-/** @cond doxygen-libnuml-internal */
 /*
  * Subclasses should override this method to read (and store) XHTML,
  * MathML, etc. directly from the XMLInputStream.
@@ -1177,7 +1124,6 @@ NMBase::readOtherXML (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream&)
 {
   return false;
 }
-/** @endcond doxygen-libnuml-internal */
 
 
 bool
@@ -1186,10 +1132,6 @@ NMBase::getHasBeenDeleted()
   return mHasBeenDeleted;
 }
 
-/** @endcond doxygen-libnuml-internal */
-
-
-/** @cond doxygen-libnuml-internal */
 /*
  * @return the ordinal position of the element with respect to its siblings
  * or -1 (default) to indicate the position is not significant.
@@ -1199,10 +1141,7 @@ NMBase::getElementPosition () const
 {
   return -1;
 }
-/** @endcond doxygen-libnuml-internal */
 
-
-/** @cond doxygen-libnuml-internal */
 /*
  * @return the NUMLErrorLog used to log errors during while reading and
  * validating NUML.
@@ -1212,10 +1151,7 @@ NMBase::getErrorLog ()
 {
   return (mNUML != 0) ? mNUML->getErrorLog() : 0;
 }
-/** @endcond doxygen-libnuml-internal */
 
-
-/** @cond doxygen-libnuml-internal */
 /*
  * Helper to log a common type of error.
  */
@@ -1233,10 +1169,7 @@ NMBase::logUnknownAttribute( string attribute,
       
   getErrorLog()->logError(NUMLNotSchemaConformant, level, version, msg.str());
 }
-/** @endcond doxygen-libnuml-internal */
 
-
-/** @cond doxygen-libnuml-internal */
 /*
  * Helper to log a common type of error.
  */
@@ -1253,10 +1186,7 @@ NMBase::logUnknownElement( string element,
   getErrorLog()->logError(NUMLUnrecognizedElement,
         level, version, msg.str());
 }
-/** @endcond doxygen-libnuml-internal */
 
-
-/** @cond doxygen-libnuml-internal */
 /*
  * Helper to log a common type of error.
  */
@@ -1275,10 +1205,7 @@ NMBase::logEmptyString( string attribute,
   getErrorLog()->logError(NUMLNotSchemaConformant,
         level, version, msg.str());
 }
-/** @endcond doxygen-libnuml-internal */
 
-
-/** @cond doxygen-libnuml-internal */
 /*
  * Convenience method for easily logging problems from within method
  * implementations.
@@ -1294,10 +1221,7 @@ NMBase::logError (  unsigned int       id
   if ( NMBase::getErrorLog() )
     getErrorLog()->logError(id, getLevel(), getVersion(), details);
 }
-/** @endcond doxygen-libnuml-internal */
 
-
-/** @cond doxygen-libnuml-internal */
 /*
  * Subclasses should override this method to read values from the given
  * XMLAttributes set into their specific fields.  Be sure to call your
@@ -1322,10 +1246,7 @@ NMBase::readAttributes (const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes& att
       logError(NUMLInvalidMetaidSyntax, getLevel(), getVersion());
   }
 }
-/** @endcond doxygen-libnuml-internal */
 
-
-/** @cond doxygen-libnuml-internal */
 /*
  * Subclasses should override this method to write their XML attributes
  * to the XMLOutputStream.  Be sure to call your parents implementation
@@ -1344,9 +1265,7 @@ NMBase::writeAttributes (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream
   }
 }
 
-/** @endcond doxygen-libnuml-internal */
 
-/** @cond doxygen-libnuml-internal */
 /*
  * Checks that NUML element has been read in the proper order.  If object
  * is not in the expected position, an error is logged.
@@ -1374,10 +1293,7 @@ NMBase::checkOrderAndLogError (NMBase* object, int expected)
     logError(error, getLevel(), getVersion());
   }
 }
-/** @endcond doxygen-libnuml-internal */
 
-
-/** @cond doxygen-libnuml-internal */
 /**
   * Checks that an NUML NUMLList element has been populated.
   * If a NUMLList element has been declared with no elements,
@@ -1414,10 +1330,7 @@ NMBase::checkNUMLListPopulated(NMBase* object)
   }
 
 }
-/** @endcond doxygen-libnuml-internal */
 
-
-/** @cond doxygen-libnuml-internal */
 
 void 
 NMBase::checkDefaultNamespace(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces* xmlns, const std::string& elementName)
@@ -1444,8 +1357,6 @@ NMBase::checkDefaultNamespace(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespace
   }
 }
 
-/** @endcond doxygen-libnuml-internal */
-/** @cond doxygen-libnuml-internal */
 /* default for components that have no required attributes */
 bool
 NMBase::hasRequiredAttributes() const
@@ -1461,9 +1372,6 @@ NMBase::hasRequiredElements() const
 }
 
 
-/** @endcond doxygen-libnuml-internal */
-
-/** @cond doxygen-libnuml-internal */
 /*
  * Stores the location (line and column) and any XML namespaces (for
  * roundtripping) declared on this NUML (XML) element.
@@ -1865,6 +1773,5 @@ NMBase_hasValidLevelVersionNamespaceCombination(NMBase_t *sb)
 
 
 
-/** @endcond doxygen-c-only */
 
 LIBNUML_CPP_NAMESPACE_END

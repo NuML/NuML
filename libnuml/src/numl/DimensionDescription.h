@@ -15,6 +15,12 @@
 * ****************************************************************************
 */
 
+/**
+ * @class DimensionDescription
+ * @brief This class stores the dimension description
+ */
+
+
 #ifndef DIMENSIONDESCRIPTION_H_
 #define DIMENSIONDESCRIPTION_H_
 
@@ -120,17 +126,14 @@ public:
   */
   //	virtual XMLNamespaces* getNamespaces() const ;
 
-  /** @cond doxygen-libnuml-internal */
   /**
   * Sets the parent NUMLDocument of this NUML object.
   *
   * @param d the NUMLDocument object to use
   */
 //		virtual void setNUMLDocument (NUMLDocument* d);
-  /** @endcond doxygen-libnuml-internal */
 
 
-  /** @cond doxygen-libnuml-internal */
   /**
   * Sets the parent NUML object of this NUML object.
   *
@@ -312,8 +315,6 @@ public:
   virtual CompositeDescription* remove (const std::string& sid);
 
 
-  /** @cond doxygen-libnuml-internal */
-
   /**
   * Get the ordinal position of this element in the containing object
   * (which in this case is the Model object).
@@ -329,14 +330,12 @@ public:
   */
   virtual int getElementPosition () const;
 
-  /** @endcond doxygen-libnuml-internal */
 
   virtual ~DimensionDescription();
 
 
 protected:
-  /** @cond doxygen-libsbml-internal */
-
+  
   /**
   * @return the SBML object corresponding to next XMLToken in the
   * XMLInputStream or NULL if the token was not recognized.

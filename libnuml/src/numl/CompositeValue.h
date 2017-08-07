@@ -15,6 +15,12 @@
 * ****************************************************************************
 */
 
+/**
+ * @class CompositeValue
+ * @brief This class stores the composite values
+ */
+
+
 #ifndef COMPOSITEVALUES_H_
 #define COMPOSITEVALUES_H_
 
@@ -150,7 +156,6 @@ public:
 	*/
 	int setIndexValue (const std::string& indexValue);
 
-	/** @cond doxygen-libnuml-internal */
 	/**
 	* Sets the value of the "description" attribute of this NUML object.
 	*
@@ -388,8 +393,7 @@ public:
 
 
 protected:
-	/** @cond doxygen-libnuml-internal */
-
+	
 	/**
 	* @return the NUML object corresponding to next XMLToken in the
 	* XMLInputStream or NULL if the token was not recognized.
@@ -399,8 +403,6 @@ protected:
 	std::string mDescription;
 	NUMLTypeCode_t mContentType;
 
-
-	/** @endcond doxygen-libnuml-internal */
 };
 
 

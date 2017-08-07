@@ -1,11 +1,4 @@
-/**
-* Begin svn Header
-* $Rev$:	Revision of last commit
-* $Author$:	Author of last commit
-* $Date$:	Date of last commit
-* $HeadURL$
-* $Id$
-* End svn Header
+/*
 * ****************************************************************************
 * This file is part of libNUML.  Please visit http://code.google.com/p/numl/for more
 * information about NUML, and the latest version of libNUML. 
@@ -99,7 +92,6 @@ Tuple::getElementName () const
 	return tuple;
 }
 
-/** @cond doxygen-libnuml-internal */
 /*
  * @return the ordinal position of the element with respect to its siblings
  * or -1 (default) to indicate the position is not significant.
@@ -109,7 +101,6 @@ Tuple::getElementPosition () const
 {
   return 4;
 }
-/** @endcond doxygen-libnuml-internal */
 
 /* return nth AtomicValue in the Tuple list */
 AtomicValue *
@@ -159,7 +150,6 @@ Tuple::createAtomicValue ()
 	return aValue;
 }
 
-/** @cond doxygen-libnuml-internal */
 /*
  * @return the NUML object corresponding to next XMLToken in the
  * XMLInputStream or NULL if the token was not recognized.
@@ -198,7 +188,6 @@ Tuple::createObject (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
   return aValue;
 }
 
-/** @cond doxygen-libnuml-internal */
 /*
  * Subclasses should override this method to read values from the given
  * XMLAttributes set into their specific fields.  Be sure to call your
@@ -210,9 +199,7 @@ Tuple::readAttributes (const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes& attr
 	NUMLList::readAttributes(attributes);
 	//no attributes for Tuple
 }
-/** @endcond doxygen-libnuml-internal */
 
-/** @cond doxygen-libnuml-internal */
 /*
  * Subclasses should override this method to write their XML attributes
  * to the XMLOutputStream.  Be sure to call your parents implementation
@@ -224,7 +211,6 @@ void Tuple::writeAttributes(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& str
 	//no attributes for Tuple
 }
 
-/** @cond doxygen-libnuml-internal */
 /*
  * Subclasses should override this method to write out their contained
  * NUML objects as XML elements.  Be sure to call your parents
@@ -256,7 +242,6 @@ Tuple::write(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const
   //mAtomicValue->write(stream);
 }
 
-/** @endcond doxygen-libnuml-internal */
 
 
 LIBNUML_CPP_NAMESPACE_END

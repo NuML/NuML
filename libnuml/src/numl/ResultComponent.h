@@ -15,6 +15,12 @@
 * ****************************************************************************
 **/
 
+/**
+ * @class ResultComponent
+ * @brief stores the result component
+ */
+
+
 #ifndef RESULTCOMPONENT_H_
 #define RESULTCOMPONENT_H_
 
@@ -96,7 +102,6 @@ public:
 	*/
 	const std::string& getId () const;
 
-	/** @cond doxygen-libnuml-internal */
 	/*
 	 *
 	 * Sets the value of the "id" attribute of this NUML object.
@@ -137,17 +142,15 @@ public:
 	*/
 	//	virtual XMLNamespaces* getNamespaces() const ;
 
-	/** @cond doxygen-libnuml-internal */
 	/**
 	* Sets the parent NUMLDocument of this NUML object.
 	*
 	* @param d the NUMLDocument object to use
 	*/
 	//	virtual void setNUMLDocument (NUMLDocument* d);
-	/** @endcond doxygen-libnuml-internal */
 
 
-	/** @cond doxygen-libnuml-internal */
+
 	/**
 	* Sets the parent NUML object of this NUML object.
 	*
@@ -455,7 +458,6 @@ public:
 	virtual ResultComponent* remove (const std::string& sid);
 
 
-	/** @cond doxygen-libnuml-internal */
 
 	/**
 	* Get the ordinal position of this element in the containing object
@@ -472,11 +474,9 @@ public:
 	*/
 	virtual int getElementPosition () const;
 
-	/** @endcond doxygen-libnuml-internal */
-
+	
 
 protected:
-	/** @cond doxygen-libnuml-internal */
 
 	/**
 	* @return the NUML object corresponding to next XMLToken in the
@@ -484,7 +484,7 @@ protected:
 	*/
   virtual NMBase* createObject (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream);
 
-	/** @endcond doxygen-libnuml-internal */
+
 };
 
 LIBNUML_CPP_NAMESPACE_END

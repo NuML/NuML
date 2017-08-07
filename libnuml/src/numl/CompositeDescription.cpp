@@ -1,11 +1,4 @@
-/**
-* Begin svn Header
-* $Rev$:	Revision of last commit
-* $Author$:	Author of last commit
-* $Date$:	Date of last commit
-* $HeadURL$
-* $Id$
-* End svn Header
+/*
 * ****************************************************************************
 * This file is part of libNUML.  Please visit http://code.google.com/p/numl/for more
 * information about NUML, and the latest version of libNUML. 
@@ -282,7 +275,6 @@ CompositeDescription::getOntologyTerm () const
   return mOntologyTerm;
 }
 
-/** @cond doxygen-libnuml-internal */
 /*
  * Subclasses should override this method to read values from the given
  * XMLAttributes set into their specific fields.  Be sure to call your
@@ -322,9 +314,7 @@ CompositeDescription::readAttributes (const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLA
   attributes.readInto("indexType", mIndexType);
 
 }
-/** @endcond doxygen-libnuml-internal */
 
-/** @cond doxygen-libnuml-internal */
 /*
  * Subclasses should override this method to write their XML attributes
  * to the XMLOutputStream.  Be sure to call your parents implementation
@@ -340,7 +330,6 @@ CompositeDescription::writeAttributes (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutput
   stream.writeAttribute("ontologyTerm", mOntologyTerm);
   stream.writeAttribute("indexType", mIndexType);
 }
-/** @endcond doxygen-libnuml-internal */
 
 /*
  * Creates a new CompositeDescription inside this CompositeDescription, add to its list and returns it.
@@ -422,7 +411,6 @@ CompositeDescription::createAtomicDescription ()
   return aDescription;
 }
 
-/** @cond doxygen-libnuml-internal */
 /*
  * @return the NUML object corresponding to next XMLToken in the
  * XMLInputStream or NULL if the token was not recognized.
@@ -502,6 +490,5 @@ CompositeDescription::createObject (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStre
 
   return object;
 }
-/** @endcond doxygen-libnuml-internal */
 
 LIBNUML_CPP_NAMESPACE_END

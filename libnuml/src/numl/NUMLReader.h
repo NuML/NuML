@@ -15,6 +15,12 @@
 * ****************************************************************************
 */
 
+/**
+ * @class NUMLReader
+ * @brief The reader class implementing reading NuML documents from file / string
+ */
+
+
 #ifndef NUMLReader_h
 #define NUMLReader_h
 
@@ -269,8 +275,6 @@ public:
 
 
 protected:
-  /** @cond doxygen-libnuml-internal */
-
   /**
    * Used by readNUML() and readNUMLFromString().
    *
@@ -288,7 +292,6 @@ protected:
    */
   NUMLDocument* readInternal (const char* content, bool isFile = true);
 
-  /** @endcond doxygen-libnuml-internal */
 };
 
 LIBNUML_CPP_NAMESPACE_END

@@ -1,11 +1,4 @@
-/**
-* Begin svn Header
-* $Rev$:	Revision of last commit
-* $Author$:	Author of last commit
-* $Date$:	Date of last commit
-* $HeadURL$
-* $Id$
-* End svn Header
+/*
 * ****************************************************************************
 * This file is part of libNUML.  Please visit http://code.google.com/p/numl/for more
 * information about NUML, and the latest version of libNUML. 
@@ -96,7 +89,6 @@ ResultComponent::getId () const
 }
 
 
-/** @cond doxygen-libnuml-internal */
 
 /* constructor for validators */
 ResultComponent::ResultComponent() :
@@ -104,7 +96,6 @@ ResultComponent::ResultComponent() :
 {
 }
 
-/** @endcond doxygen-libnuml-internal */
 
 /*
  * Destroys this ResultComponent.
@@ -257,7 +248,6 @@ ResultComponent::getDimensionDescription ()
 
 
 
-/** @cond doxygen-libnuml-internal */
 /*
  * Subclasses should override this method to read values from the given
  * XMLAttributes set into their specific fields.  Be sure to call your
@@ -300,9 +290,6 @@ ResultComponent::readAttributes (const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttrib
 
 }
 
-/** @endcond doxygen-libnuml-internal */
-
-/** @cond doxygen-libnuml-internal */
 /*
  * Subclasses should override this method to write their XML attributes
  * to the XMLOutputStream.  Be sure to call your parents implementation
@@ -315,9 +302,7 @@ ResultComponent::writeAttributes (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStrea
 
   stream.writeAttribute("id", mId);
 }
-/** @endcond doxygen-libnuml-internal */
 
-/** @cond doxygen-libnuml-internal */
 /*
  * Subclasses should override this method to write out their contained
  * NUML objects as XML elements.  Be sure to call your parents
@@ -336,10 +321,8 @@ ResultComponent::writeElements (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
   }
 
 }
-/** @endcond doxygen-libnuml-internal */
 
 
-/** @cond doxygen-libnuml-internal */
 /*
  * @return the NUML object corresponding to next XMLToken in the
  * XMLInputStream or NULL if the token was not recognized.
@@ -514,7 +497,6 @@ ResultComponents::remove (const std::string& sid)
 }
 
 
-/** @cond doxygen-libnuml-internal */
 /*
  * @return the ordinal position of the element with respect to its siblings
  * or -1 (default) to indicate the position is not significant.
@@ -524,10 +506,8 @@ ResultComponents::getElementPosition () const
 {
   return 0;
 }
-/** @endcond doxygen-libnuml-internal */
 
 
-/** @cond doxygen-libnuml-internal */
 /*
  * @return the NUML object corresponding to next XMLToken in the
  * XMLInputStream or NULL if the token was not recognized.
@@ -559,7 +539,6 @@ ResultComponents::createObject (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& 
 
   return object;
 }
-/** @endcond doxygen-libnuml-internal */
 
 LIBNUML_EXTERN
 DimensionDescription_t *

@@ -15,6 +15,12 @@
 * ****************************************************************************
 **/
 
+/**
+ * @class NUMLNamespaces
+ * @brief namespace class
+ */
+
+
 #ifndef NUMLNamespaces_h
 #define NUMLNamespaces_h
 
@@ -164,7 +170,6 @@ public:
   void addNamespaces(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces * xmlns);
 
 
-  /** @cond doxygen-libnuml-internal */
   void setLevel(unsigned int level);
 
 
@@ -172,16 +177,13 @@ public:
 
 
   void setNamespaces(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces * xmlns);
-  /** @endcond doxygen-libnuml-internal */
 
 protected:  
-  /** @cond doxygen-libnuml-internal */
 
   unsigned int    mLevel;
   unsigned int    mVersion;
   LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces * mNamespaces;
 
-  /** @endcond doxygen-libnuml-internal */
 };
 
 LIBNUML_CPP_NAMESPACE_END

@@ -15,6 +15,12 @@
 * ****************************************************************************
 **/
 
+/**
+ * @class NUMLVisitor
+ * @brief visitor for numl classes
+ */
+
+
 #ifndef NUMLVisitor_h
 #define NUMLVisitor_h
 

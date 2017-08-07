@@ -14,7 +14,9 @@
 * Joseph O. Dada, The University of Manchester - initial API and implementation
 * ****************************************************************************
 *
-*
+*/
+
+/**
 * @class NUMLWriter
 * @brief Methods for writing NUML to files and text strings.
 *
@@ -212,12 +214,10 @@ public:
 
 
  protected:
-  /** @cond doxygen-libnuml-internal */
 
   std::string mProgramName;
   std::string mProgramVersion;
 
-  /** @endcond doxygen-libnuml-internal */
 };
 
 LIBNUML_CPP_NAMESPACE_END

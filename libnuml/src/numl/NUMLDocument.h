@@ -15,6 +15,12 @@
 * ****************************************************************************
 */
 
+/**
+ * @class NUMLDocument
+ * @brief This represents the numl document that contains all information
+ */
+
+
 #ifndef NUMLDocument_h
 #define NUMLDocument_h
 
@@ -47,7 +53,6 @@ class ResultComponent;
 class NUMLVisitor;
 
 
-/** @cond doxygen-libnuml-internal */
 /* Internal constants for setting/unsetting particular consistency checks. */
 
 #ifndef IdCheckON
@@ -96,7 +101,6 @@ class NUMLVisitor;
 #define AllChecksON       0x7f;
 #endif
 
-/** @endcond doxygen-libnuml-internal */
 
 
 class LIBNUML_EXTERN NUMLDocument: public NMBase
@@ -358,10 +362,8 @@ public:
   void printErrors (std::ostream& stream = std::cerr) const;
 
 
-  /** @endcond doxygen-libnuml-internal */
 
 
-    /** @cond doxygen-libnuml-internal */
 
     /*
      * Sets the parent NUML object of this NUML object.
@@ -370,16 +372,13 @@ public:
      */
     virtual void setParentNUMLObject (NMBase* sb);
 
-    /** @endcond doxygen-libnuml-internal */
 
-  /** @cond doxygen-libnuml-internal */
   /**
    * No-op; it is provided for consistency with the method available on
    * other libNUML object classes but has no effect on NUMLDocument.
    */
   virtual void setNUMLDocument (NUMLDocument* d);
 
-  /** @endcond doxygen-libnuml-internal */
 
   /**
    * Returns the libNUML type code for this %NUML object.
@@ -432,7 +431,6 @@ public:
   virtual LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces* getNamespaces() const;
 
 
-  /** @cond doxygen-libnuml-internal */
 
   /**
    * @return the ordinal position of the element with respect to its
@@ -448,11 +446,9 @@ public:
    */
   virtual void writeElements (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const;
 
-  /** @endcond doxygen-libnuml-internal */
 
 protected:
-  /** @cond doxygen-libnuml-internal */
-
+  
   /**
    * @return the NUML object corresponding to next XMLToken in the
    * XMLInputStream or NULL if the token was not recognized.
@@ -508,7 +504,6 @@ protected:
   friend class NMBase;
   friend class NUMLReader;
 
-  /** @endcond doxygen-libnuml-internal */
 };
 
 LIBNUML_CPP_NAMESPACE_END

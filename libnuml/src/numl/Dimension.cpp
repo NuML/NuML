@@ -1,11 +1,4 @@
-/**
-* Begin svn Header
-* $Rev$:	Revision of last commit
-* $Author$:	Author of last commit
-* $Date$:	Date of last commit
-* $HeadURL$
-* $Id$
-* End svn Header
+/*
 * ****************************************************************************
 * This file is part of libNUML.  Please visit http://code.google.com/p/numl/for more
 * information about NUML, and the latest version of libNUML. 
@@ -44,15 +37,12 @@ Dimension::Dimension (NUMLNamespaces *numlns) :
     throw NUMLConstructorException();
 }
 
-/** @cond doxygen-libnuml-internal */
 
 /* constructor for validators */
 Dimension::Dimension() :
   NUMLList()
 {
 }
-
-/** @endcond doxygen-libnuml-internal */
 
 /*
  * Destroys this Dimension.
@@ -228,7 +218,6 @@ Dimension::remove (const std::string& sid)
 }
 
 
-/** @cond doxygen-libnuml-internal */
 /*
  * @return the ordinal position of the element with respect to its siblings
  * or -1 (default) to indicate the position is not significant.
@@ -238,10 +227,7 @@ Dimension::getElementPosition () const
 {
 	return 0;
 }
-/** @endcond doxygen-libnuml-internal */
 
-
-/** @cond doxygen-libnuml-internal */
 /*
  * @return the NUML object corresponding to next XMLToken in the
  * XMLInputStream or NULL if the token was not recognized.
@@ -292,9 +278,7 @@ Dimension::createObject (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 
 	return object;
 }
-/** @endcond doxygen-libnuml-internal */
 
-/** @cond doxygen-libnuml-internal */
 /*
  * Subclasses should override this method to write out their contained
  * NUML objects as XML elements.  Be sure to call your parents
@@ -305,7 +289,6 @@ Dimension::writeElements (XMLOutputStream& stream) const
 {
   NUMLList::writeElements(stream);
 }*/
-/** @endcond doxygen-libnuml-internal */
 
 
 LIBNUML_CPP_NAMESPACE_END

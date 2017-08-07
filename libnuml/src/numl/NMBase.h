@@ -15,6 +15,12 @@
 * ****************************************************************************
 **/
 
+/**
+ * @class NMBase
+ * @brief This is the base class for all numl objects
+ */
+
+
 #ifndef NMBase_h
 #define NMBase_h
 
@@ -53,7 +59,6 @@ class NUMLErrorLog;
 //class NUMLVisitor;
 class NUMLDocument;
 
-/** @cond doxygen-libnuml-internal */
 class NUMLConstructorException : public std::invalid_argument
 {
 public:
@@ -62,7 +67,6 @@ public:
   NUMLConstructorException ();
 
 };
-/** @endcond doxygen-libnuml-internal */
 
 
 class LIBNUML_EXTERN NMBase
@@ -151,7 +155,6 @@ public:
   std::string& getMetaId ();
 
 
-  /** @cond doxygen-libnuml-internal */
   /*
    * NOTE: THIS IS FOR BACKWARD COMPATABILITY REASONS
    *
@@ -160,10 +163,8 @@ public:
    * @return the id of this NUML object.
    */
   virtual const std::string& getId () const;
-  /** @endcond doxygen-libnuml-internal */
 
 
-  /** @cond doxygen-libnuml-internal */
   /*
    * NOTE: THIS IS FOR BACKWARD COMPATABILITY REASONS
    *
@@ -330,10 +331,8 @@ public:
    */
   bool isSetMetaId () const;
 
-  /** @endcond doxygen-libnuml-internal */
 
 
-  /** @cond doxygen-libnuml-internal */
   /*
    * NOTE: THIS IS FOR BACKWARD COMPATABILITY REASONS
    * Predicate returning @c true or @c false depending on whether this
@@ -343,7 +342,6 @@ public:
    * set, @c false otherwise.
    */
   bool isSetName () const;
-  /** @endcond doxygen-libnuml-internal */
 
   /**
    * Sets the value of the "metaid" attribute of this object.
@@ -375,7 +373,6 @@ public:
    */
   int setMetaId (const std::string& metaid);
 
-  /** @cond doxygen-libnuml-internal */
     /*
      * NOTE: THIS IS FOR BACKWARD COMPATABILITY REASONS
      *
@@ -393,12 +390,9 @@ public:
      * @li @link OperationReturnValues_t#LIBNUML_INVALID_ATTRIBUTE_VALUE LIBNUML_INVALID_ATTRIBUTE_VALUE @endlink
      */
      virtual int setId (const std::string& sid);
-    /** @endcond */
-
-  /** @endcond doxygen-libnuml-internal */
 
 
-  /** @cond doxygen-libnuml-internal */
+
   /*
    * NOTE: THIS IS FOR BACKWARD COMPATABILITY REASONS
    * Sets the value of the "name" attribute of this NUML object.
@@ -416,17 +410,14 @@ public:
    */
  // TODO int setName (const std::string& name);
 
-  /** @cond doxygen-libnuml-internal */
   /**
    * Sets the parent NUMLDocument of this NUML object.
    *
    * @param d the NUMLDocument object to use
    */
   virtual void setNUMLDocument (NUMLDocument* d);
-  /** @endcond doxygen-libnuml-internal */
 
 
-  /** @cond doxygen-libnuml-internal */
   /**
    * Sets the parent NUML object of this NUML object.
    *
@@ -615,23 +606,18 @@ public:
   char* toNUML ();
 
 
-  /** @cond doxygen-libnuml-internal */
   /**
    * Reads (initializes) this NUML object by reading from XMLInputStream.
    */
   void read (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream);
-  /** @endcond doxygen-libnuml-internal */
 
 
-  /** @cond doxygen-libnuml-internal */
   /**
    * Writes (serializes) this NUML object by writing it to XMLOutputStream.
    */
   void write (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const;
-  /** @endcond doxygen-libnuml-internal */
 
 
-  /** @cond doxygen-libnuml-internal */
   /**
    * Subclasses should override this method to write out their contained
    * NUML objects as XML elements.  Be sure to call your parents
@@ -643,37 +629,28 @@ public:
    *   ...
    */
   virtual void writeElements (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const;
-  /** @endcond doxygen-libnuml-internal */
 
 
-  /** @cond doxygen-libnuml-internal */
   /* function returns true if component has all the required
    * attributes
    * needs to be overloaded for each component
    */
   virtual bool hasRequiredAttributes() const ;
-  /** @endcond doxygen-libnuml-internal */
 
 
-  /** @cond doxygen-libnuml-internal */
   /* function returns true if component has all the required
    * elements
    * needs to be overloaded for each component
    */
   virtual bool hasRequiredElements() const ;
-  /** @endcond doxygen-libnuml-internal */
 
 
-  /** @cond doxygen-libnuml-internal */
   /* sets the NUMLnamespaces - internal use only*/
   void setNUMLNamespaces(NUMLNamespaces * numlns);
-  /** @endcond doxygen-libnuml-internal */
 
 
-  /** @cond doxygen-libnuml-internal */
   /* gets the NUMLnamespaces - internal use only*/
   NUMLNamespaces * getNUMLNamespaces() const;
-  /** @endcond doxygen-libnuml-internal */
 
 protected:
 
@@ -686,7 +663,6 @@ protected:
    */
   virtual void writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const;
 
-  /** @cond doxygen-libnuml-internal */
 
   /**
    * Only subclasses may create NMBase objects.
@@ -933,12 +909,10 @@ protected:
 
   std::string mEmptyString;
 
-  /** @endcond doxygen-libnuml-internal */
-
+  
 
 private:
-  /** @cond doxygen-libnuml-internal */
-
+  
   /**
    * Stores the location (line and column) and any XML namespaces (for
    * roundtripping) declared on this NUML (XML) element.
@@ -959,7 +933,7 @@ private:
 
   bool getHasBeenDeleted();
 
-  /** @endcond doxygen-libnuml-internal */
+
 };
 
 LIBNUML_CPP_NAMESPACE_END

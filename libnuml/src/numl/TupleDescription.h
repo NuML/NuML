@@ -15,6 +15,12 @@
 * ****************************************************************************
 **/
 
+/**
+ * @class TupleDescription
+ * @brief stores the tuple description
+ */
+
+
 #ifndef TUPLEDESCRIPTION_H_
 #define TUPLEDESCRIPTION_H_
 
@@ -141,8 +147,7 @@ public:
   */
   virtual NUMLTypeCode_t getItemTypeCode () const;
 
-  /** @cond doxygen-libnuml-internal */
-
+  
   /**
   * Get the ordinal position of this element in the containing object
   * (which in this case is the Model object).
@@ -167,7 +172,6 @@ public:
   */
   virtual const std::string& getElementName () const;
 
-  /** @endcond doxygen-libnuml-internal */
 
 
   /**
@@ -220,7 +224,6 @@ public:
   virtual void write(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const;
 
 protected:
-  /** @cond doxygen-libnuml-internal */
 
   /**
   * @return the NUML object corresponding to next XMLToken in the
@@ -235,8 +238,6 @@ protected:
   std::string  mName;
   std::string  mOntologyTerm;
 
-
-  /** @endcond doxygen-libnuml-internal */
 };
 LIBNUML_CPP_NAMESPACE_END
 

@@ -15,6 +15,12 @@
 * ****************************************************************************
 **/
 
+/**
+ * @class Tuple
+ * @brief stores tuple information
+ */
+
+
 #ifndef TUPLE_H_
 #define TUPLE_H_
 
@@ -138,8 +144,6 @@ public:
 	*/
 	virtual NUMLTypeCode_t getItemTypeCode () const;
 
-	/** @cond doxygen-libnuml-internal */
-
 	/**
 	* Get the ordinal position of this element in the containing object
 	* (which in this case is the Model object).
@@ -164,7 +168,7 @@ public:
 	*/
 	virtual const std::string& getElementName () const;
 
-	/** @endcond doxygen-libnuml-internal */
+
 
 
 
@@ -215,20 +219,17 @@ public:
 
   virtual NMBase* createObject (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream);
 
-	 /** @cond doxygen-libnuml-internal */
 	/**
 	 * Subclasses should override this method to write out their contained
 	 * NUML objects as XML elements.  Be sure to call your parents
 	 * implementation of this method as well.
 	 */
 	//virtual void writeElements(XMLOutputStream& stream) const;
-	/** @endcond doxygen-libnuml-internal */
 
   virtual void write(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const;
 
 protected:
-	/** @cond doxygen-libnuml-internal */
-
+	
 	/**
 	* @return the NUML object corresponding to next XMLToken in the
 	* XMLInputStream or NULL if the token was not recognized.
@@ -242,7 +243,7 @@ protected:
 	//attributes
 //	AtomicValue *mAtomicValue;
 
-	/** @endcond doxygen-libnuml-internal */
+
 };
 
 LIBNUML_CPP_NAMESPACE_END

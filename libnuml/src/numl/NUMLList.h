@@ -258,7 +258,6 @@ public:
 	*/
 	unsigned int size () const;
 
-	/** @cond doxygen-libnuml-internal */
 
 	/**
 	* Sets the parent NUMLDocument of this NUML object.
@@ -277,7 +276,6 @@ public:
 	virtual void setParentNUMLObject (NMBase* sb);
 
 
-	/** @endcond */
 
 	  /**
 	   * Returns the libnuml type code for this object, namely, @c
@@ -345,7 +343,7 @@ public:
 
 
 
-	/** @endcond doxygen-libnuml-internal */
+
 
 	/**
 	* Returns the libNUML type code for this object, namely, @c
@@ -400,18 +398,16 @@ public:
 	virtual const std::string& getElementName () const;
 
 
-	/** @cond doxygen-libnuml-internal */
 	/**
 	* Subclasses should override this method to write out their contained
 	* NUML objects as XML elements.  Be sure to call your parents
 	* implementation of this method as well.
 	*/
   virtual void writeElements (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const;
-	/** @endcond doxygen-libnuml-internal */
+
 
 protected:
-	/** @cond doxygen-libnuml-internal */
-
+	
 	/**
 	* Subclasses should override this method to read values from the given
 	* XMLAttributes set into their specific fields.  Be sure to call your
@@ -433,7 +429,7 @@ protected:
 
 	std::vector<NMBase*> mItems;
 
-	/** @endcond doxygen-libnuml-internal */
+	
 };
 
 LIBNUML_CPP_NAMESPACE_END

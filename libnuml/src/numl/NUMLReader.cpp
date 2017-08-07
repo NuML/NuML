@@ -1,11 +1,4 @@
-/**
-* Begin svn Header
-* $Rev$:	Revision of last commit
-* $Author$:	Author of last commit
-* $Date$:	Date of last commit
-* $HeadURL$
-* $Id$
-* End svn Header
+/*
 * ****************************************************************************
 * This file is part of libNUML.  Please visit http://code.google.com/p/numl/for more
 * information about NUML, and the latest version of libNUML.
@@ -33,11 +26,7 @@
 #include <numl/NUMLError.h>
 #include <numl/NUMLReader.h>
 
-/** @cond doxygen-ignored */
-
 using namespace std;
-
-/** @endcond doxygen-ignored */
 
 LIBNUML_CPP_NAMESPACE_BEGIN
 
@@ -155,7 +144,6 @@ NUMLReader::hasBzip2()
 }
 
 
-/** @cond doxygen-libnuml-internal */
 static bool
 isCriticalError(const unsigned int errorId)
 {
@@ -185,10 +173,9 @@ isCriticalError(const unsigned int errorId)
     return false;
   }
 }
-/** @endcond doxygen-libnuml-internal */
 
 
-/** @cond doxygen-libnuml-internal */
+
 /*
  * Used by readNUML() and readNUMLFromString().
  */
@@ -276,10 +263,8 @@ NUMLReader::readInternal (const char* content, bool isFile)
   }
   return d;
 }
-/** @endcond doxygen-libnuml-internal */
 
 
-/** @cond doxygen-c-only */
 
 
 /**
@@ -541,4 +526,4 @@ readNUMLFromString (const char *xml)
 
 LIBNUML_CPP_NAMESPACE_END
 
-/** @endcond doxygen-c-only */
+
