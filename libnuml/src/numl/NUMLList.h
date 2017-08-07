@@ -1,11 +1,4 @@
-/**
-* Begin svn Header
-* $Rev$:	Revision of last commit
-* $Author$:	Author of last commit
-* $Date$:	Date of last commit
-* $HeadURL$
-* $Id$
-* End svn Header
+/*
 * ****************************************************************************
 * This file is part of libNUML.  Please visit http://code.google.com/p/numl/for more
 * information about NUML, and the latest version of libNUML.
@@ -22,11 +15,10 @@
 * ****************************************************************************
 **/
 
-/*
+/**
  * @class NUMLList
  * @brief Parent class for the various NUML list classes e.g. Operations, Result, ResultComponent etc.
  *
- * @htmlinclude libnuml-not-numl-warning.html
  */
 
 #ifndef NUMLLIST_H_

@@ -1,11 +1,4 @@
 /*
-* Begin svn Header
-* $Rev$:	Revision of last commit
-* $Author$:	Author of last commit
-* $Date$:	Date of last commit
-* $HeadURL$
-* $Id$
-* End svn Header
 * ****************************************************************************
 * This file is part of libNUML.  Please visit http://code.google.com/p/numl/for more
 * information about NUML, and the latest version of libNUML. 
@@ -20,6 +13,11 @@
 * Contributors:
 * Joseph O. Dada, The University of Manchester - initial API and implementation
 * ****************************************************************************
+*/
+
+/**
+* @class AtomicDescription
+* @brief This class stores the atomic description
 */
 
 #ifndef ATOMICDESCRIPTION_H_
@@ -163,8 +161,6 @@ public:
   *
   * The string in @p ontologyTerm is copied.
   *
-  * @htmlinclude libnuml-comment-set-methods.html
-  *
   * @param ontologyTerm the new ontologyTerm for the object
   *
   * @return integer value indicating success/failure of the
@@ -177,8 +173,6 @@ public:
   *
   * The string in @p valueType is copied.
   *
-  * @htmlinclude libnuml-comment-set-methods.html
-  *
   * @param valueType the new valueType for the object
   *
   * @return integer value indicating success/failure of the
@@ -190,8 +184,6 @@ public:
   * Sets the name of the "name" attribute of this NUML object.
   *
   * The string in @p name is copied.
-  *
-  * @htmlinclude libnuml-comment-set-methods.html
   *
   * @param name the new name for the object
   *

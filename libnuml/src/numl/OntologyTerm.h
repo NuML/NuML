@@ -1,11 +1,4 @@
-/**
-* Begin svn Header
-* $Rev$:	Revision of last commit
-* $Author$:	Author of last commit
-* $Date$:	Date of last commit
-* $HeadURL$
-* $Id$
-* End svn Header
+/*
 * ****************************************************************************
 * This file is part of libNUML.  Please visit http://code.google.com/p/numl/for more
 * information about NUML, and the latest version of libNUML. 
@@ -165,8 +158,6 @@ public:
 	 * the uniqueness of identifiers in an NUML model.  Please consult the
 	 * NUML specifications for the exact formulations.
 	 *
-	 * @htmlinclude libnuml-comment-set-methods.html
-	 *
 	 * @param id the string to use as the identifier of this object
 	 *
 	 * @return integer value indicating success/failure of the
@@ -185,8 +176,6 @@ public:
 	*
 	* The string in @p term is copied.
 	*
-	* @htmlinclude libnuml-comment-set-methods.html
-	*
 	* @param term the new term for the object
 	*
 	* @return integer value indicating success/failure of the
@@ -204,8 +193,6 @@ public:
 	*
 	* The string in @p sourceTermId is copied.
 	*
-	* @htmlinclude libnuml-comment-set-methods.html
-	*
 	* @param sourceTermId the new sourceTermId for the object
 	*
 	* @return integer value indicating success/failure of the
@@ -222,8 +209,6 @@ public:
 	 * Sets the value of the "ontologyURI" attribute of this NUML object.
 	 *
 	 * The string in @p ontologyURI is copied.
-	 *
-	 * @htmlinclude libnuml-comment-set-methods.html
 	 *
 	 * @param ontologyURI the new ontologyURI for the object
 	 *

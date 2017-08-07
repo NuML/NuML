@@ -1,11 +1,4 @@
-/**
-* Begin svn Header
-* $Rev$:	Revision of last commit
-* $Author$:	Author of last commit
-* $Date$:	Date of last commit
-* $HeadURL$
-* $Id$
-* End svn Header
+/*
 * ****************************************************************************
 * This file is part of libNUML.  Please visit http://code.google.com/p/numl/for more
 * information about NUML, and the latest version of libNUML. 
@@ -123,8 +116,6 @@ public:
 	 * case-sensitive manner.  In addition, there are a few conditions for
 	 * the uniqueness of identifiers in an NUML model.  Please consult the
 	 * NUML specifications for the exact formulations.
-	 *
-	 * @htmlinclude libnuml-comment-set-methods.html
 	 *
 	 * @param id the striclass ResultComponents;ng to use as the identifier of this object
 	 *

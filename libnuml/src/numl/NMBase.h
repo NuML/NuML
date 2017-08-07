@@ -1,11 +1,4 @@
-/**
-* Begin svn Header
-* $Rev$:	Revision of last commit
-* $Author$:	Author of last commit
-* $Date$:	Date of last commit
-* $HeadURL$
-* $Id$
-* End svn Header
+/*
 * ****************************************************************************
 * This file is part of libNUML.  Please visit http://code.google.com/p/numl/for more
 * information about NUML, and the latest version of libNUML. 
@@ -329,8 +322,6 @@ public:
    * component for purposes such as referencing that component from
    * metadata placed within "annotation" subelements.
    *  
-   * @htmlinclude libnuml-comment-set-methods.html
-   *
    * @return @c true if the "metaid" attribute of this NUML object has been
    * set, @c false otherwise.
    *
@@ -348,8 +339,6 @@ public:
    * Predicate returning @c true or @c false depending on whether this
    * object's "name" attribute has been set.
    *
-   * @htmlinclude libnuml-comment-set-methods.html
-   * 
    * @return @c true if the "name" attribute of this NUML object has been
    * set, @c false otherwise.
    */
@@ -369,8 +358,6 @@ public:
    * <a href="http://www.w3.org/TR/REC-xml/#id">XML ID</a>'s in XML
    * portions of a model that are not defined by NUML, such as in the
    * application-specific content of the "annotation" subelement.
-   *
-   * @htmlinclude libnuml-comment-set-methods.html
    *
    * @param metaid the identifier string to use as the value of the
    * "metaid" attribute
@@ -396,7 +383,7 @@ public:
      * of @p id.
      *
      * The string @p sid is copied.  Note that NUML has strict requirements
-     * for the syntax of identifiers.  @htmlinclude id-syntax.html
+     * for the syntax of identifiers.
      *
      * @param sid the string to use as the identifier of this object
      *
@@ -417,8 +404,6 @@ public:
    * Sets the value of the "name" attribute of this NUML object.
    *
    * The string in @p name is copied.
-   *
-   * @htmlinclude libnuml-comment-set-methods.html
    *
    * @param name the new name for the object
    *
@@ -481,8 +466,6 @@ public:
    * component for purposes such as referencing that component from
    * metadata placed within "annotation" subelements.
    *  
-   * @htmlinclude libnuml-comment-set-methods.html
-   *
    * @return integer value indicating success/failure of the
    * function.  @if clike The value is drawn from the
    * enumeration #OperationReturnValues_t. @endif The possible values
@@ -497,8 +480,6 @@ public:
   /**
    * Unsets the value of the "id" attribute of this NUML object.
    *
-   * @htmlinclude libnuml-comment-set-methods.html
-   *
    * @return integer value indicating success/failure of the
    * function.  @if clike The value is drawn from the
    * enumeration #OperationReturnValues_t. @endif The possible values
@@ -512,8 +493,6 @@ public:
 
   /**
    * Unsets the value of the "name" attribute of this NUML object.
-   *
-   * @htmlinclude libnuml-comment-set-methods.html
    *
    * @return integer value indicating success/failure of the
    * function.  @if clike The value is drawn from the

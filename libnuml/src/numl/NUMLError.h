@@ -1,11 +1,4 @@
-/**
-* Begin svn Header
-* $Rev$:	Revision of last commit
-* $Author$:	Author of last commit
-* $Date$:	Date of last commit
-* $HeadURL$
-* $Id$
-* End svn Header
+/*
 * ****************************************************************************
 * This file is part of libNUML.  Please visit http://code.google.com/p/numl/for more
 * information about NUML, and the latest version of libNUML. 
@@ -142,7 +135,6 @@ typedef enum
  * check whether the error represents a low-level XML problem or an
  * NUML problem.
  *
- * @see #XMLErrorCategory_t
  */
 typedef enum 
 {
