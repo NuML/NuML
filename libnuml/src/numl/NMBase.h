@@ -29,8 +29,6 @@
 #include <numl/common/numlfwd.h>
 #include <sbml/util/List.h>
 #include <numl/NUMLTypeCodes.h>
-//#include <numl/annotation/RDFAnnotation.h>
-//#include <numl/annotation/CVTerm.h>
 #include <numl/NUMLNamespaces.h>
 #include <sbml/SyntaxChecker.h> //change from numl
 #include <numl/NUMLVisitor.h>
@@ -497,24 +495,6 @@ public:
 #endif
 
   /**
-  * Returns a list of CVTerm objects in the annotations of this NUML
-  * object.
-  *
-  * @return the list of CVTerms for this NUML object.
-  */
-  LIBSBML_CPP_NAMESPACE_QUALIFIER List* getCVTerms();
-
-
-  /**
-  * Returns a list of CVTerm objects in the annotations of this NUML
-  * object.
-  *
-  * @return the list of CVTerms for this NUML object.
-  */
-  LIBSBML_CPP_NAMESPACE_QUALIFIER List* getCVTerms()  const;
-
-
-  /**
    * Returns the NUML Level of the overall NUML document.
    * 
    * @return the NUML level of this NUML object.
@@ -651,6 +631,31 @@ public:
 
   /* gets the NUMLnamespaces - internal use only*/
   NUMLNamespaces * getNUMLNamespaces() const;
+
+  void syncAnnotation();
+  bool isSetNotes() const;
+  bool isSetAnnotation() const;
+  virtual int setAnnotation(const XMLNode* annotation);
+  virtual int setAnnotation(const std::string& annotation);
+  virtual int appendAnnotation(const XMLNode* annotation);
+  virtual int appendAnnotation(const std::string& annotation);
+  int removeTopLevelAnnotationElement(const std::string elementName,
+                                      const std::string elementURI = "");
+  int replaceTopLevelAnnotationElement(const XMLNode* annotation);
+  int replaceTopLevelAnnotationElement(const std::string& annotation);
+  int setNotes(const XMLNode* notes);
+  int setNotes(const std::string& notes, bool addXHTMLMarkup = false);
+  int appendNotes(const XMLNode* notes);
+  int appendNotes(const std::string& notes);
+  int unsetNotes();
+  int unsetAnnotation();
+
+  XMLNode* getNotes() const;
+  std::string getNotesString() const;
+  XMLNode* getAnnotation() const;
+  std::string getAnnotationString() const;
+
+
 
 protected:
 
@@ -898,9 +903,6 @@ protected:
 
   /* store the parent NUML object */
   NMBase* mParentNUMLObject;
-
-  /* storing annotations */
-   LIBSBML_CPP_NAMESPACE_QUALIFIER List * mCVTerms;
 
   /* flag that allows object to know its been deleted
    * for OS where the memory is still readable after a delete

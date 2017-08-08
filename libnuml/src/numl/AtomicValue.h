@@ -26,7 +26,6 @@
 
 #include <numl/common/extern.h>
 #include <numl/common/numlfwd.h>
-//#include <numl/common/operationReturnValues.h>
 
 
 #include <numl/Dimension.h>

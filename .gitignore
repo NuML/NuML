@@ -216,4 +216,5 @@ pip-log.txt
 .mr.developer.cfg
 
 libnuml-build
+build*
 doc

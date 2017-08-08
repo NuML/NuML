@@ -186,6 +186,7 @@ NUMLReader::readInternal (const char* content, bool isFile)
 
   if (isFile && content && (LIBSBML_CPP_NAMESPACE_QUALIFIER  util_file_exists(content) == false))
   {
+    if(d->getErrorLog() != NULL)
     d->getErrorLog()->logError(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLFileUnreadable);
   }
   else
@@ -204,6 +205,7 @@ NUMLReader::readInternal (const char* content, bool isFile)
 
   ///TODO    d->setModel(NULL);
 
+      if(d->getErrorLog() != NULL)
       for (unsigned int i = 0; i < d->getNumErrors(); ++i)
       {
         if (isCriticalError(d->getError(i)->getErrorId()))
@@ -221,7 +223,7 @@ NUMLReader::readInternal (const char* content, bool isFile)
         }
       }
     }
-    else
+    else if(d->getErrorLog() != NULL)
     {
       // Low-level XML errors will have been caught in the first read,
       // before we even attempt to interpret the content as NUML.  Here

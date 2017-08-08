@@ -66,6 +66,8 @@ NUMLConstructorException::NUMLConstructorException() :
  */
 NMBase::NMBase (const std::string& id, const std::string& name) :
    mNUML      ( 0 )
+ , mNotes (NULL)
+ , mAnnotation (NULL)
  , mNUMLNamespaces (0)
  , mLine      ( 0 )
  , mColumn    ( 0 )
@@ -83,6 +85,8 @@ NMBase::NMBase (const std::string& id, const std::string& name) :
  */
 NMBase::NMBase (unsigned int level, unsigned int version) :
    mNUML      ( 0 )
+ , mNotes (NULL)
+ , mAnnotation (NULL)
  , mNUMLNamespaces (0)
  , mLine      ( 0 )
  , mColumn    ( 0 )
@@ -99,6 +103,8 @@ NMBase::NMBase (unsigned int level, unsigned int version) :
  */
 NMBase::NMBase (NUMLNamespaces *numlns) :
    mNUML      ( 0 )
+ , mNotes (NULL)
+ , mAnnotation (NULL)
  , mNUMLNamespaces (0)
  , mLine      ( 0 )
  , mColumn    ( 0 )
@@ -129,6 +135,16 @@ NMBase::NMBase(const NMBase& orig)
     new NUMLNamespaces(*const_cast<NMBase&>(orig).mNUMLNamespaces);
   else
     this->mNUMLNamespaces = 0;
+
+  if (orig.isSetNotes())
+    setNotes(orig.getNotes());
+  else
+    mNotes = NULL;
+
+  if (orig.isSetAnnotation())
+    setAnnotation(orig.getAnnotation());
+  else
+    mAnnotation = NULL;
 
   this->mHasBeenDeleted = false;
 
@@ -266,6 +282,9 @@ NMBase::getNUMLDocument () const
 NUMLDocument*
 NMBase::getNUMLDocument ()
 {
+  if (getParentNUMLObject() != NULL)
+    return getParentNUMLObject()->getNUMLDocument();
+
   if (mNUML != NULL)
   {
     // if the doc object has been deleted the pointer is
@@ -334,25 +353,6 @@ NMBase::getColumn () const
   return mColumn;
 }
 
-
-/*
- * @return the list of CVTerms for this NUML object.
- */
-LIBSBML_CPP_NAMESPACE_QUALIFIER List*
-NMBase::getCVTerms()
-{
-  return mCVTerms;
-}
-
-
-/*
- * @return the list of CVTerms for this NUML object.
- */
-LIBSBML_CPP_NAMESPACE_QUALIFIER List*
-NMBase::getCVTerms() const
-{
-  return mCVTerms;
-}
 
 /*
  * @return true if the metaid of this NUML object has been set, false
@@ -650,6 +650,919 @@ NMBase::getNUMLNamespaces() const
 }
 
 
+void NMBase::syncAnnotation()
+{
+  if (mAnnotation == NULL)
+  {
+    XMLToken ann_token = XMLToken(XMLTriple("annotation", "", ""),
+                                  XMLAttributes());
+    mAnnotation = new XMLNode(ann_token);
+  }
+
+  // if annotation still empty delete the annotation
+  if (mAnnotation != NULL && mAnnotation->getNumChildren() == 0)
+  {
+    delete mAnnotation;
+    mAnnotation = NULL;
+  }
+}
+
+bool
+NMBase::isSetNotes() const
+{
+  return (mNotes != NULL);
+}
+bool
+NMBase::isSetAnnotation() const
+{
+  const_cast <NMBase *>(this)->syncAnnotation();
+  return (mAnnotation != NULL);
+}
+int
+NMBase::setAnnotation(const XMLNode* annotation)
+{
+  //
+  // (*NOTICE*)
+  //
+  // syncAnnotation() must not be invoked in this function.
+  //
+  //
+
+  if (annotation == NULL)
+  {
+    delete mAnnotation;
+    mAnnotation = NULL;
+  }
+
+
+  //else if (!(math->isWellFormedASTNode()))
+  //{
+  //  return LIBNUML_INVALID_OBJECT;
+  //}
+  if (mAnnotation != annotation)
+  {
+    delete mAnnotation;
+
+    // the annotation is an rdf annotation but the object has no metaid
+    if (RDFAnnotationParser::hasRDFAnnotation(annotation) == true
+        && (RDFAnnotationParser::hasCVTermRDFAnnotation(annotation) == true
+            || RDFAnnotationParser::hasHistoryRDFAnnotation(annotation) == true)
+        && isSetMetaId() == false)
+    {
+      mAnnotation = NULL;
+      return LIBNUML_UNEXPECTED_ATTRIBUTE;
+    }
+    else
+    {
+      // check for annotation tags and add if necessary
+      const string&  name = annotation->getName();
+
+      if (name != "annotation")
+      {
+        XMLToken ann_t = XMLToken(XMLTriple("annotation", "", ""),
+                                  XMLAttributes());
+        mAnnotation = new XMLNode(ann_t);
+
+        // The root node of the given XMLNode tree can be an empty XMLNode
+        // (i.e. neither start, end, nor text XMLNode) if the given annotation was
+        // converted from an XML string whose top level elements are neither
+        // "html" nor "body" and not enclosed with <annotation>..</annotation> tags
+        // (e.g. <foo xmlns:foo="...">..</foo><bar xmlns:bar="...">..</bar> )
+        if (!annotation->isStart() && !annotation->isEnd() &&
+            !annotation->isText())
+        {
+          for (unsigned int i = 0; i < annotation->getNumChildren(); i++)
+          {
+            mAnnotation->addChild(annotation->getChild(i));
+          }
+        }
+        else
+        {
+          mAnnotation->addChild(*annotation);
+        }
+      }
+      else
+      {
+        mAnnotation = annotation->clone();
+      }
+    }
+  }
+
+
+  return LIBNUML_OPERATION_SUCCESS;
+}
+int
+NMBase::setAnnotation(const std::string& annotation)
+{
+  int success = LIBNUML_OPERATION_FAILED;
+
+  //
+  // (*NOTICE*)
+  //
+  // syncAnnotation() must not be invoked in this function.
+  //
+  //
+
+  if (annotation.empty())
+  {
+    unsetAnnotation();
+    return LIBNUML_OPERATION_SUCCESS;
+  }
+
+  XMLNode* annt_xmln;
+
+  // you might not have a document !!
+  if (getNUMLDocument() != NULL)
+  {
+    XMLNamespaces* xmlns = getNUMLDocument()->getNamespaces();
+    annt_xmln = XMLNode::convertStringToXMLNode(annotation, xmlns);
+  }
+  else
+  {
+    annt_xmln = XMLNode::convertStringToXMLNode(annotation);
+  }
+
+  if (annt_xmln != NULL)
+  {
+    success = setAnnotation(annt_xmln);
+    delete annt_xmln;
+  }
+
+  return success;
+}
+int
+NMBase::appendAnnotation(const XMLNode* annotation)
+{
+  int success = LIBNUML_OPERATION_FAILED;
+  unsigned int duplicates = 0;
+
+
+  if (annotation == NULL)
+    return LIBNUML_OPERATION_SUCCESS;
+
+
+  XMLNode* new_annotation = NULL;
+  const string&  name = annotation->getName();
+
+  // check for annotation tags and add if necessary
+  if (name != "annotation")
+  {
+    XMLToken ann_t = XMLToken(XMLTriple("annotation", "", ""), XMLAttributes());
+    new_annotation = new XMLNode(ann_t);
+    new_annotation->addChild(*annotation);
+  }
+  else
+  {
+    new_annotation = annotation->clone();
+  }
+
+
+  if (mAnnotation != NULL)
+  {
+    // if mAnnotation is just <annotation/> need to tell
+    // it to no longer be an end
+    if (mAnnotation->isEnd())
+    {
+      mAnnotation->unsetEnd();
+    }
+
+
+    // create a list of existing top level ns
+    vector<string> topLevelNs;
+    unsigned int i = 0;
+
+    for (i = 0; i < mAnnotation->getNumChildren(); i++)
+    {
+      topLevelNs.push_back(mAnnotation->getChild(i).getName());
+    }
+
+
+
+    for (i = 0; i < new_annotation->getNumChildren(); i++)
+    {
+      if (find(topLevelNs.begin(), topLevelNs.end(), (new_annotation->getChild(i).getName())) != topLevelNs.end())
+      {
+        mAnnotation->addChild(new_annotation->getChild(i));
+      }
+      else
+      {
+        duplicates++;
+      }
+    }
+
+    delete new_annotation;
+
+    if (duplicates > 0)
+    {
+      success = LIBNUML_DUPLICATE_ANNOTATION_NS;
+    }
+    else
+    {
+      success = setAnnotation(mAnnotation->clone());
+    }
+
+
+  }
+  else
+  {
+    success = setAnnotation(new_annotation);
+
+    delete new_annotation;
+  }
+
+  return success;
+}
+int
+NMBase::appendAnnotation(const std::string& annotation)
+{
+  int success = LIBNUML_OPERATION_FAILED;
+  XMLNode* annt_xmln;
+
+  if (getNUMLDocument() != NULL)
+  {
+    XMLNamespaces* xmlns = getNUMLDocument()->getNamespaces();
+    annt_xmln = XMLNode::convertStringToXMLNode(annotation, xmlns);
+  }
+  else
+  {
+    annt_xmln = XMLNode::convertStringToXMLNode(annotation);
+  }
+
+  if (annt_xmln != NULL)
+  {
+    success = appendAnnotation(annt_xmln);
+    delete annt_xmln;
+  }
+
+  return success;
+}
+int
+NMBase::removeTopLevelAnnotationElement(const std::string elementName,
+                                    const std::string elementURI /*= ""*/)
+{
+  int success = LIBNUML_OPERATION_FAILED;
+
+  if (mAnnotation == NULL)
+  {
+    success = LIBNUML_OPERATION_SUCCESS;
+    return success;
+  }
+
+  int index = mAnnotation->getIndex(elementName);
+
+  if (index < 0)
+  {
+    // the annotation does not have a child of this name
+    success = LIBNUML_ANNOTATION_NAME_NOT_FOUND;
+    return success;
+  }
+  else
+  {
+    // check uri matches
+    std::string prefix = mAnnotation->getChild(index).getPrefix();
+
+    if (elementURI.empty() == false
+        && elementURI != mAnnotation->getChild(index).getNamespaceURI(prefix))
+    {
+      success = LIBNUML_ANNOTATION_NS_NOT_FOUND;
+      return success;
+    }
+
+    // remove the annotation at the index corresponding to the name
+    mAnnotation->removeChild(index);
+
+    if (mAnnotation->getNumChildren() == 0)
+    {
+      delete mAnnotation;
+      mAnnotation = NULL;
+    }
+
+    // check success
+    if (mAnnotation == NULL || mAnnotation->getIndex(elementName) < 0)
+    {
+      success = LIBNUML_OPERATION_SUCCESS;
+    }
+  }
+
+  return success;
+
+}
+int
+NMBase::replaceTopLevelAnnotationElement(const XMLNode* annotation)
+{
+  int success = LIBNUML_OPERATION_FAILED;
+  XMLNode * replacement = NULL;
+
+  if (annotation->getName() == "annotation")
+  {
+    if (annotation->getNumChildren() != 1)
+    {
+      success = LIBNUML_INVALID_OBJECT;
+      return success;
+    }
+    else
+    {
+      replacement = annotation->getChild(0).clone();
+    }
+  }
+  else
+  {
+    replacement = annotation->clone();
+  }
+
+  success = removeTopLevelAnnotationElement(replacement->getName());
+
+  if (success == LIBNUML_OPERATION_SUCCESS)
+  {
+    success = appendAnnotation(annotation);
+  }
+
+  delete(replacement);
+
+  return success;
+}
+int
+NMBase::replaceTopLevelAnnotationElement(const std::string& annotation)
+{
+  int success = LIBNUML_OPERATION_FAILED;
+  XMLNode* annt_xmln;
+
+  if (getNUMLDocument() != NULL)
+  {
+    XMLNamespaces* xmlns = getNUMLDocument()->getNamespaces();
+    annt_xmln = XMLNode::convertStringToXMLNode(annotation, xmlns);
+  }
+  else
+  {
+    annt_xmln = XMLNode::convertStringToXMLNode(annotation);
+  }
+
+  if (annt_xmln != NULL)
+  {
+    success = replaceTopLevelAnnotationElement(annt_xmln);
+    delete annt_xmln;
+  }
+
+  return success;
+}
+int
+NMBase::setNotes(const XMLNode* notes)
+{
+  if (mNotes == notes)
+  {
+    return LIBNUML_OPERATION_SUCCESS;
+  }
+  else if (notes == NULL)
+  {
+    delete mNotes;
+    mNotes = NULL;
+    return LIBNUML_OPERATION_SUCCESS;
+  }
+
+  delete mNotes;
+  const string&  name = notes->getName();
+
+  /* check for notes tags and add if necessary */
+
+  if (name == "notes")
+  {
+    mNotes = static_cast<XMLNode*>(notes->clone());
+  }
+  else
+  {
+    XMLToken notes_t = XMLToken(XMLTriple("notes", "", ""),
+                                XMLAttributes());
+    mNotes = new XMLNode(notes_t);
+
+    // The root node of the given XMLNode tree can be an empty XMLNode
+    // (i.e. neither start, end, nor text XMLNode) if the given notes was
+    // converted from an XML string whose top level elements are neither
+    // "html" nor "body" and not enclosed with <notes>..</notes> tag
+    // (e.g. <p ...>..</p><br/>).
+    if (!notes->isStart() && !notes->isEnd() && !notes->isText())
+    {
+      for (unsigned int i = 0; i < notes->getNumChildren(); i++)
+      {
+        if (mNotes->addChild(notes->getChild(i)) < 0)
+        {
+          return LIBNUML_OPERATION_FAILED;
+        }
+      }
+    }
+    else
+    {
+      if (mNotes->addChild(*notes) < 0)
+        return LIBNUML_OPERATION_FAILED;
+    }
+  }
+
+  // in L2v2 and beyond the XHTML content of notes is restricted
+  // but I need the notes tag to use the function
+  // so I havent tested it until now
+  if (getLevel() > 2
+      || (getLevel() == 2 && getVersion() > 1))
+  {
+    if (!SyntaxChecker::hasExpectedXHTMLSyntax(mNotes, NULL /*getSedNamespaces()*/))
+    {
+      delete mNotes;
+      mNotes = NULL;
+      return LIBNUML_INVALID_OBJECT;
+    }
+  }
+
+  return LIBNUML_OPERATION_SUCCESS;
+
+}
+int
+NMBase::setNotes(const std::string& notes, bool addXHTMLMarkup /*= false*/)
+{
+  int success = LIBNUML_OPERATION_FAILED;
+
+  if (notes.empty())
+  {
+    success = unsetNotes();
+  }
+  else
+  {
+    XMLNode* notes_xmln;
+
+    // you might not have a document !!
+    if (getNUMLDocument() != NULL)
+    {
+      XMLNamespaces* xmlns = getNUMLDocument()->getNamespaces();
+      notes_xmln = XMLNode::convertStringToXMLNode(notes, xmlns);
+    }
+    else
+    {
+      notes_xmln = XMLNode::convertStringToXMLNode(notes);
+    }
+
+    if (notes_xmln != NULL)
+    {
+      if (addXHTMLMarkup == true)
+      {
+        // user has specified that they want the markup added
+        if (getLevel() > 2
+            || (getLevel() == 2 && getVersion() > 1))
+        {
+          // just say the user passed a string that did not represent xhtml
+          // the xmlnode will not get set as it is invalid
+          if (notes_xmln->getNumChildren() == 0
+              && notes_xmln->isStart() == false
+              && notes_xmln->isEnd() == false
+              && notes_xmln->isText() == true)
+          {
+            //create a parent node of xhtml type p
+            XMLAttributes blank_att = XMLAttributes();
+            XMLTriple triple = XMLTriple("p", "http://www.w3.org/1999/xhtml", "");
+            XMLNamespaces xmlns = XMLNamespaces();
+            xmlns.add("http://www.w3.org/1999/xhtml", "");
+            XMLNode *xmlnode = new XMLNode(XMLToken(triple, blank_att, xmlns));
+
+            // create a text node from the text given
+            xmlnode->addChild(*notes_xmln);
+            success = setNotes(xmlnode);
+            delete xmlnode;
+          }
+          else
+          {
+            success = setNotes(notes_xmln);
+          }
+
+        }
+        else
+        {
+          success = setNotes(notes_xmln);
+        }
+      }
+      else
+      {
+        success = setNotes(notes_xmln);
+      }
+
+      delete notes_xmln;
+    }
+  }
+
+  return success;
+}
+int
+NMBase::appendNotes(const XMLNode* notes)
+{
+  int success = LIBNUML_OPERATION_FAILED;
+
+  if (notes == NULL)
+  {
+    return LIBNUML_OPERATION_SUCCESS;
+  }
+
+  const string&  name = notes->getName();
+
+  // The content of notes in Sed can consist only of the following
+  // possibilities:
+  //
+  //  1. A complete XHTML document (minus the XML and DOCTYPE
+  //     declarations), that is, XHTML content beginning with the
+  //     html tag.
+  //     (_NotesType is _ANotesHTML.)
+  //
+  //  2. The body element from an XHTML document.
+  //     (_NotesType is _ANotesBody.)
+  //
+  //  3. Any XHTML content that would be permitted within a body
+  //     element, each one must declare the XML namespace separately.
+  //     (_NotesType is _ANotesAny.)
+  //
+
+  typedef enum { _ANotesHTML, _ANotesBody, _ANotesAny } _NotesType;
+
+  _NotesType addedNotesType = _ANotesAny;
+  XMLNode   addedNotes;
+
+  //------------------------------------------------------------
+  //
+  // STEP1 : identifies the type of the given notes
+  //
+  //------------------------------------------------------------
+
+  if (name == "notes")
+  {
+    /* check for notes tags on the added notes and strip if present and
+     the notes tag has "html" or "body" element */
+
+    if (notes->getNumChildren() > 0)
+    {
+      // notes->getChild(0) must be "html", "body", or any XHTML
+      // element that would be permitted within a "body" element
+      // (e.g. <p>..</p>,  <br>..</br> and so forth).
+
+      const string& cname = notes->getChild(0).getName();
+
+      if (cname == "html")
+      {
+        addedNotes = notes->getChild(0);
+        addedNotesType = _ANotesHTML;
+      }
+      else if (cname == "body")
+      {
+        addedNotes = notes->getChild(0);
+        addedNotesType = _ANotesBody;
+      }
+      else
+      {
+        // the notes tag must NOT be stripped if notes->getChild(0) node
+        // is neither "html" nor "body" element because the children of
+        // the addedNotes will be added to the curNotes later if the node
+        // is neither "html" nor "body".
+        addedNotes = *notes;
+        addedNotesType = _ANotesAny;
+      }
+    }
+    else
+    {
+      // the given notes is empty
+      return LIBNUML_OPERATION_SUCCESS;
+    }
+  }
+  else
+  {
+    // if the XMLNode argument notes has been created from a string and
+    // it is a set of subelements there may be a single empty node
+    // as parent - leaving this in doesnt affect the writing out of notes
+    // but messes up the check for correct syntax
+    if (!notes->isStart() && !notes->isEnd() && !notes->isText())
+    {
+      if (notes->getNumChildren() > 0)
+      {
+        addedNotes = *notes;
+        addedNotesType = _ANotesAny;
+      }
+      else
+      {
+        // the given notes is empty
+        return LIBNUML_OPERATION_SUCCESS;
+      }
+    }
+    else
+    {
+      if (name == "html")
+      {
+        addedNotes = *notes;
+        addedNotesType = _ANotesHTML;
+      }
+      else if (name == "body")
+      {
+        addedNotes = *notes;
+        addedNotesType = _ANotesBody;
+      }
+      else
+      {
+        // The given notes node needs to be added to a parent node
+        // if the node is neither "html" nor "body" element because the
+        // children of addedNotes will be added to the curNotes later if the
+        // node is neither "html" nor "body" (i.e. any XHTML element that
+        // would be permitted within a "body" element)
+        addedNotes.addChild(*notes);
+        addedNotesType = _ANotesAny;
+      }
+    }
+  }
+
+  //
+  // checks the addedNotes of "html" if the html tag contains "head" and
+  // "body" tags which must be located in this order.
+  //
+  if (addedNotesType == _ANotesHTML)
+  {
+    if ((addedNotes.getNumChildren() != 2) ||
+        ((addedNotes.getChild(0).getName() != "head") ||
+         (addedNotes.getChild(1).getName() != "body")
+         )
+        )
+    {
+      return LIBNUML_INVALID_OBJECT;
+    }
+  }
+
+  // check whether notes is valid xhtml
+  if (getLevel() > 2
+      || (getLevel() == 2 && getVersion() > 1))
+  {
+    XMLNode tmpNotes(XMLTriple("notes", "", ""), XMLAttributes());
+
+    if (addedNotesType == _ANotesAny)
+    {
+      for (unsigned int i = 0; i < addedNotes.getNumChildren(); i++)
+      {
+        tmpNotes.addChild(addedNotes.getChild(i));
+      }
+    }
+    else
+    {
+      tmpNotes.addChild(addedNotes);
+    }
+
+    if (!SyntaxChecker::hasExpectedXHTMLSyntax(&tmpNotes, NULL /*getSedNamespaces()*/))
+    {
+      return LIBNUML_INVALID_OBJECT;
+    }
+  }
+
+
+  if (mNotes != NULL)
+  {
+    //------------------------------------------------------------
+    //
+    //  STEP2: identifies the type of the existing notes
+    //
+    //------------------------------------------------------------
+
+    _NotesType curNotesType   = _ANotesAny;
+    XMLNode&  curNotes = *mNotes;
+
+    // curNotes.getChild(0) must be "html", "body", or any XHTML
+    // element that would be permitted within a "body" element .
+
+    const string& cname = curNotes.getChild(0).getName();
+
+    if (cname == "html")
+    {
+      XMLNode& curHTML = curNotes.getChild(0);
+
+      //
+      // checks the curHTML if the html tag contains "head" and "body" tags
+      // which must be located in this order, otherwise nothing will be done.
+      //
+      if ((curHTML.getNumChildren() != 2) ||
+          ((curHTML.getChild(0).getName() != "head") ||
+           (curHTML.getChild(1).getName() != "body")
+           )
+          )
+      {
+        return LIBNUML_INVALID_OBJECT;
+      }
+
+      curNotesType = _ANotesHTML;
+    }
+    else if (cname == "body")
+    {
+      curNotesType = _ANotesBody;
+    }
+    else
+    {
+      curNotesType = _ANotesAny;
+    }
+
+    /*
+     * BUT we also have the issue of the rules relating to notes
+     * contents and where to add them ie we cannot add a second body element
+     * etc...
+     */
+
+    //------------------------------------------------------------
+    //
+    //  STEP3: appends the given notes to the current notes
+    //
+    //------------------------------------------------------------
+
+    unsigned int i;
+
+    if (curNotesType == _ANotesHTML)
+    {
+      XMLNode& curHTML = curNotes.getChild(0);
+      XMLNode& curBody = curHTML.getChild(1);
+
+      if (addedNotesType == _ANotesHTML)
+      {
+        // adds the given html tag to the current html tag
+
+        XMLNode& addedBody = addedNotes.getChild(1);
+
+        for (i = 0; i < addedBody.getNumChildren(); i++)
+        {
+          if (curBody.addChild(addedBody.getChild(i)) < 0)
+            return LIBNUML_OPERATION_FAILED;
+        }
+      }
+      else if ((addedNotesType == _ANotesBody)
+               || (addedNotesType == _ANotesAny))
+      {
+        // adds the given body or other tag (permitted in the body) to the current
+        // html tag
+
+        for (i = 0; i < addedNotes.getNumChildren(); i++)
+        {
+          if (curBody.addChild(addedNotes.getChild(i)) < 0)
+            return LIBNUML_OPERATION_FAILED;
+        }
+      }
+
+      success = LIBNUML_OPERATION_SUCCESS;
+    }
+    else if (curNotesType == _ANotesBody)
+    {
+      if (addedNotesType == _ANotesHTML)
+      {
+        // adds the given html tag to the current body tag
+
+        XMLNode  addedHTML(addedNotes);
+        XMLNode& addedBody = addedHTML.getChild(1);
+        XMLNode& curBody   = curNotes.getChild(0);
+
+        for (i = 0; i < curBody.getNumChildren(); i++)
+        {
+          addedBody.insertChild(i, curBody.getChild(i));
+        }
+
+        curNotes.removeChildren();
+
+        if (curNotes.addChild(addedHTML) < 0)
+          return LIBNUML_OPERATION_FAILED;
+      }
+      else if ((addedNotesType == _ANotesBody) || (addedNotesType == _ANotesAny))
+      {
+        // adds the given body or other tag (permitted in the body) to the current
+        // body tag
+
+        XMLNode& curBody = curNotes.getChild(0);
+
+        for (i = 0; i < addedNotes.getNumChildren(); i++)
+        {
+          if (curBody.addChild(addedNotes.getChild(i)) < 0)
+            return LIBNUML_OPERATION_FAILED;
+        }
+      }
+
+      success = LIBNUML_OPERATION_SUCCESS;
+    }
+    else if (curNotesType == _ANotesAny)
+    {
+      if (addedNotesType == _ANotesHTML)
+      {
+        // adds the given html tag to the current any tag permitted in the body.
+
+        XMLNode  addedHTML(addedNotes);
+        XMLNode& addedBody = addedHTML.getChild(1);
+
+        for (i = 0; i < curNotes.getNumChildren(); i++)
+        {
+          addedBody.insertChild(i, curNotes.getChild(i));
+        }
+
+        curNotes.removeChildren();
+
+        if (curNotes.addChild(addedHTML) < 0)
+          return LIBNUML_OPERATION_FAILED;
+      }
+      else if (addedNotesType == _ANotesBody)
+      {
+        // adds the given body tag to the current any tag permitted in the body.
+
+        XMLNode addedBody(addedNotes);
+
+        for (i = 0; i < curNotes.getNumChildren(); i++)
+        {
+          addedBody.insertChild(i, curNotes.getChild(i));
+        }
+
+        curNotes.removeChildren();
+
+        if (curNotes.addChild(addedBody) < 0)
+          return LIBNUML_OPERATION_FAILED;
+      }
+      else if (addedNotesType == _ANotesAny)
+      {
+        // adds the given any tag permitted in the boy to that of the current
+        // any tag.
+
+        for (i = 0; i < addedNotes.getNumChildren(); i++)
+        {
+          if (curNotes.addChild(addedNotes.getChild(i)) < 0)
+            return LIBNUML_OPERATION_FAILED;
+        }
+      }
+
+      success = LIBNUML_OPERATION_SUCCESS;
+    }
+  }
+  else // if (mNotes == NULL)
+  {
+    // setNotes accepts XMLNode with/without top level notes tags.
+    success = setNotes(notes);
+  }
+
+  return success;
+}
+int
+NMBase::appendNotes(const std::string& notes)
+{
+  int success = LIBNUML_OPERATION_FAILED;
+
+  if (notes.empty())
+  {
+    return LIBNUML_OPERATION_SUCCESS;
+  }
+
+  XMLNode* notes_xmln;
+
+  // you might not have a document !!
+  if (getNUMLDocument() != NULL)
+  {
+    XMLNamespaces* xmlns = getNUMLDocument()->getNamespaces();
+    notes_xmln = XMLNode::convertStringToXMLNode(notes, xmlns);
+  }
+  else
+  {
+    notes_xmln = XMLNode::convertStringToXMLNode(notes);
+  }
+
+  if (notes_xmln != NULL)
+  {
+    success = appendNotes(notes_xmln);
+    delete notes_xmln;
+  }
+
+  return success;
+
+}
+int
+NMBase::unsetNotes()
+{
+  delete mNotes;
+  mNotes = NULL;
+  return LIBNUML_OPERATION_SUCCESS;
+}
+int
+NMBase::unsetAnnotation()
+{
+  XMLNode* empty = NULL;
+  return setAnnotation(empty);
+}
+
+XMLNode*
+NMBase::getNotes() const
+{
+  return mNotes;
+}
+std::string
+NMBase::getNotesString() const
+{
+  return XMLNode::convertXMLNodeToString(mNotes);
+}
+XMLNode*
+NMBase::getAnnotation() const
+{
+  const_cast<NMBase *>(this)->syncAnnotation();
+
+  return mAnnotation;
+}
+std::string
+NMBase::getAnnotationString() const
+{
+return XMLNode::convertXMLNodeToString(getAnnotation());
+}
+
+
 /*
  * @return the partial NUML that describes this NUML object.
  */
@@ -777,16 +1690,16 @@ NMBase::writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) cons
  * implementation of this method as well.
  */
 void
-NMBase::writeElements (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& ) const
+NMBase::writeElements (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const
 {
-//  if ( mNotes      ) stream << *mNotes;
+  if ( mNotes      ) stream << *mNotes;
 
   /*
    * NOTE: CVTerms on a model have already been dealt with
    */
 
-//TODO  const_cast <NMBase *> (this)->syncAnnotation();
- // if (mAnnotation) stream << *mAnnotation;
+  const_cast <NMBase *> (this)->syncAnnotation();
+  if (mAnnotation) stream << *mAnnotation;
 }
 
 /*
@@ -837,18 +1750,6 @@ NMBase::readAnnotation (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
     mAnnotation = new LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode(stream);
     checkAnnotation();
 
-    //TODO
-   /* if(mCVTerms)
-    {
-      unsigned int size = mCVTerms->getSize();
-      while (size--) delete static_cast<CVTerm*>( mCVTerms->remove(0) );
-      delete mCVTerms;
-    }
-    mCVTerms = new List();
-    RDFAnnotationParser::parseRDFAnnotation(mAnnotation, mCVTerms);  */
-//    new_annotation = RDFAnnotationParser::deleteRDFAnnotation(mAnnotation);
-//    delete mAnnotation;
-//    mAnnotation = new_annotation;
     return true;
   }
 
@@ -895,6 +1796,7 @@ NMBase::checkXHTML(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode * xhtml)
   * it will be in the XML currently being checked and so a more
   * informative message can be added
   */
+  if(getErrorLog() != NULL)
   for (i = 0; i < getErrorLog()->getNumErrors(); i++)
   {
     if (getErrorLog()->getError(i)->getErrorId() == LIBSBML_CPP_NAMESPACE_QUALIFIER BadXMLDeclLocation)
@@ -1007,7 +1909,7 @@ NMBase::checkAnnotation()
 
     bool implicitNSdecl = false;
    // must have a namespace
-    if (topLevel.getNamespaces().getLength() == 0)
+    if (topLevel.getNamespaces().getLength() == 0 && mNUML != NULL)
     {
       // not on actual element - is it explicit ??
       if( mNUML->getNamespaces() != NULL)
@@ -1164,7 +2066,8 @@ NMBase::logUnknownAttribute( string attribute,
   msg << "Attribute '" << attribute << "' is not part of the "
       << "definition of an NUML Level " << level
       << " Version " << version << " " << element << " element.";
-      
+
+  if(getErrorLog() != NULL)
   getErrorLog()->logError(NUMLNotSchemaConformant, level, version, msg.str());
 }
 
@@ -1180,7 +2083,8 @@ NMBase::logUnknownElement( string element,
 
   msg << "Element '" << element << "' is not part of the definition of "
       << "NUML Level " << level << " Version " << version << ".";
-      
+
+  if(getErrorLog() != NULL)
   getErrorLog()->logError(NUMLUnrecognizedElement,
         level, version, msg.str());
 }
@@ -1199,7 +2103,8 @@ NMBase::logEmptyString( string attribute,
 
   msg << "Attribute '" << attribute << "' on an "
     << element << " must not be an empty string.";
-      
+
+  if(getErrorLog() != NULL)
   getErrorLog()->logError(NUMLNotSchemaConformant,
         level, version, msg.str());
 }
@@ -1257,7 +2162,7 @@ NMBase::writeAttributes (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream
   {
     if (this->getNamespaces()) stream << *(this->getNamespaces());
   }
-  if ( getLevel() > 1 && !mMetaId.empty() )
+  if (!mMetaId.empty() )
   {
     stream.writeAttribute("metaid", mMetaId);
   }

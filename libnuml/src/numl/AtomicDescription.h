@@ -191,7 +191,16 @@ public:
   */
   int setName (const std::string& name);
 
+  /**
+   * @return the id of this element
+   */
   virtual const std::string& getId() const;
+
+  /**
+   * set the id of this element
+   * @param id the id to set
+   * @return success code
+   */
   virtual int setId(const std::string& id);
 
   /**

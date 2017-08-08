@@ -68,8 +68,8 @@ LIBNUML_CPP_NAMESPACE_BEGIN
 bool
 NUMLDocument::conversion_errors(unsigned int errors)
 {
-  /** 
-   * changed this code in line with the rest of the validation 
+  /**
+   * changed this code in line with the rest of the validation
    * errors: ie each now assigns a severity
    * Error would imply conversion not possible
    * Warning implies lose of data but conversion still possible
@@ -89,7 +89,7 @@ NUMLDocument::conversion_errors(unsigned int errors)
   //for (unsigned int i = 0; i < errors; i++)
   //{
   //  bool failure = true;
-  //    
+  //
   //  for (unsigned int n = 0; n < sizeof(ignorable)/sizeof(ignorable[0]); n++)
   //  {
   //    if (getError(i)->getErrorId() == ignorable[n])
@@ -113,7 +113,7 @@ NUMLDocument::conversion_errors(unsigned int errors)
  *
  * This is the "default" level in the sense that libNUML will create
  * models of this NUML Level unless told otherwise.
- * 
+ *
  * @return the number representing the most recent NUML specification level
  * (at the time this libNUML was released).
  */
@@ -130,7 +130,7 @@ NUMLDocument::getDefaultLevel ()
  *
  * This is the "default" version in the sense that libNUML will create
  * models of this NUML Level and Version unless told otherwise.
- * 
+ *
  * @return the number representing the most recent NUML specification
  * version (at the time this libNUML was released).
  */
@@ -199,7 +199,7 @@ NUMLDocument::NUMLDocument (const NUMLDocument& orig) :
   }
   */
   //if(orig.mNamespaces)
-  //  this->mNamespaces = 
+  //  this->mNamespaces =
   //  new XMLNamespaces(*const_cast<NUMLDocument&>(orig).mNamespaces);
   //else
   //  this->mNamespaces = 0;
@@ -302,6 +302,7 @@ NUMLDocument::setLevelAndVersion (unsigned int level, unsigned int version,
   /* since this function will write to the error log we should
    * clear anything in the log first
    */
+  if(getErrorLog() != NULL)
   getErrorLog()->clearLog();
 
   bool conversionSuccess = false;
@@ -312,7 +313,7 @@ NUMLDocument::setLevelAndVersion (unsigned int level, unsigned int version,
    * to a valid model with a valid internal representation
    */
   /* see whether the unit validator is on */
-  
+
 
   if (strict)
   {
@@ -329,15 +330,17 @@ NUMLDocument::setLevelAndVersion (unsigned int level, unsigned int version,
     delete d;
 
   //  errors += checkConsistency();
+    if(getErrorLog() != NULL)
     errors = getErrorLog()->getNumFailsWithSeverity(LIBNUML_SEV_ERROR);
 
-    /* if the current model is not valid dont convert 
+    /* if the current model is not valid dont convert
     */
     if (errors > 0)
     {
       return conversionSuccess;
     }
 
+    if(getErrorLog() != NULL)
     getErrorLog()->clearLog();
   }
 
@@ -350,8 +353,8 @@ NUMLDocument::setLevelAndVersion (unsigned int level, unsigned int version,
 
 
   /* restore original value */
-  mApplicableValidators = origValidators; 
-  
+  mApplicableValidators = origValidators;
+
   mLevel   = level;
   mVersion = version;
 
@@ -407,29 +410,29 @@ NUMLDocument::setLevelAndVersion (unsigned int level, unsigned int version,
 NMBase*
 NUMLDocument::createObject (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 {
-	const string& name   = stream.peek().getName();
-	NMBase*        object = 0;
-	//unsigned int level = getLevel();
-	//unsigned int version = getVersion();
+    const string& name   = stream.peek().getName();
+    NMBase*        object = 0;
+    //unsigned int level = getLevel();
+    //unsigned int version = getVersion();
 
-	if (name == "ontologyTerms")
-		{
-			if (mOntologyTerms.size() != 0)
-			{
-				logError(NUMLNotSchemaConformant);
-			}
-			object = &mOntologyTerms;
-		}
-	else if (name == "resultComponents")
-		{
-			if (mResultComponents.size() != 0)
-			{
-				logError(NUMLNotSchemaConformant);
-			}
-			object = &mResultComponents;
-		}
+    if (name == "ontologyTerms")
+        {
+            if (mOntologyTerms.size() != 0)
+            {
+                logError(NUMLNotSchemaConformant);
+            }
+            object = &mOntologyTerms;
+        }
+    else if (name == "resultComponents")
+        {
+            if (mResultComponents.size() != 0)
+            {
+                logError(NUMLNotSchemaConformant);
+            }
+            object = &mResultComponents;
+        }
 
-	return object;
+    return object;
 }
 
 /*
@@ -442,7 +445,7 @@ NUMLDocument::createOntologyTerm ()
 
   try
   {
-	  oTerm = new OntologyTerm(getNUMLNamespaces());
+      oTerm = new OntologyTerm(getNUMLNamespaces());
   }
   catch (...)
   {
@@ -475,7 +478,7 @@ NUMLDocument::createResultComponent ()
 
   try
   {
-	  oResultComp = new ResultComponent(getNUMLNamespaces());
+      oResultComp = new ResultComponent(getNUMLNamespaces());
   }
   catch (...)
   {
@@ -682,14 +685,14 @@ NUMLDocument::readAttributes (const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttribute
     logError(InvalidNUMLLevelVersion);
     return;
   }
-  
+
   /* check that numl namespace has been set */
   unsigned int match = 0;
   if (mNUMLNamespaces->getNamespaces() == NULL)
   {
     logError(NUMLInvalidNamespaceOnNUML);
   }
-  else 
+  else
   {
     for (int n = 0; n < mNUMLNamespaces->getNamespaces()->getLength(); n++)
     {
@@ -740,7 +743,7 @@ NUMLDocument::writeAttributes (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& 
      stream << xmlns;
 
      mNUMLNamespaces->setNamespaces(&xmlns);
-  }  
+  }
 
   NMBase::writeAttributes(stream);
 
@@ -822,7 +825,7 @@ NUMLDocument_free (NUMLDocument_t *d)
  * Creates and returns a deep copy of the given NUMLDocument_t structure
  *
  * @param d the NUMLDocument_t structure
- * 
+ *
  * @return a (deep) copy of the NUMLDocument_t structure
  */
 LIBNUML_EXTERN
@@ -837,7 +840,7 @@ NUMLDocument_clone (const NUMLDocument_t *d)
  * Returns the NUML Level of the given NUMLDocument_t structure.
  *
  * @param d the NUMLDocument_t structure
- * 
+ *
  * @return the NUML Level number
  */
 LIBNUML_EXTERN
@@ -853,7 +856,7 @@ NUMLDocument_getLevel (const NUMLDocument_t *d)
  * structure.
  *
  * @param d the NUMLDocument_t structure
- * 
+ *
  * @return the version number
  */
 LIBNUML_EXTERN
@@ -872,9 +875,9 @@ NUMLDocument_getVersion (const NUMLDocument_t *d)
  * NUML.
  *
  * Callers can also check compatibility directly using the methods
- * 
+ *
  * The valid combinations as of this release of libNUML are the
- * following: 
+ * following:
  *
  * @li Level 1 Version 1
  *
@@ -909,9 +912,9 @@ NUMLDocument_setLevelAndVersion (  NUMLDocument_t *d
  * NUML.
  *
  * Callers can also check compatibility directly using the methods
- * 
+ *
  * The valid combinations as of this release of libNUML are the
- * following: 
+ * following:
  *
  * @li Level 1 Version 1
  *
@@ -929,13 +932,13 @@ NUMLDocument_setLevelAndVersion (  NUMLDocument_t *d
  *
  * Strict conversion applies the additional criteria that both the source
  * and the target model must be consistent NUML. Users can control the
- * consistency checks that are applied using the 
+ * consistency checks that are applied using the
  * NUMLDocument::setConsistencyChecks function. If either the source
  * or the potential target model have validation errors, the conversion
  * is not performed.  When a strict conversion is successful, the
  * underlying NUML object model is altered to reflect the new level
  * and version.  Thus information that cannot be converted (e.g. sboTerms)
- * will be lost.  
+ * will be lost.
  */
 LIBNUML_EXTERN
 int
@@ -1007,7 +1010,7 @@ NUMLDocument_getNumErrors (const NUMLDocument_t *d)
  *     line NNN: (id) message
  *
  * @param d the NUMLDocument_t structure
- * 
+ *
  * @param stream the output stream where the messages should be printed
  */
 LIBNUML_EXTERN
@@ -1052,7 +1055,7 @@ NUMLDocument_getDefaultVersion ()
  * of this NUML document.
  *
  * @param d the NUMLDocument_t structure
- * 
+ *
  * @return pointer to the XMLNamespaces_t structure associated with this NUML object
  */
 LIBNUML_EXTERN
@@ -1060,6 +1063,16 @@ const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces_t *
 NUMLDocument_getNamespaces(NUMLDocument_t *d)
 {
   return d->getNamespaces();
+}
+
+
+
+ResultComponent *
+NUMLDocument::getResultComponent(unsigned int index)
+{
+  if (index >= getNumResultComponents())
+    return NULL;
+  return getResultComponents()->get(index);
 }
 
 LIBNUML_CPP_NAMESPACE_END

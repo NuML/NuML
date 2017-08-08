@@ -249,15 +249,15 @@ NUMLDocument* createExampleTwoDimensionNuMLDoc()
 
 NUMLDocument* createExample52()
 {
-  auto doc = new NUMLDocument();
-  auto r = doc->createResultComponent();
+  NUMLDocument* doc = new NUMLDocument();
+  ResultComponent* r = doc->createResultComponent();
   r->setId("main_fitting_result");
-  auto d = r->getDimensionDescription();
+  DimensionDescription* d = r->getDimensionDescription();
 
-  auto t = d->createTupleDescription();
+  TupleDescription* t = d->createTupleDescription();
   t->setName("Main");
 
-  auto a = t->createAtomicDescription();
+  AtomicDescription* a = t->createAtomicDescription();
   a->setName( "Objective Value");
   a->setValueType("float");
 
@@ -269,11 +269,11 @@ NUMLDocument* createExample52()
   a->setName( "Standard Deviation");
   a->setValueType("float");
 
-  auto dim = r->getDimension();
+  Dimension* dim = r->getDimension();
 
-  auto tuple = dim->createTuple();
+  Tuple* tuple = dim->createTuple();
 
-  auto val = tuple->createAtomicValue();
+  AtomicValue* val = tuple->createAtomicValue();
   val->setValue("12.5015");
 
   val = tuple->createAtomicValue();
