@@ -24,23 +24,29 @@
 #ifndef COMPOSITEVALUES_H_
 #define COMPOSITEVALUES_H_
 
-#include <numl/Tuple.h>
-#include <numl/AtomicValue.h>
+#include <numl/common/extern.h>
+#include <numl/common/numlfwd.h>
+
+//#include <numl/Tuple.h>
+//#include <numl/AtomicValue.h>
 
 
 
 #include <numl/NMBase.h>
 #include <numl/NUMLList.h>
+#include <numl/Dimension.h>
 
 #ifdef __cplusplus
 LIBNUML_CPP_NAMESPACE_BEGIN
 
 //class CompositeValue;
 class NUMLDocument;
+class Tuple;
+class AtomicValue;
 /*
  *
  */
-class LIBNUML_EXTERN CompositeValue : public NUMLList
+class LIBNUML_EXTERN CompositeValue : public Dimension
 {
 public:
 

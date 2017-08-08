@@ -14,15 +14,19 @@
 * Joseph O. Dada, The University of Manchester - initial API and implementation
 * ****************************************************************************
 **/
-#include <numl/NUMLDocument.h>
+
 #include <numl/CompositeDescription.h>
+#include <numl/AtomicDescription.h>
+#include <numl/TupleDescription.h>
+#include <numl/NUMLDocument.h>
+#include <numl/common/operationReturnValues.h>
 
 using namespace std;
 
 LIBNUML_CPP_NAMESPACE_BEGIN
 
 CompositeDescription::CompositeDescription (unsigned int level, unsigned int version) :
-   NUMLList ( level, version )
+   DimensionDescription ( level, version )
 {
   if (!hasValidLevelVersionNamespaceCombination())
     throw NUMLConstructorException();
@@ -30,7 +34,7 @@ CompositeDescription::CompositeDescription (unsigned int level, unsigned int ver
 
 
 CompositeDescription::CompositeDescription (NUMLNamespaces *numlns) :
-    NUMLList                  ( numlns )
+    DimensionDescription                  ( numlns )
 {
   if (!hasValidLevelVersionNamespaceCombination())
     throw NUMLConstructorException();
@@ -58,8 +62,6 @@ CompositeDescription::setId(const std::string& id)
   mId = id;
   return LIBNUML_OPERATION_SUCCESS;
 }
-
-/*
 
 /*
  * @return a (deep) copy of this CompositeDescription.
@@ -437,7 +439,7 @@ CompositeDescription::createObject (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStre
       object = new CompositeDescription(NUMLDocument::getDefaultLevel(), NUMLDocument::getDefaultVersion());
     }
 
-    if (object) mItems.push_back(object);
+    if (object) appendAndOwn(object);
   }
   else if (name == "atomicDescription")
   {
@@ -457,7 +459,7 @@ CompositeDescription::createObject (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStre
 
     }
 
-    if (object) mItems.push_back(object);
+    if (object) appendAndOwn(object);
   }
   else if (name == "tupleDescription")
   {
@@ -478,7 +480,7 @@ CompositeDescription::createObject (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStre
 
     }
 
-    if (object) mItems.push_back(object);
+    if (object) appendAndOwn(object);
   /*  {
       if (mTupleDescription.size() != 0)
       {

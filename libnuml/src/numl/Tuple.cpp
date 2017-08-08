@@ -25,12 +25,15 @@
 #include <numl/NUMLError.h>
 
 #include <numl/Tuple.h>
+#include <numl/AtomicValue.h>
+
+
 
 using namespace std;
 LIBNUML_CPP_NAMESPACE_BEGIN
 
 Tuple::Tuple (unsigned int level, unsigned int version) :
-   NUMLList ( level, version )
+   Dimension ( level, version )
 {
   if (!hasValidLevelVersionNamespaceCombination())
     throw NUMLConstructorException();
@@ -38,7 +41,7 @@ Tuple::Tuple (unsigned int level, unsigned int version) :
 
 
 Tuple::Tuple (NUMLNamespaces *numlns) :
-    NUMLList                  ( numlns )
+    Dimension                  ( numlns )
 {
   if (!hasValidLevelVersionNamespaceCombination())
     throw NUMLConstructorException();
@@ -182,7 +185,7 @@ Tuple::createObject (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream)
 		 aValue->setValue(value);
 	  }
 	//  object = aValue;
-	  if (aValue) mItems.push_back(aValue);
+	  if (aValue) appendAndOwn(aValue);
   }
 
   return aValue;

@@ -26,6 +26,7 @@
 
 
 #include <numl/NUMLDocument.h>
+#include <numl/common/operationReturnValues.h>
 
 #include <numl/NUMLVisitor.h>
 #include <numl/NUMLError.h>

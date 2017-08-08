@@ -20,6 +20,12 @@
 
 #include <numl/NUMLDocument.h>
 #include <numl/DimensionDescription.h>
+#include <numl/common/operationReturnValues.h>
+
+#include <numl/AtomicDescription.h>
+#include <numl/TupleDescription.h>
+#include <numl/CompositeDescription.h>
+
 
 using namespace std;
 
@@ -72,6 +78,93 @@ DimensionDescription::getElementName () const
   return dimensionDescription;
 }
 
+
+/**
+ * Creates a new CompositeDescription and add it to DimensionDescription's list inside this ResultComponent and return it.
+ *
+ * @return the CompositeDescription object created
+ *
+ * @see addCompositeDescription(const CompositeDescription *compDesc)
+ */
+CompositeDescription*
+DimensionDescription::createCompositeDescription()
+{
+  CompositeDescription* desc = 0;
+
+  try
+  {
+    desc = new CompositeDescription(getNUMLNamespaces());
+  }
+  catch (...)
+  {
+    /* here we do not create a default object as the level/version must
+     * match the parent object
+     *
+     * so do nothing
+     */
+  }
+
+  if (desc) appendAndOwn(desc);
+
+  return desc;
+}
+
+/**
+ * creates a new tupledescription and adds it to the dimensiondescription
+ * @return the created tuple description
+ */
+TupleDescription*
+DimensionDescription::createTupleDescription()
+{
+  TupleDescription* desc = 0;
+
+  try
+  {
+    desc = new TupleDescription(getNUMLNamespaces());
+  }
+  catch (...)
+  {
+    /* here we do not create a default object as the level/version must
+     * match the parent object
+     *
+     * so do nothing
+     */
+  }
+
+  if (desc) appendAndOwn(desc);
+
+  return desc;
+
+}
+
+/**
+ * creates a new atomic description and adds it to the dimensiondescription
+ * @return the created atomic description
+ */
+AtomicDescription*
+DimensionDescription::createAtomicDescription()
+{
+  AtomicDescription* desc = 0;
+
+  try
+  {
+    desc = new AtomicDescription(getNUMLNamespaces());
+  }
+  catch (...)
+  {
+    /* here we do not create a default object as the level/version must
+     * match the parent object
+     *
+     * so do nothing
+     */
+  }
+
+  if (desc) appendAndOwn(desc);
+
+  return desc;
+}
+
+
 /*
  * @return a (deep) copy of this DimensionDescription.
  */
@@ -93,28 +186,18 @@ DimensionDescription::getItemTypeCode () const
 }
 
 /* return nth item in list */
-CompositeDescription *
+DimensionDescription *
 DimensionDescription::get(unsigned int n)
 {
-  return static_cast<CompositeDescription*>(NUMLList::get(n));
+  return static_cast<DimensionDescription*>(NUMLList::get(n));
 }
 
 
 /* return nth item in list */
-const CompositeDescription *
+const DimensionDescription *
 DimensionDescription::get(unsigned int n) const
 {
-  return static_cast<const CompositeDescription*>(NUMLList::get(n));
-}
-
-/*
- * @return the CompositeDescription in this DimensionDescription or NULL if no such
- * CompositeDescription exists.
- */
-CompositeDescription*
-DimensionDescription::getCompositeDescription()
-{
-  return 0; //&mCompositeDescription;
+  return static_cast<const DimensionDescription*>(NUMLList::get(n));
 }
 
 /**
@@ -126,49 +209,39 @@ struct IdEqS : public unary_function<NMBase*, bool>
 
   IdEqS (const string& id) : id(id) { }
   bool operator() (NMBase* sb)
-                   { return static_cast <CompositeDescription *> (sb)->getId() == id; }
+                   { return static_cast <DimensionDescription *> (sb)->getId() == id; }
 };
 
-
-/* return all the items */
-/*DimensionDescription*
-DimensionDescription::getDimensionDescription()
-{
-  //return &mDimensionDescription;
-   return static_cast<DimensionDescription*>(this);
-//	return this;
-}*/
-
 /* return item by id */
-CompositeDescription*
+DimensionDescription*
 DimensionDescription::get (const std::string& sid)
 {
-  return const_cast<CompositeDescription*>(
+  return const_cast<DimensionDescription*>(
       static_cast<const DimensionDescription&>(*this).get(sid) );
 }
 
 
 /* return item by id */
-const CompositeDescription*
+const DimensionDescription*
 DimensionDescription::get (const std::string& sid) const
 {
   vector<NMBase*>::const_iterator result;
 
   result = find_if( mItems.begin(), mItems.end(), IdEqS(sid) );
-  return (result == mItems.end()) ? 0 : static_cast <CompositeDescription*> (*result);
+  return (result == mItems.end()) ? 0 : static_cast <DimensionDescription*> (*result);
 }
 
 
 /* Removes the nth item from this list */
-CompositeDescription*
+DimensionDescription*
 DimensionDescription::remove (unsigned int n)
 {
-  return static_cast<CompositeDescription*>(NUMLList::remove(n));
+  return static_cast<DimensionDescription*>(NUMLList::remove(n));
 }
 
 
 /* Removes item in this list by id */
-CompositeDescription*
+DimensionDescription*
 DimensionDescription::remove (const std::string& sid)
 {
   NMBase* item = 0;
@@ -182,7 +255,7 @@ DimensionDescription::remove (const std::string& sid)
     mItems.erase(result);
   }
 
-  return static_cast <CompositeDescription*> (item);
+  return static_cast <DimensionDescription*> (item);
 }
 
 
@@ -201,6 +274,7 @@ void DimensionDescription::writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputS
   if (getNUMLDocument() != NULL)
   {
     NMBase::writeXMLNS(stream);
+    return;
   }
 
   LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces* ns = getNamespaces();
@@ -274,15 +348,41 @@ DimensionDescription::createObject (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStre
     {
       object = new CompositeDescription(NUMLDocument::getDefaultLevel(), NUMLDocument::getDefaultVersion());
     }
-    if (object) mItems.push_back(object);
+    if (object) appendAndOwn(object);
 
   }
   else if(name == "tupleDescription")
   {
+    try
+    {
 
+      object = new TupleDescription(getNUMLNamespaces());
+    }
+    catch (NUMLConstructorException*)
+    {
+      object = new TupleDescription(NUMLDocument::getDefaultLevel(), NUMLDocument::getDefaultVersion());
+    }
+    catch ( ... )
+    {
+      object = new TupleDescription(NUMLDocument::getDefaultLevel(), NUMLDocument::getDefaultVersion());
+    }
+    if (object)  appendAndOwn(object);
   }else if(name == "atomicDescription")
   {
+    try
+    {
 
+      object = new AtomicDescription(getNUMLNamespaces());
+    }
+    catch (NUMLConstructorException*)
+    {
+      object = new AtomicDescription(NUMLDocument::getDefaultLevel(), NUMLDocument::getDefaultVersion());
+    }
+    catch ( ... )
+    {
+      object = new AtomicDescription(NUMLDocument::getDefaultLevel(), NUMLDocument::getDefaultVersion());
+    }
+    if (object)  appendAndOwn(object);
   }
 
   return object;

@@ -31,7 +31,7 @@
 
 #include <numl/NMBase.h>
 #include <numl/NUMLList.h>
-#include <numl/AtomicDescription.h>
+#include <numl/DimensionDescription.h>
 #include <vector>
 
 
@@ -41,7 +41,7 @@ LIBNUML_CPP_NAMESPACE_BEGIN
 class AtomicDescription;
 class NUMLVisitor;
 
-class LIBNUML_EXTERN TupleDescription : public NUMLList
+class LIBNUML_EXTERN TupleDescription : public DimensionDescription
 {
 
 public:

@@ -42,11 +42,9 @@
 #include <numl/DimensionDescription.h>
 #include <numl/NUMLList.h>
 #include <numl/NMBase.h>
+#include <numl/common/operationReturnValues.h>
 
-/*#ifdef USE_LAYOUT
- #include <numl/layout/LineSegment.h>
-#endif
-*/
+#include <numl/AtomicValue.h>
 
 using namespace std;
 
@@ -1558,75 +1556,6 @@ NMBase_setMetaId (NMBase_t *sb, const char *metaid)
   return (metaid == NULL) ? sb->unsetMetaId() : sb->setMetaId(metaid);
 }
 
-
-///**
-// * Sets the value of the "id" attribute of this NUML object.
-// *
-// * The string @p sid is copied.  Note that NUML has strict requirements
-// * for the syntax of identifiers.  The following is summary of the
-// * definition of the NUML identifier type @c SId (here expressed in an
-// * extended form of BNF notation):
-// * @code
-// *   letter ::= 'a'..'z','A'..'Z'
-// *   digit  ::= '0'..'9'
-// *   idChar ::= letter | digit | '_'
-// *   SId    ::= ( letter | '_' ) idChar*
-// * @endcode
-// * The equality of NUML identifiers is determined by an exact character
-// * sequence match; i.e., comparisons must be performed in a
-// * case-sensitive manner.  In addition, there are a few conditions for
-// * the uniqueness of identifiers in an NUML model.  Please consult the
-// * NUML specifications for the exact formulations.
-// *
-// * @param sb the NMBase_t structure
-// *
-// * @param sid the string to use as the identifier of this object
-// *
-// * @return integer value indicating success/failure of the
-// * function.  @if clike The value is drawn from the
-// * enumeration #OperationReturnValues_t. @endif The possible values
-// * returned by this function are:
-// *
-// * @li LIBNUML_OPERATION_SUCCESS
-// * @li LIBNUML_INVALID_ATTRIBUTE_VALUE
-// *
-// * @note Using this function with an id of NULL is equivalent to
-// * unsetting the "id" attribute.
-// */
-//LIBNUML_EXTERN
-//int
-//NMBase_setId (NMBase_t *sb, const char *sid)
-//{
-//  return (sid == NULL) ? sb->unsetId() : sb->setId(sid);
-//}
-//
-//
-///**
-// * Sets the value of the "name" attribute of this NUML object.
-// *
-// * The string in @p name is copied.
-// *
-// * @param sb the NMBase_t structure
-// *
-// * @param name the new name for the object
-// *
-// * @return integer value indicating success/failure of the
-// * function.  @if clike The value is drawn from the
-// * enumeration #OperationReturnValues_t. @endif The possible values
-// * returned by this function are:
-// *
-// * @li LIBNUML_OPERATION_SUCCESS
-// * @li LIBNUML_INVALID_ATTRIBUTE_VALUE
-// *
-// * @note Using this function with the name set to NULL is equivalent to
-// * unsetting the "name" attribute.
-// */
-//LIBNUML_EXTERN
-//int
-//NMBase_setName (NMBase_t *sb, const char *name)
-//{
-//  return (name == NULL) ? sb->unsetName() : sb->setName(name);
-//}
 
 
 /**

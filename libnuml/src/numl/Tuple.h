@@ -30,7 +30,7 @@
 
 #include <numl/NMBase.h>
 #include <numl/NUMLList.h>
-#include <numl/AtomicValue.h>
+#include <numl/Dimension.h>
 #include <vector>
 
 
@@ -41,7 +41,7 @@ class AtomicValue;
 class AtomicValues;
 class NUMLVisitor;
 
-class LIBNUML_EXTERN Tuple : public NUMLList
+class LIBNUML_EXTERN Tuple : public Dimension
 {
 
 public:

@@ -26,6 +26,7 @@
 #include <numl/NUMLError.h>
 #include <numl/NUMLDocument.h>
 #include <numl/NUMLWriter.h>
+#include <numl/common/operationReturnValues.h>
 
 #include <sbml/compress/CompressCommon.h>
 #include <sbml/compress/OutputCompressor.h>

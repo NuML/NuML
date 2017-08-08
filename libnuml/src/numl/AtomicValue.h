@@ -29,7 +29,7 @@
 //#include <numl/common/operationReturnValues.h>
 
 
-#include <numl/NMBase.h>
+#include <numl/Dimension.h>
 #include <numl/NUMLList.h>
 #include <numl/NUMLTypes.h>
 #include <string>
@@ -38,7 +38,7 @@
 #ifdef __cplusplus
 LIBNUML_CPP_NAMESPACE_BEGIN
 
-class LIBNUML_EXTERN AtomicValue : public NMBase {
+class LIBNUML_EXTERN AtomicValue : public Dimension {
 
 public:
 

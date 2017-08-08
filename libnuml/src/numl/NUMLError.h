@@ -363,13 +363,12 @@ public:
   NUMLError(const NUMLError& orig);
 
 
-#ifndef SWIG
-
-
   /**
    * clone function
    */
   virtual NUMLError* clone() const;
+
+#ifndef SWIG
 
   /**
    * Outputs this NUMLError to stream in the following format (and followed

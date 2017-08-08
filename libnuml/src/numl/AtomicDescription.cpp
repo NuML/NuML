@@ -19,19 +19,25 @@
 #include <sbml/xml/XMLInputStream.h>
 #include <sbml/xml/XMLOutputStream.h>
 
+#include <numl/common/extern.h>
+#include <numl/common/libnuml-namespace.h>
+#include <numl/common/operationReturnValues.h>
+
+#include <numl/common/numlfwd.h>
+
+#include <numl/AtomicDescription.h>
 #include <numl/NUMLVisitor.h>
 #include <numl/NUMLDocument.h>
 #include <numl/NUMLError.h>
 
 
-#include <numl/AtomicDescription.h>
 
 using namespace std;
 
 LIBNUML_CPP_NAMESPACE_BEGIN
 
 AtomicDescription::AtomicDescription (unsigned int level, unsigned int version) 
-  : NMBase ( level, version )
+  : DimensionDescription ( level, version )
   , mId                 ( ""   )
   , mName               ( ""   )
   , mOntologyTerm       ( ""   )
@@ -44,7 +50,7 @@ AtomicDescription::AtomicDescription (unsigned int level, unsigned int version)
 
 
 AtomicDescription::AtomicDescription (NUMLNamespaces *numlns) :
-    NMBase                   ( numlns )
+    DimensionDescription                   ( numlns )
   , mId                 ( ""   )
   , mName               ( ""   )
   , mOntologyTerm       ( ""   )

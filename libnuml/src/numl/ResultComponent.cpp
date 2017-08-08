@@ -24,32 +24,50 @@
 
 
 #include <numl/NUMLDocument.h>
+#include <numl/common/operationReturnValues.h>
 
 #include <numl/NUMLVisitor.h>
 #include <numl/NUMLError.h>
 
 #include <numl/ResultComponent.h>
+#include <numl/CompositeDescription.h>
+#include <numl/CompositeValue.h>
+
+#include <numl/AtomicDescription.h>
+#include <numl/AtomicValue.h>
+
+#include <numl/TupleDescription.h>
+#include <numl/Tuple.h>
 
 using namespace std;
 
 LIBNUML_CPP_NAMESPACE_BEGIN
 
 
-ResultComponent::ResultComponent (unsigned int level, unsigned int version) :
-   NMBase ( level, version )
+ResultComponent::ResultComponent (unsigned int level, unsigned int version)
+  : NMBase ( level, version )
   , mId                       ( ""   )
+  , mDimensionDescription(level, version)
+  , mDimension(level, version)
 {
   if (!hasValidLevelVersionNamespaceCombination())
     throw NUMLConstructorException();
+
+  mDimensionDescription.setParentNUMLObject(this);
+  mDimension.setParentNUMLObject(this);
 }
 
 
-ResultComponent::ResultComponent (NUMLNamespaces *numlns) :
-    NMBase                   ( numlns )
-   ,mId                       ( ""   )
+ResultComponent::ResultComponent (NUMLNamespaces *numlns)
+  : NMBase                   ( numlns )
+  , mId                       ( ""   )
+  , mDimensionDescription(numlns)
+  , mDimension(numlns)
 {
   if (!hasValidLevelVersionNamespaceCombination())
     throw NUMLConstructorException();
+  mDimensionDescription.setParentNUMLObject(this);
+  mDimension.setParentNUMLObject(this);
 }
 
 /*
@@ -196,6 +214,133 @@ ResultComponent::createCompositeValue ()
 }
 
 
+TupleDescription*
+ResultComponent::createTupleDescription()
+{
+  TupleDescription* CompDesc = 0;
+
+  try
+  {
+    CompDesc = new TupleDescription(getNUMLNamespaces());
+  }
+  catch (...)
+  {
+    /* here we do not create a default object as the level/version must
+     * match the parent object
+     *
+     * so do nothing
+     */
+  }
+
+  /* if the NUMLList is empty it doesnt know its parent */
+  if (mDimensionDescription.size() == 0)
+  {
+    mDimensionDescription.setNUMLDocument(this->getNUMLDocument());
+    mDimensionDescription.setParentNUMLObject(this);
+  }
+
+
+  if (CompDesc) mDimensionDescription.appendAndOwn(CompDesc);
+
+  return CompDesc;
+}
+
+Tuple*
+ResultComponent::createTuple()
+{
+  Tuple* compValue = 0;
+
+  try
+  {
+    compValue = new Tuple(getNUMLNamespaces());
+  }
+  catch (...)
+  {
+    /* here we do not create a default object as the level/version must
+     * match the parent object
+     *
+     * so do nothing
+     */
+  }
+
+  /* if the NUMLList is empty it doesn't know its parent */
+  if (mDimension.size() == 0)
+  {
+    mDimension.setNUMLDocument(this->getNUMLDocument());
+    mDimension.setParentNUMLObject(this);
+  }
+
+
+  if (compValue) mDimension.appendAndOwn(compValue);
+
+  return compValue;
+}
+
+AtomicDescription*
+ResultComponent::createAtomicDescription()
+{
+  AtomicDescription* CompDesc = 0;
+
+  try
+  {
+    CompDesc = new AtomicDescription(getNUMLNamespaces());
+  }
+  catch (...)
+  {
+    /* here we do not create a default object as the level/version must
+     * match the parent object
+     *
+     * so do nothing
+     */
+  }
+
+  /* if the NUMLList is empty it doesnt know its parent */
+  if (mDimensionDescription.size() == 0)
+  {
+    mDimensionDescription.setNUMLDocument(this->getNUMLDocument());
+    mDimensionDescription.setParentNUMLObject(this);
+  }
+
+
+  if (CompDesc) mDimensionDescription.appendAndOwn(CompDesc);
+
+  return CompDesc;
+}
+
+AtomicValue*
+ResultComponent::createAtomicValue()
+{
+  AtomicValue* compValue = 0;
+
+  try
+  {
+    compValue = new AtomicValue(getNUMLNamespaces());
+  }
+  catch (...)
+  {
+    /* here we do not create a default object as the level/version must
+     * match the parent object
+     *
+     * so do nothing
+     */
+  }
+
+  /* if the NUMLList is empty it doesn't know its parent */
+  if (mDimension.size() == 0)
+  {
+    mDimension.setNUMLDocument(this->getNUMLDocument());
+    mDimension.setParentNUMLObject(this);
+  }
+
+
+  if (compValue) mDimension.appendAndOwn(compValue);
+
+  return compValue;
+}
+
+
+
+
 /*
  * Creates a new DimensionDescription inside this ResultComponent and returns it.
  */
@@ -315,7 +460,8 @@ ResultComponent::writeElements (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream&
   if (mDimensionDescription.size()!=0){
 	  mDimensionDescription.write(stream);
   }
-  cout<<mDimension.size()<<endl;
+
+
   if (mDimension.size()!=0){
 	mDimension.write(stream);
   }
@@ -382,6 +528,33 @@ ResultComponent::setId (const std::string& sid)
     return LIBNUML_OPERATION_SUCCESS;
   }
 }
+
+/**
+	* Sets the parent NUMLDocument of this NUML object.
+	*
+	* @param d the NUMLDocument object to use
+	*/
+void
+ResultComponent::setNUMLDocument (NUMLDocument* d)
+{
+  mDimensionDescription.setNUMLDocument(d);
+  mDimension.setNUMLDocument(d);
+}
+
+
+
+/**
+	* Sets the parent NUML object of this NUML object.
+	*
+	* @param sb the NUML object to use
+	*/
+void
+ResultComponent::setParentNUMLObject (NMBase* sb)
+{
+  mDimensionDescription.setParentNUMLObject(sb);
+  mDimension.setParentNUMLObject(sb);
+}
+
 
 /*
  * @return the NUMLTypeCode_t of NUML objects contained in this ResultComponents or
@@ -534,7 +707,7 @@ ResultComponents::createObject (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& 
       object = new ResultComponent(NUMLDocument::getDefaultLevel(), NUMLDocument::getDefaultVersion());
     }
 
-    if (object) mItems.push_back(object);
+    if (object) appendAndOwn(object);
   }
 
   return object;

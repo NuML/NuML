@@ -32,8 +32,9 @@
 #include <sbml/xml/XMLInputStream.h>
 #include <sbml/xml/XMLOutputStream.h>
 
-#include <numl/TupleDescription.h>
-#include <numl/AtomicDescription.h>
+//#include <numl/TupleDescription.h>
+//#include <numl/AtomicDescription.h>
+#include <numl/DimensionDescription.h>
 
 
 #include <numl/NMBase.h>
@@ -53,7 +54,7 @@ class NUMLDocument;
 /*
  *
  */
-class LIBNUML_EXTERN CompositeDescription : public NUMLList
+class LIBNUML_EXTERN CompositeDescription : public DimensionDescription
 {
 
 public:

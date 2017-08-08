@@ -147,7 +147,7 @@ public:
 	*
 	* @param d the NUMLDocument object to use
 	*/
-	//	virtual void setNUMLDocument (NUMLDocument* d);
+	virtual void setNUMLDocument (NUMLDocument* d);
 
 
 
@@ -156,7 +156,7 @@ public:
 	*
 	* @param sb the NUML object to use
 	*/
-	//	virtual void setParentNUMLObject (NMBase* sb);
+	virtual void setParentNUMLObject (NMBase* sb);
 
 	/**
 	 * Returns the libNUML type code for this %NUML object.
@@ -236,6 +236,30 @@ public:
 	* @see addCompositeValue(const CompositeValue *compValue)
 	*/
 	CompositeValue* createCompositeValue ();
+
+  /**
+   * creates a new tupledescription and adds it to the dimensiondescription
+   * @return the created tuple description
+   */
+  TupleDescription* createTupleDescription();
+
+  /**
+   * creates a new tuple and adds it to the dimension
+   * @return the created tuple
+   */
+  Tuple* createTuple();
+
+  /**
+   * creates a new atomic description and adds it to the dimensiondescription
+   * @return the created atomic description
+   */
+  AtomicDescription* createAtomicDescription();
+
+  /**
+   * creates a new atomic value and adds it to the dimension
+   * @return the created atomic value
+   */
+  AtomicValue* createAtomicValue();
 
 	/**
 	* Get the DimensionDescription object in this ResultComponent.

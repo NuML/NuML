@@ -19,6 +19,7 @@
 #include <sbml/xml/XMLInputStream.h>
 #include <sbml/xml/XMLOutputStream.h>
 
+#include <numl/Dimension.h>
 #include <numl/NUMLVisitor.h>
 #include <numl/NUMLDocument.h>
 #include <numl/NUMLError.h>
@@ -31,7 +32,7 @@ using namespace std;
 LIBNUML_CPP_NAMESPACE_BEGIN
 
 AtomicValue::AtomicValue (unsigned int level, unsigned int version) :
-   NMBase ( level, version )
+   Dimension ( level, version )
   , mValue                 ( ""   )
 
 {
@@ -41,7 +42,7 @@ AtomicValue::AtomicValue (unsigned int level, unsigned int version) :
 
 
 AtomicValue::AtomicValue (NUMLNamespaces *numlns) :
-    NMBase                   ( numlns )
+    Dimension                   ( numlns )
    ,mValue                      ( ""   )
 {
   if (!hasValidLevelVersionNamespaceCombination())

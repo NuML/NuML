@@ -29,6 +29,7 @@
 
 #include <numl/NMBase.h>
 #include <numl/NUMLList.h>
+#include <numl/DimensionDescription.h>
 #include <string>
 #include <sstream>
 
@@ -38,7 +39,7 @@
 #ifdef __cplusplus
 LIBNUML_CPP_NAMESPACE_BEGIN
 
-class LIBNUML_EXTERN AtomicDescription : public NMBase {
+class LIBNUML_EXTERN AtomicDescription : public DimensionDescription {
 
 public:
 

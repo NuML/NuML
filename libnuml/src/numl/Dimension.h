@@ -32,16 +32,10 @@
 #include <sbml/xml/XMLInputStream.h>
 #include <sbml/xml/XMLOutputStream.h>
 
-
-
-#include <numl/AtomicValue.h>
-#include <numl/CompositeValue.h>
-#include <numl/Tuple.h>
-
+#include <numl/NUMLList.h>
 #include <numl/NUMLVisitor.h>
 #include <numl/NUMLError.h>
 #include <numl/NMBase.h>
-#include <numl/NUMLList.h>
 
 
 #include <string>
@@ -126,6 +120,26 @@ public:
 	*/
 	virtual Dimension* clone () const;
 
+  /**
+   * Creates a new CompositeValue and add it to Dimension's list inside this ResultComponent and return it.
+   *
+   * @return the CompositeValue object created
+   *
+   * @see addCompositeValue(const CompositeValue *compValue)
+   */
+  CompositeValue* createCompositeValue ();
+
+  /**
+   * creates a new tuple and adds it to the dimension
+   * @return the created tuple
+   */
+  Tuple* createTuple();
+
+  /**
+   * creates a new atomic value and adds it to the dimension
+   * @return the created atomic value
+   */
+  AtomicValue* createAtomicValue();
 
 	/**
 	* Returns the libNUML type code for this %NUML object.
@@ -191,7 +205,7 @@ public:
 	*
 	* @see size()
 	*/
-	virtual CompositeValue * get(unsigned int n);
+	virtual Dimension * get(unsigned int n);
 
 
 	/**
@@ -203,49 +217,7 @@ public:
 	*
 	* @see size()
 	*/
-	virtual const CompositeValue * get(unsigned int n) const;
-
-	/**
-	* Get a CompositeValue from the Dimension.
-	*
-	* @param n the index number of the CompositeValue to get.
-	*
-	* @return the nth CompositeValue in this Dimension.
-	*
-	* @see size()
-	*/
-//	virtual CompositeValue * get(unsigned int n);
-
-
-	/**
-	* Get a CompositeValue from the Dimension.
-	*
-	* @param n the index number of the CompositeValue to get.
-	*
-	* @return the nth CompositeValue in this Dimension.
-	*
-	* @see size()
-	*/
-//	virtual const CompositeValue * get(unsigned int n) const;
-
-	/**
-	* Get all the Dimension.
-	*
-	*
-	* @return this Dimension.
-	*
-	* @see size()
-	*/
-	//virtual Dimension * getCompositeValue();
-
-	/**
-	* Get all the CompositeValue.
-	*
-	*
-	* @return this CompositeValue.
-	*
-	*/
-	virtual CompositeValue* getCompositeValue();
+	virtual const Dimension * get(unsigned int n) const;
 
 
 	/**
@@ -292,7 +264,7 @@ public:
 	*
 	* @see size()
 	*/
-	virtual CompositeValue* remove (unsigned int n);
+	virtual Dimension* remove (unsigned int n);
 
 
 	/**
@@ -307,7 +279,7 @@ public:
 	* @return the item removed.  As mentioned above, the caller owns the
 	* returned item.
 	*/
-	virtual CompositeValue* remove (const std::string& sid);
+	virtual Dimension* remove (const std::string& sid);
 
 
 	/**
@@ -341,7 +313,6 @@ protected:
 	* XMLInputStream or NULL if the token was not recognized.
 	*/
   virtual NMBase* createObject (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stream);
-	CompositeValue mCompositeValue;
 
 	enum DimensionType { Unknown, CompositeValueType, TupleType, AtomicValueType };
 	DimensionType mType;

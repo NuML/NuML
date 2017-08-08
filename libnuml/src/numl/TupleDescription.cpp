@@ -23,15 +23,17 @@
 #include <numl/NUMLVisitor.h>
 #include <numl/NUMLDocument.h>
 #include <numl/NUMLError.h>
+#include <numl/common/operationReturnValues.h>
 
 
 #include <numl/TupleDescription.h>
+#include <numl/AtomicDescription.h>
 
 using namespace std;
 LIBNUML_CPP_NAMESPACE_BEGIN
 
 TupleDescription::TupleDescription (unsigned int level, unsigned int version) :
-   NUMLList ( level, version )
+   DimensionDescription ( level, version )
 {
   if (!hasValidLevelVersionNamespaceCombination())
     throw NUMLConstructorException();
@@ -39,7 +41,7 @@ TupleDescription::TupleDescription (unsigned int level, unsigned int version) :
 
 
 TupleDescription::TupleDescription (NUMLNamespaces *numlns) :
-    NUMLList                  ( numlns )
+    DimensionDescription                  ( numlns )
 {
   if (!hasValidLevelVersionNamespaceCombination())
     throw NUMLConstructorException();
@@ -244,7 +246,7 @@ TupleDescription::createObject (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& 
       aDescription = new AtomicDescription(NUMLDocument::getDefaultLevel(), NUMLDocument::getDefaultVersion());
     }
 
-    if (aDescription) mItems.push_back(aDescription);
+    if (aDescription) appendAndOwn(aDescription);
   }
 
   return aDescription;
