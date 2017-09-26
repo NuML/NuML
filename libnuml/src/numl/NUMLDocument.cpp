@@ -431,6 +431,10 @@ NUMLDocument::createObject (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLInputStream& stre
             }
             object = &mResultComponents;
         }
+    else if (name == "resultComponent")
+    {
+      object = createResultComponent();
+    }
 
     return object;
 }
