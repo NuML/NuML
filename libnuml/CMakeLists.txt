@@ -223,6 +223,7 @@ unset(SWIG_DIR CACHE )
 unset(SWIG_VERSION CACHE )
 endif()
 
+
 if(WITH_SWIG)
     find_program(SWIG_EXECUTABLE
       NAMES swig
@@ -247,6 +248,8 @@ if(WITH_SWIG)
         c:/swigwin-2.0.2
         c:/swigwin-2.0.1
         c:/swigwin-2.0.0
+        $ENV{ProgramFiles}/swig
+        $ENV{ProgramW6432}/swig
         /usr/local/bin
         /opt/local/bin
         /usr/bin
