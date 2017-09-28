@@ -93,7 +93,7 @@ add_custom_target(binding_python_swig ALL DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/li
 
 include_directories(BEFORE ${CMAKE_BINARY_DIR})
 include_directories(BEFORE ${CMAKE_BINARY_DIR}/src)
-include_directories(BEFORE ${CMAKE_BINARY_DIR}/src/numl
+include_directories(BEFORE ${CMAKE_BINARY_DIR}/src/numl)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../swig)
 include_directories(${LIBSBML_INCLUDE_DIR})
