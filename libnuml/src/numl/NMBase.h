@@ -1,15 +1,15 @@
 /*
 * ****************************************************************************
 * This file is part of libNUML.  Please visit http://code.google.com/p/numl/for more
-* information about NUML, and the latest version of libNUML. 
+* information about NUML, and the latest version of libNUML.
 * Copyright (c) 2013 The University of Manchester.
-* 
+*
 * This library is free software; you can redistribute it and/or modify it
 * under the terms of the GNU Lesser General Public License as published
-* by the Free Software Foundation.  A copy of the license agreement is 
-* provided in the file named "LICENSE.txt" included with this software 
-* distribution and also available online as http://www.gnu.org/licenses/lgpl.html 
-* 
+* by the Free Software Foundation.  A copy of the license agreement is
+* provided in the file named "LICENSE.txt" included with this software
+* distribution and also available online as http://www.gnu.org/licenses/lgpl.html
+*
 * Contributors:
 * Joseph O. Dada, The University of Manchester - initial API and implementation
 * ****************************************************************************
@@ -95,7 +95,7 @@ public:
 
   /**
    * Creates and returns a deep copy of this NMBase object.
-   * 
+   *
    * @return a (deep) copy of this NMBase object
    */
   virtual NMBase* clone () const = 0;
@@ -103,7 +103,7 @@ public:
 
   /**
    * Returns the value of the "metaid" attribute of this object.
-   * 
+   *
    * The optional attribute named "metaid", present on every major NUML
    * component type, is for supporting metadata annotations using RDF
    * (Resource Description Format). The attribute value has the data type
@@ -118,7 +118,7 @@ public:
    * The "metaid" value serves to identify a model
    * component for purposes such as referencing that component from
    * metadata placed within "annotation" subelements.
-   *  
+   *
    * @return the metaid of this NUML object.
    *
    * @see isSetMetaId()
@@ -129,7 +129,7 @@ public:
 
   /**
    * Returns the value of the "metaid" attribute of this object.
-   * 
+   *
    * The optional attribute named "metaid", present on every major NUML
    * component type, is for supporting metadata annotations using RDF
    * (Resource Description Format). The attribute value has the data type
@@ -144,7 +144,7 @@ public:
    * The "metaid" value serves to identify a model
    * component for purposes such as referencing that component from
    * metadata placed within "annotation" subelements.
-   *  
+   *
    * @return the metaid of this NUML object.
    *
    * @see isSetMetaId()
@@ -157,7 +157,7 @@ public:
    * NOTE: THIS IS FOR BACKWARD COMPATABILITY REASONS
    *
    * Returns the value of the "id" attribute of this object.
-   * 
+   *
    * @return the id of this NUML object.
    */
   virtual const std::string& getId () const;
@@ -167,7 +167,7 @@ public:
    * NOTE: THIS IS FOR BACKWARD COMPATABILITY REASONS
    *
    * Returns the value of the "name" attribute of this object.
-   * 
+   *
    * @return the name of this NUML object.
    */
   virtual const std::string& getName () const;
@@ -205,7 +205,7 @@ public:
 
   /**
    * Returns a list of the XML Namespaces declared on this NUML document.
-   * 
+   *
    * @return the XML Namespaces associated with this NUML object
    */
   virtual LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces* getNamespaces() const ;
@@ -225,7 +225,7 @@ public:
    *
    * This method allows the NUMLDocument for the current object to be
    * retrieved.
-   * 
+   *
    * @return the parent NUMLDocument object of this NUML object.
    */
   const NUMLDocument* getNUMLDocument () const;
@@ -245,7 +245,7 @@ public:
    *
    * This method allows the NUMLDocument for the current object to be
    * retrieved.
-   * 
+   *
    * @return the parent NUMLDocument object of this NUML object.
    */
   NUMLDocument* getNUMLDocument ();
@@ -256,7 +256,7 @@ public:
    * This method is convenient when holding an object nested inside
    * other objects in an NUML model.  It allows direct access to the
    * <code>&lt;model&gt;</code> element containing it.
-   * 
+   *
    * @return the parent NUML object of this NUML object.
    */
   NMBase* getParentNUMLObject();
@@ -283,7 +283,7 @@ public:
   /**
    * Returns the line number on which this object first appears in the XML
    * representation of the NUML document.
-   * 
+   *
    * @return the line number of this NUML object.
    *
    * @see getColumn()
@@ -294,9 +294,9 @@ public:
   /**
    * Returns the column number on which this object first appears in the XML
    * representation of the NUML document.
-   * 
+   *
    * @return the column number of this NUML object.
-   * 
+   *
    * @see getLine()
    */
   unsigned int getColumn () const;
@@ -320,7 +320,7 @@ public:
    * The "metaid" value serves to identify a model
    * component for purposes such as referencing that component from
    * metadata placed within "annotation" subelements.
-   *  
+   *
    * @return @c true if the "metaid" attribute of this NUML object has been
    * set, @c false otherwise.
    *
@@ -365,7 +365,7 @@ public:
    * @li LIBNUML_OPERATION_SUCCESS
    * @li LIBNUML_INVALID_ATTRIBUTE_VALUE
    * @li LIBNUML_UNEXPECTED_ATTRIBUTE
-   * 
+   *
    * @see getMetaId()
    * @see isSetMetaId()
    */
@@ -454,7 +454,7 @@ public:
    * The "metaid" value serves to identify a model
    * component for purposes such as referencing that component from
    * metadata placed within "annotation" subelements.
-   *  
+   *
    * @return integer value indicating success/failure of the
    * function.  @if clike The value is drawn from the
    * enumeration #OperationReturnValues_t. @endif The possible values
@@ -496,9 +496,9 @@ public:
 
   /**
    * Returns the NUML Level of the overall NUML document.
-   * 
+   *
    * @return the NUML level of this NUML object.
-   * 
+   *
    * @see getVersion()
    */
   unsigned int getLevel () const;
@@ -506,7 +506,7 @@ public:
 
   /**
    * Returns the Version within the NUML Level of the overall NUML document.
-   * 
+   *
    * @return the NUML version of this NUML object.
    *
    * @see getLevel()
@@ -534,7 +534,7 @@ public:
 
   /**
    * Returns the libNUML type code for this object.
-   * 
+   *
    * This method MAY return the typecode of this NUML object or it MAY
    * return NUML_UNKNOWN.  That is, subclasses of NMBase are not required to
    * implement this method to return a typecode.  This method is meant
@@ -560,12 +560,12 @@ public:
    * <li> Level&nbsp;1 Version&nbsp;1 "http://www.numl.org/numl/level1"
    * </ul>
    *
-   * @return @c true if the level, version and namespace values of this 
+   * @return @c true if the level, version and namespace values of this
    * NUML object correspond to a valid set of values, @c false otherwise.
    */
   bool hasValidLevelVersionNamespaceCombination();
 
-  
+
   /**
    * Returns the XML element name of this object.
    *
@@ -580,7 +580,7 @@ public:
    * Returns a string that consists of the partial NUML describing this
    * object.  This is primarily provided for testing and debugging
    * purposes.  It may be removed in a future version of libNUML.
-   * 
+   *
    * @return the partial NUML that describes this NUML object.
    */
   char* toNUML ();
@@ -635,24 +635,24 @@ public:
   void syncAnnotation();
   bool isSetNotes() const;
   bool isSetAnnotation() const;
-  virtual int setAnnotation(const XMLNode* annotation);
+  virtual int setAnnotation(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* annotation);
   virtual int setAnnotation(const std::string& annotation);
-  virtual int appendAnnotation(const XMLNode* annotation);
+  virtual int appendAnnotation(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* annotation);
   virtual int appendAnnotation(const std::string& annotation);
   int removeTopLevelAnnotationElement(const std::string elementName,
                                       const std::string elementURI = "");
-  int replaceTopLevelAnnotationElement(const XMLNode* annotation);
+  int replaceTopLevelAnnotationElement(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* annotation);
   int replaceTopLevelAnnotationElement(const std::string& annotation);
-  int setNotes(const XMLNode* notes);
+  int setNotes(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* notes);
   int setNotes(const std::string& notes, bool addXHTMLMarkup = false);
-  int appendNotes(const XMLNode* notes);
+  int appendNotes(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* notes);
   int appendNotes(const std::string& notes);
   int unsetNotes();
   int unsetAnnotation();
 
-  XMLNode* getNotes() const;
+  LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* getNotes() const;
   std::string getNotesString() const;
-  XMLNode* getAnnotation() const;
+  LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNode* getAnnotation() const;
   std::string getAnnotationString() const;
 
 
@@ -686,7 +686,7 @@ protected:
    */
   NMBase (const std::string& id = "", const std::string& name = "");
 
-  
+
   /**
    * Creates a new NMBase object with the given sboTerm.
    * Only subclasses may create NMBase objects.
@@ -787,7 +787,7 @@ protected:
         const unsigned int level,
         const unsigned int version );
 
- 
+
   /**
    * Helper to log a common type of error.
    */
@@ -843,7 +843,7 @@ protected:
    *  - idChar ::= letter | digit | '_'
    *  - UnitSId    ::= ( letter | '_' ) idChar*
    *
-   * If the syntax of the unit attribute of this object is incorrect, 
+   * If the syntax of the unit attribute of this object is incorrect,
    * an error is logged
    *
    * @docnote The native C++ implementation of this method defines a
@@ -911,10 +911,10 @@ protected:
 
   std::string mEmptyString;
 
-  
+
 
 private:
-  
+
   /**
    * Stores the location (line and column) and any XML namespaces (for
    * roundtripping) declared on this NUML (XML) element.

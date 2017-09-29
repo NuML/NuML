@@ -47,6 +47,7 @@
 #include <numl/AtomicValue.h>
 
 using namespace std;
+LIBSBML_CPP_NAMESPACE_USE
 
 LIBNUML_CPP_NAMESPACE_BEGIN
 
@@ -124,7 +125,7 @@ NMBase::NMBase (NUMLNamespaces *numlns) :
 NMBase::NMBase(const NMBase& orig)
 {
   this->mMetaId = orig.mMetaId;
-  
+
   this->mNUML       = NULL;
   this->mLine       = orig.mLine;
   this->mColumn     = orig.mColumn;
@@ -314,7 +315,7 @@ NMBase::getParentNUMLObject ()
   {
     // if the parent object has been deleted the pointer is
     // still valid but points to nothing
-    try 
+    try
     {
       if (mParentNUMLObject->getHasBeenDeleted())
       {
@@ -481,7 +482,7 @@ NMBase::hasValidLevelVersionNamespaceCombination()
   *
   * @param sb the NUML object to use
   */
-void 
+void
 NMBase::setParentNUMLObject (NMBase* sb)
 {
   mParentNUMLObject = sb;
@@ -518,7 +519,7 @@ NMBase::getAncestorOfType(NUMLTypeCode_t type)
  *
  * @param xmlns the namespaces to set
  */
-int 
+int
 NMBase::setNamespaces(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces* xmlns)
 {
   if (xmlns == NULL)
@@ -627,7 +628,7 @@ NMBase::getTypeCode () const
 
 
 /* sets the NUMLnamespaces - internal use only*/
-void 
+void
 NMBase::setNUMLNamespaces(NUMLNamespaces * numlns)
 {
   delete mNUMLNamespaces;
@@ -1678,7 +1679,7 @@ NMBase::write (LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const
 }
 
 
-void 
+void
 NMBase::writeXMLNS(LIBSBML_CPP_NAMESPACE_QUALIFIER XMLOutputStream& stream) const
 {
 
@@ -2097,7 +2098,7 @@ NMBase::logEmptyString( string attribute,
                        const unsigned int level,
                        const unsigned int version,
                        string element )
-                       
+
 {
   ostringstream msg;
 
@@ -2139,7 +2140,7 @@ NMBase::readAttributes (const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLAttributes& att
 
   if (assigned && mMetaId.empty())
   {
-    logEmptyString("metaid", getLevel(), getVersion(), 
+    logEmptyString("metaid", getLevel(), getVersion(),
       NUMLTypeCode_toString(getTypeCode()));
   }
 
@@ -2235,7 +2236,7 @@ NMBase::checkNUMLListPopulated(NMBase* object)
 }
 
 
-void 
+void
 NMBase::checkDefaultNamespace(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespaces* xmlns, const std::string& elementName)
 {
   //
@@ -2254,7 +2255,7 @@ NMBase::checkDefaultNamespace(const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLNamespace
       errMsg.str("");
       errMsg << "xmlns=\"" << defaultURI << "\" in <" << elementName
              << "> element is an invalid namespace." << endl;
-      
+
       logError(NUMLNotSchemaConformant, level, version, errMsg.str());
     }
   }
@@ -2302,7 +2303,7 @@ NMBase::setNMBaseFields (const LIBSBML_CPP_NAMESPACE_QUALIFIER XMLToken& element
  * structure.
  *
  * @param sb the NMBase_t structure
- * 
+ *
  * @return the value of the "metaid" attribute of @p sb
  */
 LIBNUML_EXTERN
@@ -2318,7 +2319,7 @@ NMBase_getMetaId (NMBase_t *sb)
 // * structure.
 // *
 // * @param sb the NMBase_t structure
-// * 
+// *
 // * @return the value of the "id" attribute of @p sb
 // */
 //LIBNUML_EXTERN
@@ -2334,7 +2335,7 @@ NMBase_getMetaId (NMBase_t *sb)
 // * structure.
 // *
 // * @param sb the NMBase_t structure
-// * 
+// *
 // * @return the value of the "name" attribute of @p sb
 // */
 //LIBNUML_EXTERN
@@ -2350,7 +2351,7 @@ NMBase_getMetaId (NMBase_t *sb)
  * structure.
  *
  * @param sb the NMBase_t structure
- * 
+ *
  * @return the parent NUMLDocument of this NUML object.
  */
 LIBNUML_EXTERN
@@ -2366,7 +2367,7 @@ NMBase_getNUMLDocument (NMBase_t *sb)
  * structure.
  *
  * @param sb the NMBase_t structure
- * 
+ *
  * @return the parent NMBase  of this NUML object.
  */
 LIBNUML_EXTERN
@@ -2380,9 +2381,9 @@ NMBase_getParentNUMLObject (NMBase_t *sb)
  * Returns the NUML Level of the overall NUML document.
  *
  * @param sb the NMBase_t structure to query
- * 
+ *
  * @return the NUML level of the given object.
- * 
+ *
  * @see getVersion()
  */
 LIBNUML_EXTERN
@@ -2397,7 +2398,7 @@ NMBase_getLevel (const NMBase_t *sb)
  * Returns the Version within the NUML Level of the overall NUML document.
  *
  * @param sb the NMBase_t structure to query
- * 
+ *
  * @return the NUML version of the given object.
  *
  * @see getLevel()
@@ -2414,7 +2415,7 @@ NMBase_getVersion (const NMBase_t *sb)
  * structure's "metaid" attribute has been set.
  *
  * @param sb the NMBase_t structure to query
- * 
+ *
  * @return nonzero (for true) if the "metaid" attribute of this NUML object
  * has been set, zero (for false) otherwise.
  */
@@ -2550,7 +2551,7 @@ NMBase_getElementName (const NMBase_t *sb)
  * XML representation of the NUML document.
  *
  * @param sb the NMBase_t structure
- * 
+ *
  * @return the line number of the given structure
  *
  * @see getColumn().
@@ -2568,9 +2569,9 @@ NMBase_getLine (const NMBase_t *sb)
  * XML representation of the NUML document.
  *
  * @param sb the NMBase_t structure
- * 
+ *
  * @return the column number of this NUML object.
- * 
+ *
  * @see getLine().
  */
 LIBNUML_EXTERN
@@ -2594,7 +2595,7 @@ NMBase_getColumn (const NMBase_t *sb)
   *
   * @param sb the NMBase_t structure
   *
-  * @return nonzero (true) if the level, version and namespace values of this 
+  * @return nonzero (true) if the level, version and namespace values of this
   * NUML object correspond to a valid set of values, zero (false) otherwise.
   */
 LIBNUML_EXTERN
