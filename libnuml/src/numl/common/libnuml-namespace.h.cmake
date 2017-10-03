@@ -46,6 +46,13 @@
 #ifndef LIBNUML_NAMESPACE_H
 #define LIBNUML_NAMESPACE_H 1
 
+#ifndef SWIG
+#include <sbml/common/libsbml-namespace.h>
+
+LIBSBML_CPP_NAMESPACE_USE
+
+#endif
+
 /*
  *
  * The idea of the following marcors are borrowed from 
@@ -54,7 +61,7 @@
  */
 
 /* Define to enable libNUML C++ namespace */
-/* #undef LIBNUML_USE_CPP_NAMESPACE */
+#cmakedefine LIBNUML_USE_CPP_NAMESPACE 1
 
 
 #if defined(__cplusplus) && defined(LIBNUML_USE_CPP_NAMESPACE) && !defined(SWIG)
