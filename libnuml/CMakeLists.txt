@@ -212,8 +212,10 @@ endif()
 # If WITH_SWIG is selected, we need to find swig
 #
 
+set (LIBNUML_USE_CPP_NAMESPACE 0)
 if(WITH_CPP_NAMESPACE)
     add_definitions(-DLIBNUML_USE_CPP_NAMESPACE)
+    set (LIBNUML_USE_CPP_NAMESPACE 1)
 endif()
 
 
