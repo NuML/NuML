@@ -70,10 +70,10 @@
 #define PACKAGE_NAME "libNUML"
 
 /* Define to the full name and version of this package. */
-#define PACKAGE_STRING "libNUML 1.0.1"
+#define PACKAGE_STRING "libNUML @LIBNUML_VERSION@"
 
 /* Define to the one symbol short name of this package. */
 #define PACKAGE_TARNAME "libnuml"
 
 /* Define to the version of this package. */
-#define PACKAGE_VERSION "1.0.1"
+#define PACKAGE_VERSION "@LIBNUML_VERSION@"

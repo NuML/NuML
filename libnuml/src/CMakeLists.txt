@@ -37,6 +37,16 @@ configure_file (
   "${CMAKE_CURRENT_BINARY_DIR}/numl/common/libnuml-version.h"
   )
 
+configure_file (
+  "${CMAKE_CURRENT_SOURCE_DIR}/common/libnuml-package.h.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/common/libnuml-package.h"
+  )
+
+configure_file (
+  "${CMAKE_CURRENT_SOURCE_DIR}/common/libnuml-namespace.h.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/common/libnuml-namespace.h"
+  )
+  
 
 ###############################################################################
 #
