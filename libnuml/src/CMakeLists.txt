@@ -37,6 +37,16 @@ configure_file (
   "${CMAKE_CURRENT_BINARY_DIR}/numl/common/libnuml-version.h"
   )
 
+configure_file (
+  "${CMAKE_CURRENT_SOURCE_DIR}/numl/common/libnuml-package.h.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/numl/common/libnuml-package.h"
+  )
+
+configure_file (
+  "${CMAKE_CURRENT_SOURCE_DIR}/numl/common/libnuml-namespace.h.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/numl/common/libnuml-namespace.h"
+  )
+  
 
 ###############################################################################
 #
@@ -62,6 +72,8 @@ install(FILES ${files} DESTINATION include/numl)
 install(FILES 
        "${CMAKE_CURRENT_BINARY_DIR}/numl/common/libnuml-version.h"
        "${CMAKE_CURRENT_BINARY_DIR}/numl/common/libnuml-config-common.h"
+       "${CMAKE_CURRENT_BINARY_DIR}/numl/common/libnuml-package.h"
+       "${CMAKE_CURRENT_BINARY_DIR}/numl/common/libnuml-namespace.h"
         DESTINATION include/numl/common)
 
 ###############################################################################

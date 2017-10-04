@@ -212,8 +212,10 @@ endif()
 # If WITH_SWIG is selected, we need to find swig
 #
 
+set (LIBNUML_USE_CPP_NAMESPACE 0)
 if(WITH_CPP_NAMESPACE)
     add_definitions(-DLIBNUML_USE_CPP_NAMESPACE)
+    set (LIBNUML_USE_CPP_NAMESPACE 1)
 endif()
 
 
@@ -634,7 +636,6 @@ endif()
 # so we encode these values here
 if (MSVC)
   set(HAVE_ERRNO_H TRUE)
-  set(HAVE_IEEEFP_H TRUE)
   set(STDC_HEADERS TRUE)
   set(HAVE_MATH_H TRUE)
   set(HAVE_SYS_TYPES_H TRUE)
