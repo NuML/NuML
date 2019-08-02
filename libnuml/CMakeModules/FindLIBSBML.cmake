@@ -39,6 +39,29 @@ if (${LIBSBML_LIBRARY_NAME}_FOUND)
   get_filename_component (LIBSBML_INCLUDE_DIR ${LIBSBML_INCLUDE_DIR} REALPATH)
   get_target_property(LIBSBML_VERSION ${LIBSBML_LIBRARY_NAME} VERSION)
 
+
+  if (NOT EXISTS ${LIBSBML_INCLUDE_DIR}/sbml/SBase.h)
+  
+  set (LIBSBML_INCLUDE_DIR)
+  find_path(LIBSBML_INCLUDE_DIR sbml/SBase.h
+      PATHS $ENV{LIBSBML_DIR}/include
+            $ENV{LIBSBML_DIR}
+            ${LIBNUML_DEPENDENCY_DIR}
+            ${LIBNUML_DEPENDENCY_DIR}/include
+            ${CONAN_INCLUDE_DIRS_LIBSBML}
+            ~/Library/Frameworks
+            /Library/Frameworks
+            /sw/include        # Fink
+            /opt/local/include # MacPorts
+            /opt/csw/include   # Blastwave
+            /opt/include
+            /usr/freeware/include
+      NO_DEFAULT_PATH)
+  
+  if (NOT LIBSBML_INCLUDE_DIR)
+      find_path(LIBSBML_INCLUDE_DIR sbml/SBase.h)
+  endif (NOT LIBSBML_INCLUDE_DIR)
+
 else()
 
 find_path(LIBSBML_INCLUDE_DIR sbml/SBase.h
