@@ -46,6 +46,7 @@ find_path(LIBSBML_INCLUDE_DIR sbml/SBase.h
           $ENV{LIBSBML_DIR}
           ${LIBNUML_DEPENDENCY_DIR}
           ${LIBNUML_DEPENDENCY_DIR}/include
+          ${CONAN_INCLUDE_DIRS_LIBSBML}
           ~/Library/Frameworks
           /Library/Frameworks
           /sw/include        # Fink
