@@ -62,6 +62,8 @@ if (${LIBSBML_LIBRARY_NAME}_FOUND)
       find_path(LIBSBML_INCLUDE_DIR sbml/SBase.h)
   endif (NOT LIBSBML_INCLUDE_DIR)
 
+  endif()
+
 else()
 
 find_path(LIBSBML_INCLUDE_DIR sbml/SBase.h
