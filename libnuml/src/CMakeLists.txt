@@ -201,6 +201,7 @@ endif()
 
 endif()
 
+if (NOT LIBNUML_SKIP_STATIC_LIBRARY)
 add_library (${LIBNUML_LIBRARY}-static STATIC ${LIBNUML_SOURCES} )
 if (WIN32 AND NOT CYGWIN)
   # don't decorate static library 
@@ -234,6 +235,8 @@ if (${CMAKE_VERSION} VERSION_GREATER 2.8.7)
   )
 
 endif()
+  
+endif (NOT LIBNUML_SKIP_STATIC_LIBRARY)
   
 ##############################################################################
 #
