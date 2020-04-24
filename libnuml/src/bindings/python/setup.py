@@ -222,6 +222,9 @@ class CMakeBuild(build_ext):
             dep_build_dir = os.path.join(cwd, 'build_libSBML_' + suffix)
             makedirs(dep_build_dir)
             os.chdir(dep_build_dir)
+            zlib = get_lib_full_path(os.path.join(dep_inst_dir, 'lib'), 'zlib')
+            if not zlib: 
+              zlib = get_lib_full_path(os.path.join(dep_inst_dir, 'lib'), 'zdll')
             self.spawn(['cmake', DEP_SBML_SRC_DIR] + cmake_args
                        + [
                            '-DCMAKE_INSTALL_PREFIX=' + dep_inst_dir,
@@ -231,7 +234,7 @@ class CMakeBuild(build_ext):
                            '-DLIBBZ_INCLUDE_DIR=' + os.path.join(dep_inst_dir, 'include'),
                            '-DLIBBZ_LIBRARY=' + get_lib_full_path(os.path.join(dep_inst_dir, 'lib'), 'bz2'),
                            '-DLIBZ_INCLUDE_DIR=' + os.path.join(dep_inst_dir, 'include'),
-                           '-DLIBZ_LIBRARY=' + get_lib_full_path(os.path.join(dep_inst_dir, 'lib'), 'zlib'),
+                           '-DLIBZ_LIBRARY=' + zlib,
                            '-DWITH_ZLIB=ON',
                            '-DWITH_EXPAT=ON',
                            '-DWITH_LIBXML=OFF',
