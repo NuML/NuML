@@ -217,4 +217,5 @@ pip-log.txt
 
 libnuml-build
 build*
+install*
 doc
