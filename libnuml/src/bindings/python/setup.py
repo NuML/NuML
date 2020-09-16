@@ -36,6 +36,12 @@ from os.path import abspath, exists, join, split
 from setuptools import setup, Extension
 from setuptools.command.build_ext import build_ext
 
+def get_python_include():
+  path = sysconfig.get_paths()['include']
+  if exists(path): 
+    return path
+  # for whatever reason 2.7 on centos returns a wrong path here 
+  return sysconfig.get_config_vars()['INCLUDEPY']
 
 def prepend_variables(args, variables):
   for var in variables: 
@@ -210,51 +216,52 @@ class CMakeBuild(build_ext):
             dep_suffix = sysconfig.get_platform()
             dep_build_dir = os.path.join(cwd, 'build_dependencies_' + dep_suffix)
             dep_inst_dir = os.path.join(cwd, 'install_dependencies_' + dep_suffix)
-            dep_src_dir = DEP_SRC_DIR
-            makedirs(dep_build_dir)
-            os.chdir(dep_build_dir)
-            print ('compiling libSBML dependencies from: {0}'.format(dep_src_dir))
-            self.spawn(['cmake', dep_src_dir] + cmake_args
-                       + [
-                           '-DCMAKE_INSTALL_PREFIX=' + dep_inst_dir,
-                           '-DWITH_BZIP2=ON',
-                           '-DWITH_CHECK=OFF',
-                           '-DWITH_EXPAT=ON',
-                           '-DWITH_XERCES=OFF',
-                           '-DWITH_ICONV=OFF',
-                           '-DWITH_LIBXML=OFF',
-                       ]
-                       )
-            self.spawn(['cmake', '--build', '.', '--target', 'install'] + build_args)
+            if not exists(dep_inst_dir):
+              dep_src_dir = DEP_SRC_DIR
+              makedirs(dep_build_dir)
+              os.chdir(dep_build_dir)
+              print ('compiling libSBML dependencies from: {0}'.format(dep_src_dir))
+              self.spawn(['cmake', dep_src_dir] + cmake_args
+                         + [
+                             '-DCMAKE_INSTALL_PREFIX=' + dep_inst_dir,
+                             '-DWITH_BZIP2=ON',
+                             '-DWITH_CHECK=OFF',
+                             '-DWITH_EXPAT=ON',
+                             '-DWITH_XERCES=OFF',
+                             '-DWITH_ICONV=OFF',
+                             '-DWITH_LIBXML=OFF',
+                         ]
+                         )
+              self.spawn(['cmake', '--build', '.', '--target', 'install'] + build_args)
+              
+              os.chdir(cwd)
             
-            os.chdir(cwd)
-            
-            dep_build_dir = os.path.join(cwd, 'build_libSBML_' + dep_suffix)
-            makedirs(dep_build_dir)
-            os.chdir(dep_build_dir)
-            zlib = get_lib_full_path(os.path.join(dep_inst_dir, 'lib'), 'zlib')
-            if not zlib: 
-              zlib = get_lib_full_path(os.path.join(dep_inst_dir, 'lib'), 'zdll')
-            self.spawn(['cmake', DEP_SBML_SRC_DIR] + cmake_args
-                       + [
-                           '-DCMAKE_INSTALL_PREFIX=' + dep_inst_dir,
-                           '-DLIBSBML_DEPENDENCY_DIR=' + dep_inst_dir,
-                           '-DLIBEXPAT_INCLUDE_DIR=' + os.path.join(dep_inst_dir, 'include'),
-                           '-DLIBEXPAT_LIBRARY=' + get_lib_full_path(os.path.join(dep_inst_dir, 'lib'), 'expat'),
-                           #'-DLIBBZ_INCLUDE_DIR=' + os.path.join(dep_inst_dir, 'include'),
-                           #'-DLIBBZ_LIBRARY=' + get_lib_full_path(os.path.join(dep_inst_dir, 'lib'), 'bz2'),
-                           #'-DLIBZ_INCLUDE_DIR=' + os.path.join(dep_inst_dir, 'include'),
-                           #'-DLIBZ_LIBRARY=' + zlib,
-                           '-DWITH_ZLIB=OFF',
-                           '-DWITH_BZIP2=OFF',
-                           '-DWITH_EXPAT=ON',
-                           '-DWITH_LIBXML=OFF',
-                           '-DLIBSBML_SKIP_SHARED_LIBRARY=ON',
-                       ]
-                       )
-            self.spawn(['cmake', '--build', '.', '--target', 'install'] + build_args)
-            
-            os.chdir(cwd)
+              dep_build_dir = os.path.join(cwd, 'build_libSBML_' + dep_suffix)
+              makedirs(dep_build_dir)
+              os.chdir(dep_build_dir)
+              zlib = get_lib_full_path(os.path.join(dep_inst_dir, 'lib'), 'zlib')
+              if not zlib: 
+                zlib = get_lib_full_path(os.path.join(dep_inst_dir, 'lib'), 'zdll')
+              self.spawn(['cmake', DEP_SBML_SRC_DIR] + cmake_args
+                         + [
+                             '-DCMAKE_INSTALL_PREFIX=' + dep_inst_dir,
+                             '-DLIBSBML_DEPENDENCY_DIR=' + dep_inst_dir,
+                             '-DLIBEXPAT_INCLUDE_DIR=' + os.path.join(dep_inst_dir, 'include'),
+                             '-DLIBEXPAT_LIBRARY=' + get_lib_full_path(os.path.join(dep_inst_dir, 'lib'), 'expat'),
+                             #'-DLIBBZ_INCLUDE_DIR=' + os.path.join(dep_inst_dir, 'include'),
+                             #'-DLIBBZ_LIBRARY=' + get_lib_full_path(os.path.join(dep_inst_dir, 'lib'), 'bz2'),
+                             #'-DLIBZ_INCLUDE_DIR=' + os.path.join(dep_inst_dir, 'include'),
+                             #'-DLIBZ_LIBRARY=' + zlib,
+                             '-DWITH_ZLIB=OFF',
+                             '-DWITH_BZIP2=OFF',
+                             '-DWITH_EXPAT=ON',
+                             '-DWITH_LIBXML=OFF',
+                             '-DLIBSBML_SKIP_SHARED_LIBRARY=ON',
+                         ]
+                         )
+              self.spawn(['cmake', '--build', '.', '--target', 'install'] + build_args)
+              
+              os.chdir(cwd)
             
             DEP_DIR = dep_inst_dir
 
@@ -263,7 +270,7 @@ class CMakeBuild(build_ext):
             '-DWITH_ZLIB=ON',
             '-DWITH_PYTHON=ON',
             '-DPYTHON_EXECUTABLE=' + sys.executable,
-            '-DPYTHON_INCLUDE_DIR=' + sysconfig.get_paths()['include']
+            '-DPYTHON_INCLUDE_DIR=' + get_python_include()
         ]
 
         libnuml_args = prepend_variables(libnuml_args, [
@@ -277,8 +284,14 @@ class CMakeBuild(build_ext):
         cmake_args = cmake_args + libnuml_args
         
         if DEP_DIR:
+          zlib = get_lib_full_path(os.path.join(DEP_DIR, 'lib'), 'zlib')
+          if not zlib: 
+            zlib = get_lib_full_path(os.path.join(DEP_DIR, 'lib'), 'zdll')
           cmake_args.append('-DLIBNUML_DEPENDENCY_DIR=' + DEP_DIR)
           cmake_args.append('-DLIBEXPAT_INCLUDE_DIR=' + join(DEP_DIR, 'include'))
+          cmake_args.append('-DLIBEXPAT_LIBRARY=' + get_lib_full_path(os.path.join(DEP_DIR, 'lib'), 'expat'))
+          cmake_args.append('-DLIBZ_LIBRARY=' + zlib)
+          cmake_args.append('-DLIBBZ_LIBRARY=' + get_lib_full_path(os.path.join(dep_inst_dir, 'lib'), 'bz2'))
 
         if is_win_32:
           if DEP_DIR32:
@@ -332,7 +345,7 @@ setup(name             = "python-libnuml",
       description      = "LibNuML Python API",
       long_description = ("libNuML is a library for reading, writing and "+
                           "manipulating NuML.  It is written in ISO C and C++, supports "+
-                          "NuML Levels 1, Version 1, and runs on Linux, Microsoft "+
+                          "NuML Level 1, Version 1, and runs on Linux, Microsoft "+
                           "Windows, and Apple MacOS X.  For more information "+
                           "about SEDML, please see http://github.com/numl/numl/."),
       license          = "BSD",
