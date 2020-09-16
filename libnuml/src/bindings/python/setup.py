@@ -184,10 +184,10 @@ class CMakeBuild(build_ext):
         is_win_32 = is_win and ('win32' in name or 'win32' in build_temp)
 
         cmake_args = [
-            '-DCMAKE_BUILD_TYPE=' + config, 
-            '-DCMAKE_BUILD_PARALLEL_LEVEL=4',
-            '-DWITH_STATIC_RUNTIME=ON'
+            '-DCMAKE_BUILD_TYPE=' + config
         ]
+        
+        os.environ["CMAKE_BUILD_PARALLEL_LEVEL"] = "4"
 
         cmake_args = prepend_variables(cmake_args, [
           'CMAKE_CXX_COMPILER', 
@@ -203,6 +203,8 @@ class CMakeBuild(build_ext):
         if is_osx: 
           cmake_args.append('-DCLANG_USE_LIBCPP=ON')
           cmake_args.append('-DCMAKE_OSX_DEPLOYMENT_TARGET=10.9')
+        if is_win:
+          cmake_args.append('-DWITH_STATIC_RUNTIME=ON')
 
         # example of build args
         build_args = [
@@ -284,23 +286,14 @@ class CMakeBuild(build_ext):
         cmake_args = cmake_args + libnuml_args
         
         if DEP_DIR:
-          zlib = get_lib_full_path(os.path.join(DEP_DIR, 'lib'), 'zlib')
-          if not zlib: 
-            zlib = get_lib_full_path(os.path.join(DEP_DIR, 'lib'), 'zdll')
           cmake_args.append('-DLIBNUML_DEPENDENCY_DIR=' + DEP_DIR)
-          cmake_args.append('-DLIBEXPAT_INCLUDE_DIR=' + join(DEP_DIR, 'include'))
-          cmake_args.append('-DLIBEXPAT_LIBRARY=' + get_lib_full_path(os.path.join(DEP_DIR, 'lib'), 'expat'))
-          cmake_args.append('-DLIBZ_LIBRARY=' + zlib)
-          cmake_args.append('-DLIBBZ_LIBRARY=' + get_lib_full_path(os.path.join(dep_inst_dir, 'lib'), 'bz2'))
 
         if is_win_32:
           if DEP_DIR32:
             cmake_args.append('-DLIBNUML_DEPENDENCY_DIR=' + DEP_DIR32)
-            cmake_args.append('-DLIBEXPAT_INCLUDE_DIR=' + join(DEP_DIR32, 'include'))
         elif is_win:
           if DEP_DIR64:
             cmake_args.append('-DLIBNUML_DEPENDENCY_DIR=' + DEP_DIR64)
-            cmake_args.append('-DLIBEXPAT_INCLUDE_DIR=' + join(DEP_DIR64, 'include'))
 
         os.chdir(build_temp)
         
