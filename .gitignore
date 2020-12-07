@@ -219,3 +219,4 @@ libnuml-build
 build*
 install*
 doc
+libnuml/libnuml/_*

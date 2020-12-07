@@ -4,3 +4,4 @@
 [submodule "libnuml/submodules/libSBML"]
 	path = libnuml/submodules/libSBML
 	url = https://github.com/sbmlteam/libsbml.git
+	branch = development
