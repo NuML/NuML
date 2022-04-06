@@ -53,7 +53,7 @@ jobs:
       env:
           CIBW_BUILD: ${{ matrix.python_version }}
           CIBW_ARCHS_MACOS: x86_64 arm64
-          CIBW_ENVIRONMENT: LIBNUML_SRC_DIR=$LIBNUML_SRC_DIR LIBNUML_DEP_SRC=$LIBNUML_DEP_SRC LIBNUML_SBML_DEP_SRC=$LIBNUML_SBML_DEP_SRC
+          CIBW_ENVIRONMENT: LIBNUML_SRC_DIR=./libnuml LIBNUML_DEP_SRC=./libnuml/submodules/libSBML-dependencies/ LIBNUML_SBML_DEP_SRC=./libnuml/submodules/libSBML/
 
     - name: Upload wheels
       uses: actions/upload-artifact@v2
