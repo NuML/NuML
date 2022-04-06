@@ -5,7 +5,12 @@ on:
   release:
     types:
     - published
-    
+
+env:
+  LIBNUML_SRC_DIR: ./libnuml
+  LIBNUML_DEP_SRC: ./libnuml/submodules/libSBML-dependencies/
+  LIBNUML_SBML_DEP_SRC: ./libnuml/submodules/libSBML/
+  
 jobs:
   make_sdist:
     name: Make SDist
