@@ -86,11 +86,12 @@ NUMLNamespaces::clone () const
 }
 
 
-std::string 
+const std::string& 
 NUMLNamespaces::getNUMLNamespaceURI(unsigned int level,
                                  unsigned int version)
 {
-	return NUML_XMLNS_L1;
+  static std::string numlns = NUML_XMLNS_L1;
+  return numlns;
 }
 
 

@@ -123,7 +123,7 @@ public:
    * @return a string representing the NUML namespace that reflects the
    * NUML Level and Version specified.
    */
-  static std::string getNUMLNamespaceURI(unsigned int level,
+  static const std::string& getNUMLNamespaceURI(unsigned int level,
                                             unsigned int version);
   
   
