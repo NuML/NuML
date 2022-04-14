@@ -271,8 +271,7 @@ endif()
 
 set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules;${CMAKE_MODULE_PATH}")
 # install find modules, so they can readily be used by others
-file(GLOB find_modules "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules/Find*.cmake")
-install(FILES ${find_modules} DESTINATION share/cmake/Modules)
+install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules/FindLIBNUML.cmake" DESTINATION share/cmake/Modules)
 
 ###############################################################################
 #
