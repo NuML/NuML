@@ -228,7 +228,7 @@ class CMakeBuild(build_ext):
               self.spawn(['cmake', dep_src_dir] + cmake_args
                          + [
                              '-DCMAKE_INSTALL_PREFIX=' + dep_inst_dir,
-                             '-DWITH_BZIP2=ON',
+                             '-DWITH_BZIP2=OFF',
                              '-DWITH_CHECK=OFF',
                              '-DWITH_EXPAT=ON',
                              '-DWITH_XERCES=OFF',
@@ -250,12 +250,6 @@ class CMakeBuild(build_ext):
                          + [
                              '-DCMAKE_INSTALL_PREFIX=' + dep_inst_dir,
                              '-DLIBSBML_DEPENDENCY_DIR=' + dep_inst_dir,
-                             '-DLIBEXPAT_INCLUDE_DIR=' + os.path.join(dep_inst_dir, 'include'),
-                             '-DLIBEXPAT_LIBRARY=' + get_lib_full_path(os.path.join(dep_inst_dir, 'lib'), 'expat'),
-                             #'-DLIBBZ_INCLUDE_DIR=' + os.path.join(dep_inst_dir, 'include'),
-                             #'-DLIBBZ_LIBRARY=' + get_lib_full_path(os.path.join(dep_inst_dir, 'lib'), 'bz2'),
-                             #'-DLIBZ_INCLUDE_DIR=' + os.path.join(dep_inst_dir, 'include'),
-                             #'-DLIBZ_LIBRARY=' + zlib,
                              '-DWITH_ZLIB=OFF',
                              '-DWITH_BZIP2=OFF',
                              '-DWITH_EXPAT=ON',
