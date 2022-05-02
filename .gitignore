@@ -220,3 +220,4 @@ build*
 install*
 doc
 libnuml/libnuml/_*
+setup.py
