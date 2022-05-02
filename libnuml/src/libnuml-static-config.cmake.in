@@ -1,0 +1,26 @@
+get_filename_component(LIBSBML_CMAKE_DIR "${CMAKE_CURRENT_LIST_FILE}" PATH)
+include(CMakeFindDependencyMacro)
+
+list(APPEND CMAKE_MODULE_PATH "@CMAKE_INSTALL_PREFIX@/share/cmake/Modules")
+
+set(LIBSBML_LIBRARY_NAME @LIBSBML_LIBRARY_NAME@)
+find_dependency(LIBSBML)
+
+foreach (library @EXTRA_LIBS@)
+
+    string(FIND "${library}" "::" index)
+
+    if (${index} GREATER 0)
+      # found dependent library
+      string(SUBSTRING "${library}" 0 ${index} DEPENDENT_NAME)
+      message(VERBOSE "Looking for dependent library: ${DEPENDENT_NAME}")
+      find_dependency(${DEPENDENT_NAME})
+    endif()
+
+endforeach()
+
+if(NOT TARGET @LIBNUML_LIBRARY@-static)
+    include("${LIBSBML_CMAKE_DIR}/@LIBNUML_LIBRARY@-static-targets.cmake")
+endif()
+
+set(LIBNUML_LIBRARIES @LIBNUML_LIBRARY@-static)
