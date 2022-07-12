@@ -136,6 +136,8 @@ option(WITH_RUBY     "Generate Ruby language bindings"    OFF)
 option(WITH_R        "Generate R language bindings"       OFF)
 option(WITH_OCTAVE   "Generate Octave language bindings." OFF)
 option(WITH_MATLAB   "Generate MATLAB language bindings." OFF)
+option(FIND_LIBSBML  "Search for the libsbml library (must set variables manually if off)." ON)
+mark_as_advanced(FIND_LIBSBML)
 
 # Add an option to compile with all warnings shown
 option(WITH_WALL     "Compile with -Wall, so that the compiler will display all warnings." OFF)
@@ -254,12 +256,6 @@ if(WITH_SWIG)
 endif(WITH_SWIG)
 
 
-###############################################################################
-#
-# Locate libsbml
-#
-
-
 # Update cmake path variables
 if (LIBNUML_DEPENDENCY_DIR AND EXISTS ${LIBNUML_DEPENDENCY_DIR})
   set(CMAKE_PREFIX_PATH "${LIBNUML_DEPENDENCY_DIR}/${CMAKE_INSTALL_LIBDIR}/cmake;${CMAKE_PREFIX_PATH}")
@@ -273,7 +269,7 @@ install(FILES "${CMAKE_CURRENT_SOURCE_DIR}/CMakeModules/FindLIBNUML.cmake" DESTI
 #
 # Locate libsbml
 #
-if(NOT TARGET libsbml-static)
+if(FIND_LIBSBML)
    find_package(LIBSBML REQUIRED)
 endif()
 
