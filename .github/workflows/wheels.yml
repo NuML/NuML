@@ -97,16 +97,16 @@ jobs:
         
 
   upload_all:
-    needs: [build_wheels, make_sdist]
+    needs: [merge_wheels]
     runs-on: ubuntu-latest
     if: github.event_name == 'release' && github.event.action == 'published'
     steps:
     - uses: actions/download-artifact@v4
       with:
-        name: libNUML-*
+        name: libNUML-combined
         path: dist
 
-    - uses: pypa/gh-action-pypi-publish@v1.10.3
+    - uses: pypa/gh-action-pypi-publish@release/v1
       with:
         user: __token__
         password: ${{ secrets.PYPI_API_TOKEN }}
