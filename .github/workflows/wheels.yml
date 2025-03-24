@@ -58,6 +58,12 @@ jobs:
         git submodule update --init
         pushd libnuml/submodules/libSBML-dependencies  && git submodule update --init expat && popd
 
+    - name: Install gawk on mac
+      if: matrix.os == 'macos-13'
+      shell: bash
+      run: brew install gawk swig
+
+
     - name: Copy setup.py
       run: |
         cp libnuml/src/bindings/python/setup.py .
