@@ -90,6 +90,11 @@ jobs:
         pattern: libNUML-*
         path: dist
     
+    - name: Move wheels from dist subfolder to dist folder
+      run: |
+        find dist -name "*.whl" -exec mv {} dist/ \;
+        find dist -type d -empty -delete
+
     - uses: actions/upload-artifact@v4
       with:
         name: libNUML-combined
