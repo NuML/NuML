@@ -56,9 +56,6 @@ jobs:
 
     - name: Unpack sdist
       run: |
-        ls -la
-        mv libNUML-sdist/*.tar.gz .
-        ls -la
         tar zxf python_libnuml-*.tar.gz
         mv python_libnuml-*/* .
         rm -rf python_libnuml-*
