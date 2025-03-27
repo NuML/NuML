@@ -5,11 +5,6 @@ on:
   release:
     types:
     - published
-
-env:
-  LIBNUML_SRC_DIR: ./libnuml
-  LIBNUML_DEP_SRC: ./libnuml/submodules/libSBML-dependencies/
-  LIBNUML_SBML_DEP_SRC: ./libnuml/submodules/libSBML/
   
 jobs:
   make_sdist:
@@ -30,15 +25,19 @@ jobs:
 
     - name: Build SDist
       run: |
-        cp libnuml/src/bindings/python/setup.py .
+        pushd libnuml
+        cp src/bindings/python/setup.py .
         pipx run build --sdist
+        echo "NUML_VERSION=$(cat VERSION.txt)" >> $GITHUB_ENV
+        popd
 
     - uses: actions/upload-artifact@v4
       with:
-        path: dist/*.tar.gz
+        path: libnuml/dist/*.tar.gz
         name: libNUML-sdist
   
   build_wheels:
+    needs: [make_sdist]
     name: Wheel on ${{ matrix.os }} for ${{ matrix.python_version }}
     runs-on: ${{ matrix.os }}
     strategy:
@@ -48,32 +47,30 @@ jobs:
         python_version: ['cp39-*', 'cp310-*', 'cp311-*', 'cp312-*', 'cp313-*']
 
     steps:
-    - uses: actions/checkout@v4
+
+    - name: Download sdist
+      uses: actions/download-artifact@v4
       with:
-        fetch-depth: 0 
+        name: libNUML-sdist
+        path: .
 
-    - name: fetch libsbml / expat submodules
-      shell: bash
+    - name: Unpack sdist
       run: |
-        git submodule update --init
-        pushd libnuml/submodules/libSBML-dependencies  && git submodule update --init expat && popd
+        mv libNUML-sdist/*.tar.gz .
+        tar zxf python_libnuml-*.tar.gz
+        mv python_libnuml-*/* .
+        rm -rf python_libnuml-*
 
-    - name: Install gawk on mac
+    - name: Install swig on mac
       if: matrix.os == 'macos-13'
       shell: bash
       run: brew install gawk swig
-
-
-    - name: Copy setup.py
-      run: |
-        cp libnuml/src/bindings/python/setup.py .
 
     - uses: pypa/cibuildwheel@v2.21.3
       env:
           CIBW_BUILD: ${{ matrix.python_version }}
           CIBW_ARCHS_MACOS: x86_64 arm64
           CIBW_SKIP: "*-musllinux*"
-          CIBW_ENVIRONMENT: LIBNUML_SRC_DIR=./libnuml LIBNUML_DEP_SRC=./libnuml/submodules/libSBML-dependencies/ LIBNUML_SBML_DEP_SRC=./libnuml/submodules/libSBML/
 
     - name: Upload wheels
       uses: actions/upload-artifact@v4

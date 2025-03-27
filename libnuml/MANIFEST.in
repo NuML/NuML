@@ -1,0 +1,18 @@
+include README.md
+include LICENSE.txt
+include VERSION.txt
+include CMakeLists.txt
+
+recursive-include src *
+recursive-include submodules *
+recursive-include CMakeModules *
+
+recursive-exclude submodules/libSBML-dependencies/expat/testdata *
+recursive-exclude submodules/libSBML-dependencies/xerces-c *
+recursive-exclude submodules/libSBML-dependencies/libxml2 *
+recursive-exclude submodules/libSBML-dependencies/libiconv *
+recursive-exclude submodules/libSBML/src/**/test *
+
+exclude examples
+exclude build*
+exclude install*
