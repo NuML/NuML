@@ -346,14 +346,14 @@ class CMakeBuild(build_ext):
 setup(name             = "python-libnuml",
       version          = VERSION,
       description      = "LibNuML Python API",
-      long_description = ("libNuML is a library for reading, writing and "+
-                          "manipulating NuML.  It is written in ISO C and C++, supports "+
-                          "NuML Level 1, Version 1, and runs on Linux, Microsoft "+
-                          "Windows, and Apple MacOS X.  For more information "+
+      long_description = ("libNuML is a library for reading, writing and " +
+                          "manipulating NuML. It is written in ISO C and C++, supports " +
+                          "NuML Level 1, Version 1, and runs on Linux, Microsoft " +
+                          "Windows, and Apple MacOS X. For more information " +
                           "about SEDML, please see http://github.com/numl/numl/."),
       license          = "BSD",
       author           = "Frank T. Bergmann",
-      author_email     = "fbergman@caltech.edu",
+      author_email     = "frank.bergmann@bioquant.uni-heidelberg.de",
       url              = "https://github.com/NuML/NuML/tree/master/libnuml",
       packages         = ["libnuml"],
       package_dir      = {'libnuml': 'libnuml'},
