@@ -41,7 +41,7 @@ jobs:
     name: Wheel on ${{ matrix.os }} for ${{ matrix.python_version }}
     runs-on: ${{ matrix.os }}
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         os: [ubuntu-latest, windows-latest, macos-13]
         python_version: ['cp39-*', 'cp310-*', 'cp311-*', 'cp312-*', 'cp313-*']
@@ -56,10 +56,13 @@ jobs:
 
     - name: Unpack sdist
       run: |
+        ls -la
         mv libNUML-sdist/*.tar.gz .
+        ls -la
         tar zxf python_libnuml-*.tar.gz
         mv python_libnuml-*/* .
         rm -rf python_libnuml-*
+        ls -la
 
     - name: Install swig on mac
       if: matrix.os == 'macos-13'
