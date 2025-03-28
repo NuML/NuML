@@ -1,3 +1,6 @@
+include(CheckLibraryExists)
+include(CheckCSourceCompiles)
+
 string(TOUPPER ${PROJECT_NAME} _UPPER_PROJECT_NAME)
 set(_PROJECT_DEPENDENCY_DIR ${_UPPER_PROJECT_NAME}_DEPENDENCY_DIR)
 
@@ -23,7 +26,7 @@ find_path(LIBXML_INCLUDE_DIR
     PATHS ${${_PROJECT_DEPENDENCY_DIR}}/include
           ${${_PROJECT_DEPENDENCY_DIR}}/include/libxml2
     NO_DEFAULT_PATH
-)      
+)
 
 
 if (NOT LIBXML_INCLUDE_DIR)
@@ -68,8 +71,15 @@ if (EXISTS ${ZLIB_LIBRARY})
 set(ADDITIONAL_LIBS "${ADDITIONAL_LIBS}ZLIB::ZLIB;")
 endif()
 if (WIN32)
-set(ADDITIONAL_LIBS "WS2_32.lib;${ADDITIONAL_LIBS}")
+set(ADDITIONAL_LIBS "ws2_32.lib;${ADDITIONAL_LIBS}")
 endif()
+
+
+CHECK_LIBRARY_EXISTS(m sin "" HAVE_LIB_M)
+
+if (HAVE_LIB_M)
+    set(ADDITIONAL_LIBS ${ADDITIONAL_LIBS} m)
+endif (HAVE_LIB_M)
 
 if(NOT TARGET LIBXML::LIBXML)
   add_library(LIBXML::LIBXML UNKNOWN IMPORTED)
@@ -83,7 +93,7 @@ endif()
 
 # figure out if we need XML_STATIC flag
 if (LIBXML_INCLUDE_DIR AND LIBXML_LIBRARY)
-  
+
   set(LIBXML_LIBXML_CODE
 "
 #include <libxml/xmlversion.h>
@@ -130,10 +140,10 @@ if (LIBXML_LIBXML_TEST2)
     )
 else()
     message(FATAL_ERROR "Unable to compile a test executable against LIBXML
-    
+
     LIBXML_INCLUDE_DIR = ${LIBXML_INCLUDE_DIR}
     LIBXML_LIBRARY     = ${LIBXML_LIBRARY}
-    
+
     ")
 endif()
 
@@ -143,7 +153,7 @@ set(CMAKE_REQUIRED_LIBRARIES ${CMAKE_REQUIRED_LIBRARIES_CACHE})
 set(CMAKE_REQUIRED_INCLUDES ${CMAKE_REQUIRED_INCLUDES_CACHE})
 set(CMAKE_REQUIRED_DEFINITIONS ${CMAKE_REQUIRED_DEFINITIONS_CACHE})
 endif()
-  
+
 include(FindPackageHandleStandardArgs)
 
 find_package_handle_standard_args(

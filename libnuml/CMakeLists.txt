@@ -48,7 +48,7 @@ if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/VERSION.txt")
 endif()
 
 project(libnuml VERSION "${LIBNUML_VERSION_MAJOR}.${LIBNUML_VERSION_MINOR}.${LIBNUML_VERSION_PATCH}"
-                LANGUAGES CXX)
+                LANGUAGES C CXX)
 
 include (CMakeTestCXXCompiler)
 include (CheckCSourceCompiles)
