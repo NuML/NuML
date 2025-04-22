@@ -30,7 +30,7 @@ import os
 import sys
 import shutil
 import platform
-import sysconfig 
+import sysconfig
 from os.path import abspath, exists, join, split
 
 from setuptools import setup, Extension
@@ -361,5 +361,6 @@ setup(name             = "python-libnuml",
       ext_modules=[CMakeExtension('_libnuml')],
       cmdclass={
         'build_ext': CMakeBuild,
-      }
+      },
+      setup_requires=['cmake==3.31.6', 'swig==4.2.1']
 )
