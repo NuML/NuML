@@ -56,20 +56,14 @@ jobs:
     - name: Install cibuildwheel
       shell: bash
       run: |
-        python -m pip install cibuildwheel==3.2.1 swig==4.2.1 cmake==3.31.6
+        python -m pip install swig==4.2.1 cmake==3.31.6
+        # dont fail if cibuildwheel is not available, just install the latest version
+        python -m pip install cibuildwheel==3.2.1 || python -m pip install cibuildwheel
 
         # print versions
         python --version
         cmake --version
         swig -version
-
-        # run cibuildwheel -h to see if command is available, 
-        # if not, install it
-        if ! cibuildwheel -h; then
-          # newer versions of cibuildwheel require python 3.11 if we want to build
-          # for 3.9 and 3.10 we can just take another version of cibuildwheel
-          python -m pip install cibuildwheel
-        fi
 
     - name: Download sdist
       uses: actions/download-artifact@v4
