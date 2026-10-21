@@ -11,7 +11,7 @@ jobs:
     name: Make SDist
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v7
       with:
         fetch-depth: 0  # Optional, use if you use setuptools_scm
 
@@ -31,7 +31,7 @@ jobs:
         echo "NUML_VERSION=$(cat VERSION.txt)" >> $GITHUB_ENV
         popd
 
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v7
       with:
         path: libnuml/dist/*.tar.gz
         name: libNUML-sdist
@@ -44,31 +44,39 @@ jobs:
       matrix:
         # macos-15-intel is an Intel runner, macos-14 is Apple silicon
         os: [ubuntu-latest, ubuntu-24.04-arm, windows-latest, windows-11-arm, macos-15-intel, macos-14]
-        python_version: ['cp39-*', 'cp310-*', 'cp311-*', 'cp312-*', 'cp313-*', 'cp314-*']
+        python_version: [ 'cp310-*', 'cp311-*', 'cp312-*', 'cp313-*', 'cp314-*', 'cp315-*']
 
-    steps:
-    - uses: seanmiddleditch/gha-setup-ninja@master
-  
+    steps:  
     - name: Add msbuild to PATH (Windows)
       if: matrix.os == 'windows-latest'
       uses: ilammy/msvc-dev-cmd@v1
 
     - uses: actions/setup-python@v5
       with:
-        python-version: '3.11'
+        python-version: '3.14'
 
     - name: Install cibuildwheel
       shell: bash
       run: |
-        python -m pip install swig==4.2.1 cmake==3.31.6 cibuildwheel==3.2.1
+        python -m pip install swig cmake cibuildwheel
 
         # print versions
         python --version
         cmake --version
         swig -version
 
+    - name: store python version in environment variable
+      shell: bash
+      run: |
+        arch=$(python -c "import platform; print(platform.machine())")
+        ver="${{ matrix.python_version }}"
+        ver=${ver#cp}
+        ver=${ver%%-*}
+        pyver="${ver:0:1}.${ver:1}"
+        echo "CURRENT_PYTHON_VERSION=${pyver}_${arch}" >> $GITHUB_ENV
+
     - name: Download sdist
-      uses: actions/download-artifact@v4
+      uses: actions/download-artifact@v7
       with:
         name: libNUML-sdist
         path: .
@@ -86,21 +94,21 @@ jobs:
     - name: Build wheels
       env:
         CIBW_BUILD: ${{ matrix.python_version }}
-        CIBW_SKIP: "*-musllinux* cp36-* cp37-* cp38-* *-win32"
+        CIBW_SKIP: "*-musllinux* *-win32"
       run: |
         python -m cibuildwheel --output-dir wheelhouse
   
     - name: Upload wheels
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v7
       with:
         path: wheelhouse/*.whl
-        name: libNUML-${{ matrix.os }}-${{ strategy.job-index }}
+        name: libNUML-${{ matrix.os }}-py${{ env.CURRENT_PYTHON_VERSION }}-${{ strategy.job-index }}
         
   merge_wheels:
     needs: [build_wheels]
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         pattern: libNUML-*
         path: dist
@@ -111,7 +119,7 @@ jobs:
         find dist -name "*.tar.gz" -exec mv {} dist/ \;
         find dist -type d -empty -delete
 
-    - uses: actions/upload-artifact@v4
+    - uses: actions/upload-artifact@v7
       with:
         name: libNUML-combined
         path: dist
@@ -122,7 +130,7 @@ jobs:
     runs-on: ubuntu-latest
     if: github.event_name == 'release' && github.event.action == 'published'
     steps:
-    - uses: actions/download-artifact@v4
+    - uses: actions/download-artifact@v7
       with:
         name: libNUML-combined
         path: dist

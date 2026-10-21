@@ -221,3 +221,4 @@ install*
 doc
 libnuml/libnuml/_*
 setup.py
+.vscode/settings.json
