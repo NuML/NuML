@@ -47,10 +47,17 @@ jobs:
         python_version: [ 'cp310-*', 'cp311-*', 'cp312-*', 'cp313-*', 'cp314-*', 'cp315-*']
 
     steps:  
+    - uses: seanmiddleditch/gha-setup-ninja@master
+
     - name: Add msbuild to PATH (Windows)
       if: matrix.os == 'windows-latest'
       uses: ilammy/msvc-dev-cmd@v1
 
+    - name: Add msbuild to PATH (Windows ARM)
+      if: matrix.os == 'windows-11-arm'
+      uses: ilammy/msvc-dev-cmd@v1
+      with:
+        arch: amd64_arm64
     - uses: actions/setup-python@v5
       with:
         python-version: '3.14'
